@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe_app/constants/color_constants.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class FeatureScreen extends StatefulWidget {
   const FeatureScreen({super.key});
@@ -15,6 +16,7 @@ class _FeatureScreenState extends State<FeatureScreen> {
     ['assets/images/Rectangle 17.png', 'Create your Own Recipe'],
     ['assets/images/Rectangle 34.png', 'Search using Ingrediants'],
   ];
+  int onChangeIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +64,17 @@ class _FeatureScreenState extends State<FeatureScreen> {
                 options: CarouselOptions(
                   enlargeCenterPage: true,
                   aspectRatio: 50 / 49,
+                  onPageChanged: (index, reason) {
+                    onChangeIndex = index;
+                    setState(() {});
+                  },
                 )),
+            SmoothIndicator(
+              offset: onChangeIndex.toDouble(),
+              count: carousalComponents.length,
+              size: Size.fromRadius(34),
+              effect: ExpandingDotsEffect(),
+            ),
             Padding(
               padding: const EdgeInsets.only(
                 left: 10,
@@ -75,8 +87,12 @@ class _FeatureScreenState extends State<FeatureScreen> {
                   ),
                   padding: const EdgeInsets.all(10),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+                      Icon(
+                        Icons.abc,
+                        color: Colors.transparent,
+                      ),
                       Text(
                         "Explore",
                         style: TextStyle(
@@ -85,9 +101,6 @@ class _FeatureScreenState extends State<FeatureScreen> {
                           fontSize: 32,
                           fontWeight: FontWeight.w700,
                         ),
-                      ),
-                      const SizedBox(
-                        width: 10,
                       ),
                       IconButton(
                           onPressed: () {},
