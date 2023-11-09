@@ -17,6 +17,14 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Constants.primaryColor,
       appBar: AppBar(
+        toolbarHeight: 70,
+        title: Text(
+          'BigBite',
+          style: TextStyle(
+            fontFamily: Constants.mainFont,
+            color: Colors.white,
+          ),
+        ),
         elevation: 0,
         backgroundColor: Constants.primaryColor,
         leading: Padding(
@@ -24,37 +32,40 @@ class HomeScreen extends StatelessWidget {
             child: Icon(
               Icons.cookie,
               size: 32,
-              color: Colors.black,
+              color: Colors.white,
             )),
         actions: [
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                height: 30,
-                width: 50,
+                height: 37,
+                width: 70,
                 decoration: BoxDecoration(
-                  color: Colors.black,
+                  color: Colors.white,
+                  border: Border.all(
+                    color: Colors.black,
+                  ),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Center(
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.bookmark,
-                        size: 27,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.bookmark,
+                      size: 27,
+                      color: Colors.black,
+                    ),
+                    Text(
+                      '0',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'InriaSans',
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
                       ),
-                      Text(
-                        '0',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'InriaSans',
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -84,9 +95,11 @@ class HomeScreen extends StatelessWidget {
 
               //card swiper
               SizedBox(
-                height: 388,
+                height: 450,
                 child: Flexible(
                   child: CardSwiper(
+                      allowedSwipeDirection:
+                          AllowedSwipeDirection.only(left: false, right: true),
                       cardBuilder: (context, index, horizontalOffsetPercentage,
                               verticalOffsetPercentage) =>
                           dailyInspirationCardList[index],
@@ -96,17 +109,22 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(
                 height: 16,
               ),
-              Row(
-                children: [
-                  Text(
-                    'Trending Now',
-                    style: TextStyle(
-                      fontFamily: Constants.mainFont,
-                      color: Colors.white,
-                      fontSize: 28,
-                    ),
-                  )
-                ],
+
+              //trending recipes
+              Padding(
+                padding: const EdgeInsets.only(left: 12),
+                child: Row(
+                  children: [
+                    Text(
+                      'Trending Now',
+                      style: TextStyle(
+                        fontFamily: Constants.mainFont,
+                        color: Colors.white,
+                        fontSize: 28,
+                      ),
+                    )
+                  ],
+                ),
               ),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -128,17 +146,20 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               //new releases
-              Row(
-                children: [
-                  Text(
-                    'New Releases',
-                    style: TextStyle(
-                      fontFamily: Constants.mainFont,
-                      color: Colors.white,
-                      fontSize: 28,
-                    ),
-                  )
-                ],
+              Padding(
+                padding: const EdgeInsets.only(left: 12),
+                child: Row(
+                  children: [
+                    Text(
+                      'New Releases',
+                      style: TextStyle(
+                        fontFamily: Constants.mainFont,
+                        color: Colors.white,
+                        fontSize: 28,
+                      ),
+                    )
+                  ],
+                ),
               ),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -158,7 +179,79 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-              )
+              ),
+
+              //new every day dishes
+              Padding(
+                padding: const EdgeInsets.only(left: 12),
+                child: Row(
+                  children: [
+                    Text(
+                      'New Everyday Dishes',
+                      style: TextStyle(
+                        fontFamily: Constants.mainFont,
+                        color: Colors.white,
+                        fontSize: 28,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: List.generate(
+                      dailyInspirationCardList.length,
+                      (index) => Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            dailyInspirationCardList[index],
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              //easy recipes
+              Padding(
+                padding: const EdgeInsets.only(left: 12),
+                child: Row(
+                  children: [
+                    Text(
+                      'Easy Recipes',
+                      style: TextStyle(
+                        fontFamily: Constants.mainFont,
+                        color: Colors.white,
+                        fontSize: 28,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: List.generate(
+                      dailyInspirationCardList.length,
+                      (index) => Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            dailyInspirationCardList[index],
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
