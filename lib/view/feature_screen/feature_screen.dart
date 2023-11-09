@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:recipe_app/constants/color_constants.dart';
+import 'package:recipe_app/view/bottom_navi/bottom_navi.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class FeatureScreen extends StatefulWidget {
@@ -34,7 +35,6 @@ class _FeatureScreenState extends State<FeatureScreen> {
                         width: 357,
                         height: 400,
                         decoration: BoxDecoration(
-                            color: Colors.amber,
                             image: DecorationImage(
                                 image: AssetImage(carousalComponents[index][0]),
                                 fit: BoxFit.cover),
@@ -80,37 +80,47 @@ class _FeatureScreenState extends State<FeatureScreen> {
                 left: 10,
                 right: 10,
               ),
-              child: Container(
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(120, 0, 0, 0),
-                    borderRadius: BorderRadius.circular(22),
-                  ),
-                  padding: const EdgeInsets.all(10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Icon(
-                        Icons.abc,
-                        color: Colors.transparent,
-                      ),
-                      Text(
-                        "Explore",
-                        style: TextStyle(
-                          fontFamily: Constants.mainFont,
-                          color: Colors.white,
-                          fontSize: 32,
-                          fontWeight: FontWeight.w700,
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BottomNaviBar(),
+                      ));
+                },
+                child: Container(
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(120, 0, 0, 0),
+                      borderRadius: BorderRadius.circular(22),
+                    ),
+                    padding: const EdgeInsets.all(10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Icon(
+                          Icons.abc,
+                          color: Colors.transparent,
+                          size: 46,
                         ),
-                      ),
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.arrow_forward_ios_rounded,
+                        Text(
+                          "Explore",
+                          style: TextStyle(
+                            fontFamily: Constants.mainFont,
                             color: Colors.white,
-                            size: 38,
-                          ))
-                    ],
-                  )),
+                            fontSize: 32,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: Colors.white,
+                              size: 38,
+                            ))
+                      ],
+                    )),
+              ),
             )
           ],
         ),

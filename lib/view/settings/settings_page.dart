@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +10,7 @@ class HomeScreen extends StatelessWidget {
       color: Colors.amber,
       width: double.infinity,
       height: double.infinity,
-      child: Center(child: Text('home')),
+      child: Center(child: Text('settings')),
     ));
   }
 }
