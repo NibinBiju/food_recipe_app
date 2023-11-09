@@ -9,8 +9,6 @@ class OwnRecipe extends StatefulWidget {
 }
 
 class _OwnRecipeState extends State<OwnRecipe> {
-  String? recipeName;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +25,7 @@ class _OwnRecipeState extends State<OwnRecipe> {
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: Padding(
-              padding:  EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(8.0),
               child: Container(
                 padding: EdgeInsets.only(top: 5),
                 height: MediaQuery.of(context).size.height,
@@ -60,10 +58,10 @@ class _OwnRecipeState extends State<OwnRecipe> {
                         ),
                         width: double.infinity,
                         height: 90,
-                        margin:  EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 10),
-                        padding:  EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 10),
+                        margin:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                       );
                     }),
               ),
