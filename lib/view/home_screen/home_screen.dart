@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
             child: Icon(
               Icons.cookie,
               size: 32,
-              color: Colors.white,
+              color: Colors.black,
             )),
         actions: [
           Row(
@@ -42,24 +42,24 @@ class HomeScreen extends StatelessWidget {
                 height: 37,
                 width: 70,
                 decoration: BoxDecoration(
-                  color: Colors.white,
                   border: Border.all(
+                    width: 3,
                     color: Colors.black,
                   ),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(15),
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Icon(
                       Icons.bookmark,
                       size: 27,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                     Text(
                       '0',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontFamily: 'InriaSans',
                         fontSize: 24,
                         fontWeight: FontWeight.w600,

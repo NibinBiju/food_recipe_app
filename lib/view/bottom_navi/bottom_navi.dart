@@ -31,7 +31,7 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 10,
-              vertical: 13,
+              vertical: 7,
             ),
             child: GNav(
               padding: EdgeInsets.all(16),
