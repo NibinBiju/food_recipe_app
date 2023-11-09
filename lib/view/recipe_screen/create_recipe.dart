@@ -48,7 +48,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(8.0),
           child: Column(
             children: [
               SizedBox(
@@ -227,12 +227,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
                 height: 12,
               ),
               Center(
-                child: ElevatedButton(
-                    onPressed: () {
-                      String rrname = nameController.text;
-                      Navigator.pop(context, rrname);
-                    },
-                    child: Text("save")),
+                child: ElevatedButton(onPressed: () {}, child: Text("save")),
               )
             ],
           ),
