@@ -17,7 +17,7 @@ class BottomNaviBar extends StatefulWidget {
 class _BottomNaviBarState extends State<BottomNaviBar> {
   int _currentIndex = 0;
   final List _mainPages = [
-    const HomeScreen(),
+    HomeScreen(),
     const SearchPage(),
     const CreateRecipePage(),
     const SettingsPage(),
@@ -42,6 +42,7 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
                   const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
               child: GNav(
                 haptic: true,
+                rippleColor: Colors.black,
 
                 tabActiveBorder: Border.all(color: Colors.black, width: 1),
                 tabBorder: Border.all(color: Colors.grey, width: 1),
@@ -49,11 +50,11 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
                   BoxShadow(color: Colors.grey.withOpacity(0.5), blurRadius: 8)
                 ],
                 curve: Curves.easeOutExpo,
-                duration: const Duration(milliseconds: 900),
+
                 gap: 8,
                 color: Colors.grey[800],
                 activeColor: Constants.primaryColor,
-                iconSize: 35,
+                iconSize: 32,
                 tabBackgroundColor: Constants.buttonColor.withOpacity(0.1),
                 padding: const EdgeInsets.symmetric(
                     horizontal: 20, vertical: 5), // na
