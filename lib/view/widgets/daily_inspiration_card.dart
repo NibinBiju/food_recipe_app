@@ -15,7 +15,7 @@ class DailyInspirationCard extends StatelessWidget {
       width: 290,
       height: 400,
       decoration: BoxDecoration(
-        color: Constants.dailyInspirationCardColor,
+        color: Constants.CardColor,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
@@ -80,7 +80,7 @@ class DailyInspirationCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Add to Read Later',
+                      'Add to Save',
                       style: TextStyle(
                         fontFamily: Constants.mainFont,
                         color: Colors.white,

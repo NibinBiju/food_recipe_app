@@ -82,7 +82,7 @@ class _FeatureScreenState extends State<FeatureScreen> {
               ),
               child: InkWell(
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => BottomNaviBar(),
