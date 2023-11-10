@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/constants/color_constants.dart';
+import 'package:recipe_app/view/saved_recipe_page/saved_recipe_page.dart';
 
 class ScheduleRecipes extends StatelessWidget {
   const ScheduleRecipes({super.key});
@@ -29,34 +30,43 @@ class ScheduleRecipes extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
-                height: 37,
-                width: 70,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 3,
-                    color: Colors.black,
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SavedRecipePage(),
+                      ));
+                },
+                child: Container(
+                  height: 37,
+                  width: 70,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 3,
+                      color: Colors.black,
+                    ),
+                    borderRadius: BorderRadius.circular(15),
                   ),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      Icons.bookmark,
-                      size: 27,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      '0',
-                      style: TextStyle(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(
+                        Icons.bookmark,
+                        size: 27,
                         color: Colors.white,
-                        fontFamily: 'InriaSans',
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
                       ),
-                    ),
-                  ],
+                      Text(
+                        '0',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'InriaSans',
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
