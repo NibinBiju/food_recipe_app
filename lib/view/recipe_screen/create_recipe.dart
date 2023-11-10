@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_app/constants/color_constants.dart';
 
 class CreateRecipe extends StatefulWidget {
   CreateRecipe({super.key});
@@ -35,7 +36,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
       backgroundColor: Color.fromARGB(255, 5, 16, 77),
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.blue,
+        backgroundColor: Constants.primaryColor,
         elevation: 0,
         iconTheme: IconThemeData(
           color: Colors.white,
@@ -43,7 +44,11 @@ class _CreateRecipeState extends State<CreateRecipe> {
         title: Text(
           "CREATE RECIPE",
           style: TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            fontFamily: Constants.mainFont,
+          ),
         ),
       ),
       body: SingleChildScrollView(

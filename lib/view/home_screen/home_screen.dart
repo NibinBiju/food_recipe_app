@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:recipe_app/constants/color_constants.dart';
+import 'package:recipe_app/view/saved_recipe_page/saved_recipe_page.dart';
 import 'package:recipe_app/view/widgets/daily_inspiration_card.dart';
+import 'package:recipe_app/view/widgets/recipes_may_like_card.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -38,34 +40,44 @@ class HomeScreen extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Container(
-                height: 37,
-                width: 70,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 3,
-                    color: Colors.black,
+              InkWell(
+                //for navigate to save recipe page
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SavedRecipePage(),
+                      ));
+                },
+                child: Container(
+                  height: 37,
+                  width: 70,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 3,
+                      color: Colors.black,
+                    ),
+                    borderRadius: BorderRadius.circular(15),
                   ),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Icon(
-                      Icons.bookmark,
-                      size: 27,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      '0',
-                      style: TextStyle(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(
+                        Icons.bookmark,
+                        size: 27,
                         color: Colors.white,
-                        fontFamily: 'InriaSans',
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
                       ),
-                    ),
-                  ],
+                      Text(
+                        '0',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'InriaSans',
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -252,6 +264,48 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(left: 12),
+                child: Row(
+                  children: [
+                    Text(
+                      'Recipes you may like',
+                      style: TextStyle(
+                        fontFamily: Constants.mainFont,
+                        color: Colors.white,
+                        fontSize: 28,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 1200,
+                child: GridView.count(
+                  //grid container width and height
+                  childAspectRatio: 140 / 180,
+                  physics: NeverScrollableScrollPhysics(),
+                  crossAxisCount: 2,
+                  children: List.generate(
+                    12,
+                    (index) => Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Card(
+                        elevation: 0,
+                        color: Colors.transparent,
+                        shadowColor: Colors.black87,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(14),
+                            color: Constants.CardColor,
+                          ),
+                          child: RecipesMayLikeCard(),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
         ),
