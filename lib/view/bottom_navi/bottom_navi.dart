@@ -36,6 +36,11 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
               vertical: 7,
             ),
             child: GNav(
+              textStyle: TextStyle(
+                fontFamily: Constants.mainFont,
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
               padding: EdgeInsets.all(16),
               gap: 8,
               backgroundColor: Constants.primaryColor,
@@ -58,7 +63,7 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
                 ),
                 GButton(
                   icon: LineIcons.calendarCheckAlt,
-                  text: 'Create\nrecipe',
+                  text: 'Meal\nPlan',
                 ),
                 GButton(
                   icon: LineIcons.cog,

@@ -18,6 +18,7 @@ class _FeatureScreenState extends State<FeatureScreen> {
     ['assets/images/Rectangle 34.png', 'Search using Ingrediants'],
   ];
   int onChangeIndex = 0;
+  int onDotClick = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +69,10 @@ class _FeatureScreenState extends State<FeatureScreen> {
                     onChangeIndex = index;
                     setState(() {});
                   },
+                  autoPlay: true,
                 )),
+
+            //dot indicator
             SmoothIndicator(
               offset: onChangeIndex.toDouble(),
               count: carousalComponents.length,
