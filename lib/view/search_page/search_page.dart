@@ -192,7 +192,7 @@ class SearchPage extends StatelessWidget {
                           padding: EdgeInsets.all(7),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(19),
-                            color: Colors.amber,
+                            color: Constants.CardColor,
                             image: DecorationImage(
                                 image: NetworkImage(
                                     'https://c.ndtvimg.com/2020-09/mdvmmk0g_appam_625x300_15_September_20.jpg'),
@@ -224,7 +224,7 @@ class SearchPage extends StatelessWidget {
                           padding: EdgeInsets.all(7),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(19),
-                            color: Colors.black,
+                            color: Constants.CardColor,
                             image: DecorationImage(
                                 image: NetworkImage(
                                     'https://www.kothiyavunu.com/wp-content/uploads/2009/08/chickenbiryani.jpg'),
@@ -256,7 +256,7 @@ class SearchPage extends StatelessWidget {
                           padding: EdgeInsets.all(7),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(19),
-                              color: Colors.deepPurpleAccent,
+                              color: Constants.CardColor,
                               image: DecorationImage(
                                   image: NetworkImage(
                                       'https://i.pinimg.com/736x/c1/13/f1/c113f1f757454aca993ff59c95b8b22b.jpg'),
