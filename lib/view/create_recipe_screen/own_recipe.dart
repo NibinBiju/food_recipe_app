@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/constants/color_constants.dart';
-import 'package:recipe_app/view/recipe_screen/create_recipe.dart';
+import 'package:recipe_app/view/create_recipe_screen/create_recipe.dart';
 import 'package:recipe_app/view/saved_recipe_page/saved_recipe_page.dart';
 
 class OwnRecipe extends StatefulWidget {
@@ -28,11 +28,7 @@ class _OwnRecipeState extends State<OwnRecipe> {
         backgroundColor: Constants.primaryColor,
         leading: Padding(
             padding: const EdgeInsets.only(left: 20),
-            child: Icon(
-              Icons.cookie,
-              size: 32,
-              color: Colors.black,
-            )),
+            child: Image.asset('assets/images/logo (1).png')),
         actions: [
           Row(
             mainAxisSize: MainAxisSize.min,
@@ -138,7 +134,7 @@ class _OwnRecipeState extends State<OwnRecipe> {
                         ),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            color: Colors.white,
+                            color: Constants.buttonColor,
                             image: DecorationImage(
                                 image: NetworkImage(
                                     'https://www.thechunkychef.com/wp-content/uploads/2017/09/Chicken-Stroganoff-feat.jpg'),

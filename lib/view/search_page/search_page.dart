@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:recipe_app/constants/color_constants.dart';
+import 'package:recipe_app/controller/search_ingredients_provider/search_ingredient_provider.dart';
+import 'package:recipe_app/model/search_ingredient_model/search_ingredient_model.dart';
 import 'package:recipe_app/view/saved_recipe_page/saved_recipe_page.dart';
+import 'package:recipe_app/view/search_page/ingredients_search.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var searchIngredientProvider =
+        Provider.of<SearchIngredientProvdier>(context);
     return Scaffold(
         backgroundColor: Constants.primaryColor,
         appBar: AppBar(
@@ -22,11 +28,7 @@ class SearchPage extends StatelessWidget {
           backgroundColor: Constants.primaryColor,
           leading: Padding(
               padding: const EdgeInsets.only(left: 20),
-              child: Icon(
-                Icons.cookie,
-                size: 32,
-                color: Colors.black,
-              )),
+              child: Image.asset('assets/images/logo (1).png')),
           actions: [
             Row(
               mainAxisSize: MainAxisSize.min,
@@ -112,7 +114,7 @@ class SearchPage extends StatelessWidget {
                     ),
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: 'Search recipes',
+                      hintText: 'search recipes',
                       suffixIcon: Icon(
                         Icons.search,
                         size: 32,
@@ -134,6 +136,8 @@ class SearchPage extends StatelessWidget {
                     ),
                   ),
                 ),
+
+                //ingredients for search
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
@@ -141,28 +145,44 @@ class SearchPage extends StatelessWidget {
                       10,
                       (index) => Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          width: 80,
-                          height: 100,
-                          child: Column(
-                            children: [
-                              CircleAvatar(
-                                backgroundColor: Colors.black,
-                                radius: 32,
-                                foregroundImage: NetworkImage(
-                                    'https://5.imimg.com/data5/SELLER/Default/2023/9/345985590/NP/ND/CY/191842402/frozen-skin-whole-chicken-meat-for-restaurant-500x500.jpeg'),
-                              ),
-                              Text(
-                                'Ingredients',
-                                style: TextStyle(
-                                  fontFamily: Constants.mainFont,
-                                  fontSize: 15,
-                                  color: Colors.white,
+                        child: InkWell(
+                          onTap: () {
+                            searchIngredientProvider.addToSearch(
+                                SearchIngredientsModel(
+                                    imagepath:
+                                        'https://5.imimg.com/data5/SELLER/Default/2023/9/345985590/NP/ND/CY/191842402/frozen-skin-whole-chicken-meat-for-restaurant-500x500.jpeg',
+                                    ingredientName: 'Ingredients'));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => IngredientSearch(
+                                    index: index,
+                                  ),
+                                ));
+                          },
+                          child: Container(
+                            width: 80,
+                            height: 100,
+                            child: Column(
+                              children: [
+                                CircleAvatar(
+                                  backgroundColor: Colors.black,
+                                  radius: 32,
+                                  foregroundImage: NetworkImage(
+                                      'https://5.imimg.com/data5/SELLER/Default/2023/9/345985590/NP/ND/CY/191842402/frozen-skin-whole-chicken-meat-for-restaurant-500x500.jpeg'),
                                 ),
-                                overflow: TextOverflow.clip,
-                                maxLines: 1,
-                              ),
-                            ],
+                                Text(
+                                  'Ingredients',
+                                  style: TextStyle(
+                                    fontFamily: Constants.mainFont,
+                                    fontSize: 15,
+                                    color: Colors.white,
+                                  ),
+                                  overflow: TextOverflow.clip,
+                                  maxLines: 1,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
