@@ -8,6 +8,23 @@ class ScheduleRecipePage extends StatefulWidget {
 }
 
 class ScheduleRecipePageState extends State<ScheduleRecipePage> {
+  Widget buildListTile(IconData icon, String title) {
+    return Column(
+      children: [
+        ListTile(
+          leading: Icon(
+            icon,
+            size: 35,
+          ),
+          title: Text(
+            title,
+            style: TextStyle(fontSize: 20, color: Colors.white),
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,55 +45,24 @@ class ScheduleRecipePageState extends State<ScheduleRecipePage> {
                     topRight: Radius.circular(30.0),
                   ),
                 ),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      ListTile(
-                        leading: Icon(
-                          Icons.bookmark,
-                          size: 35,
-                        ),
-                        title: Text(
-                          "Add from save",
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        ),
-                      ),
-                      Divider(
-                        color: Colors.white,
-                        indent: 19,
-                        endIndent: 19,
-                        thickness: 1,
-                      ),
-                      ListTile(
-                        leading: Icon(
-                          Icons.search,
-                          size: 35,
-                        ),
-                        title: Text(
-                          "Search recipe",
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        ),
-                      ),
-                      Divider(
-                        color: Colors.white,
-                        indent: 19,
-                        endIndent: 19,
-                        thickness: 1,
-                      ),
-                      ListTile(
-                        leading: Icon(
-                          Icons.edit,
-                          size: 35,
-                        ),
-                        title: Text(
-                          "Create recipe",
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        ),
-                      ),
-                    ],
-                  ),
+                child: Column(
+                  children: [
+                    buildListTile(Icons.bookmark, "Add from save"),
+                    Divider(
+                      color: Colors.white,
+                      indent: 19,
+                      endIndent: 19,
+                      thickness: 1,
+                    ),
+                    buildListTile(Icons.search, "Search recipe"),
+                    Divider(
+                      color: Colors.white,
+                      indent: 19,
+                      endIndent: 19,
+                      thickness: 1,
+                    ),
+                    buildListTile(Icons.edit, "Create recipe"),
+                  ],
                 ),
               );
             },
