@@ -21,11 +21,7 @@ class ScheduleRecipes extends StatelessWidget {
         backgroundColor: Constants.primaryColor,
         leading: Padding(
             padding: const EdgeInsets.only(left: 20),
-            child: Icon(
-              Icons.cookie,
-              size: 32,
-              color: Colors.black,
-            )),
+            child: Image.asset('assets/images/logo (1).png')),
         actions: [
           Row(
             mainAxisSize: MainAxisSize.min,

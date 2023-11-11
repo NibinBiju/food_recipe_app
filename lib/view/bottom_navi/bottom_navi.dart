@@ -3,7 +3,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:recipe_app/constants/color_constants.dart';
 import 'package:recipe_app/view/home_screen/home_screen.dart';
-import 'package:recipe_app/view/recipe_screen/own_recipe.dart';
+import 'package:recipe_app/view/create_recipe_screen/own_recipe.dart';
 import 'package:recipe_app/view/schedule_recipes/schedule_recipes.dart';
 import 'package:recipe_app/view/search_page/search_page.dart';
 import 'package:recipe_app/view/settings_page/settings_page.dart';
@@ -59,7 +59,7 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
                 ),
                 GButton(
                   icon: LineIcons.plusSquare,
-                  text: 'Create\nrecipe',
+                  text: 'Create\nRecipe',
                 ),
                 GButton(
                   icon: LineIcons.calendarCheckAlt,
@@ -67,7 +67,7 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
                 ),
                 GButton(
                   icon: LineIcons.cog,
-                  text: 'Profile',
+                  text: 'Settings',
                 ),
               ],
               selectedIndex: _currentIndex,
