@@ -13,7 +13,75 @@ class ScheduleRecipePageState extends State<ScheduleRecipePage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xFF0216CC),
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet<void>(
+            elevation: 0,
+            backgroundColor: Color.fromARGB(255, 62, 37, 153),
+            context: context,
+            builder: (BuildContext context) {
+              return Container(
+                height: 220,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 36, 55, 231),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    topRight: Radius.circular(30.0),
+                  ),
+                ),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ListTile(
+                        leading: Icon(
+                          Icons.bookmark,
+                          size: 35,
+                        ),
+                        title: Text(
+                          "Add from save",
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                      ),
+                      Divider(
+                        color: Colors.white,
+                        indent: 19,
+                        endIndent: 19,
+                        thickness: 1,
+                      ),
+                      ListTile(
+                        leading: Icon(
+                          Icons.search,
+                          size: 35,
+                        ),
+                        title: Text(
+                          "Search recipe",
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                      ),
+                      Divider(
+                        color: Colors.white,
+                        indent: 19,
+                        endIndent: 19,
+                        thickness: 1,
+                      ),
+                      ListTile(
+                        leading: Icon(
+                          Icons.edit,
+                          size: 35,
+                        ),
+                        title: Text(
+                          "Create recipe",
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        },
         child: Icon(Icons.add),
       ),
       backgroundColor: Color.fromARGB(255, 62, 37, 153),
