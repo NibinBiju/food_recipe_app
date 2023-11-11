@@ -13,4 +13,9 @@ class SearchIngredientProvdier with ChangeNotifier {
     ingredientSearch.removeAt(index);
     notifyListeners();
   }
+
+  void clearAll() {
+    ingredientSearch.clear();
+    notifyListeners();
+  }
 }

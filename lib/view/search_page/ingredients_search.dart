@@ -19,6 +19,12 @@ class _IngredientSearchState extends State<IngredientSearch> {
     return Scaffold(
       backgroundColor: Constants.primaryColor,
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+              ingredientProvider.clearAll();
+            },
+            icon: Icon(Icons.arrow_back_ios)),
         elevation: 0,
         backgroundColor: Constants.primaryColor,
         toolbarHeight: 120,
