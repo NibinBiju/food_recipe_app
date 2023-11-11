@@ -110,7 +110,7 @@ class ScheduleRecipePageState extends State<ScheduleRecipePage> {
                 child: SingleChildScrollView(
                   physics: ClampingScrollPhysics(),
                   child: Column(
-                    children: <Widget>[
+                    children: [
                       Container(
                         padding: EdgeInsets.symmetric(horizontal: 20),
                         height: MediaQuery.of(context).size.height * 0.35,
