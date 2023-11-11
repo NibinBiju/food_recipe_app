@@ -8,12 +8,66 @@ class ScheduleRecipePage extends StatefulWidget {
 }
 
 class ScheduleRecipePageState extends State<ScheduleRecipePage> {
+  Widget buildListTile(IconData icon, String title) {
+    return Column(
+      children: [
+        ListTile(
+          leading: Icon(
+            icon,
+            size: 35,
+          ),
+          title: Text(
+            title,
+            style: TextStyle(fontSize: 20, color: Colors.white),
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xFF0216CC),
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet<void>(
+            elevation: 0,
+            backgroundColor: Color.fromARGB(255, 62, 37, 153),
+            context: context,
+            builder: (BuildContext context) {
+              return Container(
+                height: 220,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 36, 55, 231),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    topRight: Radius.circular(30.0),
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    buildListTile(Icons.bookmark, "Add from save"),
+                    Divider(
+                      color: Colors.white,
+                      indent: 19,
+                      endIndent: 19,
+                      thickness: 1,
+                    ),
+                    buildListTile(Icons.search, "Search recipe"),
+                    Divider(
+                      color: Colors.white,
+                      indent: 19,
+                      endIndent: 19,
+                      thickness: 1,
+                    ),
+                    buildListTile(Icons.edit, "Create recipe"),
+                  ],
+                ),
+              );
+            },
+          );
+        },
         child: Icon(Icons.add),
       ),
       backgroundColor: Color.fromARGB(255, 62, 37, 153),
