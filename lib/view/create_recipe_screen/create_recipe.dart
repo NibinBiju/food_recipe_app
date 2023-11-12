@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/constants/color_constants.dart';
+import 'package:recipe_app/constants/constants.dart';
 
 class CreateRecipe extends StatefulWidget {
   CreateRecipe({super.key});

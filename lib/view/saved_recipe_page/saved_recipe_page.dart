@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/constants/color_constants.dart';
+import 'package:provider/provider.dart';
+import 'package:recipe_app/constants/constants.dart';
+import 'package:recipe_app/controller/save_page_provider/save_page_controller.dart';
+import 'package:recipe_app/model/save_page_model/save_page_cookbook_model.dart';
+import 'package:recipe_app/view/saved_recipe_page/widgets/save_recipes_card.dart';
 
-class SavedRecipePage extends StatelessWidget {
-  const SavedRecipePage({super.key});
+class SavedRecipePage extends StatefulWidget {
+  SavedRecipePage({super.key});
+
+  @override
+  State<SavedRecipePage> createState() => _SavedRecipePageState();
+}
+
+class _SavedRecipePageState extends State<SavedRecipePage> {
+  int selectedIndex = 0;
+
+  TextEditingController _cookbookTextfield = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    var saveProvider = Provider.of<SavePageProvider>(context);
     return Scaffold(
       backgroundColor: Constants.primaryColor,
       appBar: AppBar(
@@ -18,17 +32,221 @@ class SavedRecipePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'My Saved Recipes',
-                style: TextStyle(
-                  fontFamily: Constants.mainFont,
-                  color: Colors.white,
-                  fontSize: 28,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'My Saved Recipes',
+                    style: TextStyle(
+                      fontFamily: Constants.mainFont,
+                      color: Colors.white,
+                      fontSize: 28,
+                    ),
+                  ),
+                  selectedIndex == 0
+                      ? CircleAvatar(
+                          backgroundColor: Constants.primaryColor,
+                          radius: 18,
+                        )
+                      : InkWell(
+                          onTap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (context) => Container(
+                                height: 200,
+                                color: Colors.green,
+                              ),
+                            );
+                          },
+                          child: CircleAvatar(
+                            radius: 18,
+                            backgroundColor: Colors.black45,
+                            child: Center(
+                              child: Icon(Icons.more_horiz_outlined),
+                            ),
+                          ),
+                        ),
+                ],
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: List.generate(
+                    saveProvider.mySavedRecipes.length + 1,
+                    (index) => Padding(
+                      padding: const EdgeInsets.only(
+                        top: 20,
+                        bottom: 17,
+                      ),
+                      child: saveProvider.mySavedRecipes.length == index
+
+                          //add button to create new list
+                          ? InkWell(
+                              highlightColor: Constants.primaryColor,
+                              onTap: () {
+                                _cookbookTextfield.text = '';
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => Dialog(
+                                    backgroundColor: Colors.transparent,
+                                    child: Container(
+                                      padding: EdgeInsets.all(10),
+                                      width: 300,
+                                      height: 220,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(19),
+                                        color: Constants.CardColor,
+                                      ),
+
+                                      //button for create new cookbook
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        children: [
+                                          TextField(
+                                            controller: _cookbookTextfield,
+                                            cursorColor: Colors.grey.shade600,
+                                            style: TextStyle(
+                                              fontFamily: Constants.mainFont,
+                                              fontSize: 27,
+                                            ),
+                                            autofocus: true,
+                                            decoration: InputDecoration(
+                                              hintText: 'Cookbook name',
+                                              hintStyle: TextStyle(
+                                                color: Colors.grey.shade600,
+                                              ),
+                                              border: OutlineInputBorder(),
+                                            ),
+                                            onSubmitted: (value) {
+                                              saveProvider.createNewCookBook(
+                                                  CreateCookBookModel(
+                                                      index: index,
+                                                      cookBookName:
+                                                          _cookbookTextfield
+                                                              .text));
+
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              saveProvider.createNewCookBook(
+                                                  CreateCookBookModel(
+                                                      index: index,
+                                                      cookBookName:
+                                                          _cookbookTextfield
+                                                              .text));
+
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Container(
+                                              width: 140,
+                                              height: 50,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(7),
+                                                color: Constants.buttonColor,
+                                              ),
+                                              child: Center(
+                                                child: Text(
+                                                  'Create',
+                                                  style: TextStyle(
+                                                    fontFamily:
+                                                        Constants.mainFont,
+                                                    fontSize: 23,
+                                                    color: Colors.black87,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                width: 130,
+                                height: 110,
+                                child: Column(
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 42,
+                                      backgroundColor: Constants.CardColor,
+                                      child: Center(
+                                        child: Icon(
+                                          Icons.add,
+                                          color: Colors.white,
+                                          size: 42,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      'Create new cookbook',
+                                      style: TextStyle(
+                                        fontFamily: Constants.mainFont,
+                                        color: Colors.white,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+
+                          //recipes lists
+                          : InkWell(
+                              highlightColor: Colors.black12,
+                              splashColor: Constants.primaryColor,
+                              onTap: () {
+                                selectedIndex = index;
+                                setState(() {});
+                              },
+                              child: Container(
+                                width: 100,
+                                height: 110,
+                                child: Column(
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 42,
+                                      backgroundColor: selectedIndex == index
+                                          ? Colors.white
+                                          : Colors.grey,
+                                      child: Center(
+                                        child: CircleAvatar(
+                                          radius: 38,
+                                          backgroundColor:
+                                              Constants.primaryColor,
+                                          child: CircleAvatar(
+                                            radius: 35,
+                                            foregroundImage: AssetImage(
+                                                'assets/images/Rectangle 17.png'),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      saveProvider
+                                          .mySavedRecipes[index].cookBookName,
+                                      style: TextStyle(
+                                        fontFamily: Constants.mainFont,
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.clip,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                    ),
+                  ),
                 ),
               ),
-              Row(
-                children: List.generate(2, (index) => Container()),
-              )
+              SavePageRecipeCard()
             ],
           ),
         ),

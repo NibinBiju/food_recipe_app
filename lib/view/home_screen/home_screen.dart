@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
-import 'package:recipe_app/constants/color_constants.dart';
+import 'package:recipe_app/constants/constants.dart';
 import 'package:recipe_app/view/saved_recipe_page/saved_recipe_page.dart';
-import 'package:recipe_app/view/widgets/daily_inspiration_card.dart';
-import 'package:recipe_app/view/widgets/recipes_may_like_card.dart';
+import 'package:recipe_app/view/home_screen/homescreen_widgets/homepage_recipe_card.dart';
+import 'package:recipe_app/view/home_screen/homescreen_widgets/recipes_may_like_card.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -13,15 +13,6 @@ class HomeScreen extends StatelessWidget {
     const DailyInspirationCard(image: 'assets/images/Rectangle 17.png'),
     const DailyInspirationCard(image: 'assets/images/Rectangle 34.png'),
   ];
-  String greeting(int hour) {
-    if (hour < 12) {
-      return 'Breakfast Time';
-    }
-    if (hour < 17) {
-      return 'Lunch Time';
-    }
-    return 'Dinner Time';
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +31,14 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Constants.primaryColor,
         leading: Padding(
             padding: const EdgeInsets.only(left: 20),
-            child: Image.asset('assets/images/logo (1).png')),
+            child: Image.asset(Constants.logo)),
         actions: [
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               InkWell(
+                splashColor: Colors.black,
+                highlightColor: Colors.transparent,
                 //for navigate to save recipe page
                 onTap: () {
                   Navigator.push(
@@ -97,22 +90,6 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Row(
-                  children: [
-                    Text(
-                      greeting(DateTime.now().hour),
-                      style: TextStyle(
-                        fontFamily: Constants.mainFont,
-                        color: Colors.white,
-                        fontSize: 45,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-
               Row(
                 children: [
                   Text(
@@ -131,7 +108,7 @@ class HomeScreen extends StatelessWidget {
                 height: 450,
                 child: CardSwiper(
                     allowedSwipeDirection:
-                        AllowedSwipeDirection.only(left: false, right: true),
+                        AllowedSwipeDirection.only(right: true, left: false),
                     cardBuilder: (context, index, horizontalOffsetPercentage,
                             verticalOffsetPercentage) =>
                         dailyInspirationCardList[index],
