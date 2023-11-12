@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/constants/color_constants.dart';
+import 'package:recipe_app/constants/constants.dart';
 
 class RecipesMayLikeCard extends StatelessWidget {
   const RecipesMayLikeCard({
@@ -30,9 +30,7 @@ class RecipesMayLikeCard extends StatelessWidget {
                 radius: 23,
                 backgroundColor: Colors.black45,
                 child: IconButton(
-                  onPressed: () {
-                    print('${DateTime.now().hour}');
-                  },
+                  onPressed: () {},
                   icon: Icon(
                     Icons.bookmark_border,
                     color: Colors.white,

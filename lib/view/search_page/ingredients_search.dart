@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:recipe_app/constants/color_constants.dart';
+import 'package:recipe_app/constants/constants.dart';
 import 'package:recipe_app/controller/search_ingredients_provider/search_ingredient_provider.dart';
 import 'package:recipe_app/model/search_ingredient_model/search_ingredient_model.dart';
 
-class IngredientSearch extends StatefulWidget {
+class IngredientSearch extends StatelessWidget {
   IngredientSearch({super.key, required this.index});
   final int index;
 
-  @override
-  State<IngredientSearch> createState() => _IngredientSearchState();
-}
-
-class _IngredientSearchState extends State<IngredientSearch> {
   @override
   Widget build(BuildContext context) {
     var ingredientProvider = Provider.of<SearchIngredientProvdier>(context);

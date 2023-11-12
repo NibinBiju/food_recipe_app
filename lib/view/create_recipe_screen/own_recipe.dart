@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_app/constants/color_constants.dart';
+import 'package:recipe_app/constants/constants.dart';
 import 'package:recipe_app/view/create_recipe_screen/create_recipe.dart';
 import 'package:recipe_app/view/saved_recipe_page/saved_recipe_page.dart';
 
@@ -28,7 +28,7 @@ class _OwnRecipeState extends State<OwnRecipe> {
         backgroundColor: Constants.primaryColor,
         leading: Padding(
             padding: const EdgeInsets.only(left: 20),
-            child: Image.asset('assets/images/logo (1).png')),
+            child: Image.asset(Constants.logo)),
         actions: [
           Row(
             mainAxisSize: MainAxisSize.min,

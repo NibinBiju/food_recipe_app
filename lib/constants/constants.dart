@@ -5,4 +5,5 @@ class Constants {
   static Color buttonColor = Color(0xFF0216CC);
   static String mainFont = 'InriaSans';
   static Color CardColor = Color.fromARGB(255, 62, 37, 153);
+  static String logo = 'assets/images/main logo (1).png';
 }

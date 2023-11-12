@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:recipe_app/constants/color_constants.dart';
+import 'package:recipe_app/constants/constants.dart';
 import 'package:recipe_app/view/bottom_navi/bottom_navi.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -22,6 +22,31 @@ class _FeatureScreenState extends State<FeatureScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Constants.primaryColor,
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              Constants.logo,
+              height: 42,
+            ),
+            SizedBox(
+              width: 4,
+            ),
+            Text(
+              'BigBite',
+              style: TextStyle(
+                fontFamily: Constants.mainFont,
+                color: Colors.white,
+                fontSize: 23,
+              ),
+            )
+          ],
+        ),
+        centerTitle: true,
+        elevation: 0,
+      ),
       backgroundColor: Constants.primaryColor,
       body: Padding(
         padding: const EdgeInsets.only(top: 60, bottom: 30),

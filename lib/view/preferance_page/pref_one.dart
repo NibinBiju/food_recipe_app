@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class PrefPageOne extends StatefulWidget {
