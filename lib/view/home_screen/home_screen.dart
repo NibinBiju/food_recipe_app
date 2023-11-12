@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
-import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:recipe_app/constants/constants.dart';
 import 'package:recipe_app/view/saved_recipe_page/saved_recipe_page.dart';
 import 'package:recipe_app/view/home_screen/homescreen_widgets/homepage_recipe_card.dart';
@@ -14,17 +13,6 @@ class HomeScreen extends StatelessWidget {
     const DailyInspirationCard(image: 'assets/images/Rectangle 17.png'),
     const DailyInspirationCard(image: 'assets/images/Rectangle 34.png'),
   ];
-  Future<String> greeting() async {
-    final String currentTimeZone = await FlutterTimezone.getLocalTimezone();
-    var hour = int.parse(currentTimeZone);
-    if (hour < 12) {
-      return 'Breakfast Time';
-    }
-    if (hour < 17) {
-      return 'Lunch Time';
-    }
-    return 'Dinner Time';
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,25 +90,6 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              // Padding(
-              //   padding: const EdgeInsets.only(bottom: 10),
-              //   child: Row(
-              //     children: [
-              //       FutureBuilder<String>(
-              //         future: greeting(),
-              //         builder: (context, snapshot) => Text(
-              //           snapshot.data.toString(),
-              //           style: TextStyle(
-              //             fontFamily: Constants.mainFont,
-              //             color: Colors.white,
-              //             fontSize: 45,
-              //           ),
-              //         ),
-              //       )
-              //     ],
-              //   ),
-              // ),
-
               Row(
                 children: [
                   Text(

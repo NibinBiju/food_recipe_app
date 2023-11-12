@@ -30,9 +30,7 @@ class RecipesMayLikeCard extends StatelessWidget {
                 radius: 23,
                 backgroundColor: Colors.black45,
                 child: IconButton(
-                  onPressed: () {
-                    print('${DateTime.now().hour}');
-                  },
+                  onPressed: () {},
                   icon: Icon(
                     Icons.bookmark_border,
                     color: Colors.white,
