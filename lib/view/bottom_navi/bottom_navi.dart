@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:recipe_app/constants/color_constants.dart';
+import 'package:recipe_app/constants/constants.dart';
 import 'package:recipe_app/view/home_screen/home_screen.dart';
 import 'package:recipe_app/view/create_recipe_screen/own_recipe.dart';
 import 'package:recipe_app/view/schedule_recipes/schedule.dart';
