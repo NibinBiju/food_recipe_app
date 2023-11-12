@@ -13,6 +13,15 @@ class HomeScreen extends StatelessWidget {
     const DailyInspirationCard(image: 'assets/images/Rectangle 17.png'),
     const DailyInspirationCard(image: 'assets/images/Rectangle 34.png'),
   ];
+  String greeting(int hour) {
+    if (hour < 12) {
+      return 'Breakfast Time';
+    }
+    if (hour < 17) {
+      return 'Lunch Time';
+    }
+    return 'Dinner Time';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +97,22 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Row(
+                  children: [
+                    Text(
+                      greeting(DateTime.now().hour),
+                      style: TextStyle(
+                        fontFamily: Constants.mainFont,
+                        color: Colors.white,
+                        fontSize: 45,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+
               Row(
                 children: [
                   Text(
@@ -104,15 +129,13 @@ class HomeScreen extends StatelessWidget {
               //card swiper
               SizedBox(
                 height: 450,
-                child: Flexible(
-                  child: CardSwiper(
-                      allowedSwipeDirection:
-                          AllowedSwipeDirection.only(left: false, right: true),
-                      cardBuilder: (context, index, horizontalOffsetPercentage,
-                              verticalOffsetPercentage) =>
-                          dailyInspirationCardList[index],
-                      cardsCount: dailyInspirationCardList.length),
-                ),
+                child: CardSwiper(
+                    allowedSwipeDirection:
+                        AllowedSwipeDirection.only(left: false, right: true),
+                    cardBuilder: (context, index, horizontalOffsetPercentage,
+                            verticalOffsetPercentage) =>
+                        dailyInspirationCardList[index],
+                    cardsCount: dailyInspirationCardList.length),
               ),
               const SizedBox(
                 height: 16,
