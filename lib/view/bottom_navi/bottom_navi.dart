@@ -21,7 +21,7 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
     HomeScreen(),
     const SearchPage(),
     const OwnRecipe(),
-    ScheduleRecipePage(),
+    const SchedulePage(),
     const SettingsPage(),
   ];
   @override
