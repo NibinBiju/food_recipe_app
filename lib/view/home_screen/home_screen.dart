@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:recipe_app/constants/constants.dart';
 import 'package:recipe_app/view/saved_recipe_page/saved_recipe_page.dart';
-import 'package:recipe_app/view/home_screen/homescreen_widgets/homepage_recipe_card.dart';
-import 'package:recipe_app/view/home_screen/homescreen_widgets/recipes_may_like_card.dart';
+import 'package:recipe_app/view/home_screen/widgets/homepage_recipe_card.dart';
+import 'package:recipe_app/view/home_screen/widgets/recipes_may_like_card.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
