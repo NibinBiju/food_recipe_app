@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/constants/constants.dart';
 import 'package:recipe_app/view/create_recipe_screen/create_recipe.dart';
+import 'package:recipe_app/view/details_page/details_page.dart';
 import 'package:recipe_app/view/saved_recipe_page/saved_recipe_page.dart';
 
 class OwnRecipe extends StatefulWidget {
@@ -92,59 +93,70 @@ class _OwnRecipeState extends State<OwnRecipe> {
                 child: ListView.builder(
                     itemCount: 1,
                     itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Align(
-                                    alignment: Alignment.topCenter,
-                                    child: Text(
-                                      "RECIPE NAME",
-                                      style: TextStyle(
-                                        fontSize: 22,
-                                        fontWeight: FontWeight.w900,
-                                        fontFamily: Constants.mainFont,
-                                        color: Colors.white,
-                                      ),
-                                    )),
-                                Spacer(),
-                                Text(
-                                  "Date Created",
-                                  style: TextStyle(
-                                    fontFamily: Constants.mainFont,
-                                    color: Colors.white,
-                                  ),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'Time take',
-                                  style: TextStyle(
-                                    fontFamily: Constants.mainFont,
-                                    color: Colors.white,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ],
+                      return InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailsPage(
+                                    imagepath:
+                                        'assets/images/Rectangle 17 (1).png'),
+                              ));
+                        },
+                        child: Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Align(
+                                      alignment: Alignment.topCenter,
+                                      child: Text(
+                                        "RECIPE NAME",
+                                        style: TextStyle(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.w900,
+                                          fontFamily: Constants.mainFont,
+                                          color: Colors.white,
+                                        ),
+                                      )),
+                                  Spacer(),
+                                  Text(
+                                    "Date Created",
+                                    style: TextStyle(
+                                      fontFamily: Constants.mainFont,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Time take',
+                                    style: TextStyle(
+                                      fontFamily: Constants.mainFont,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Constants.buttonColor,
+                              image: DecorationImage(
+                                  image: AssetImage(
+                                      'assets/images/Rectangle 17 (1).png'),
+                                  fit: BoxFit.cover)),
+                          width: double.infinity,
+                          height: 120,
+                          margin: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
                         ),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            color: Constants.buttonColor,
-                            image: DecorationImage(
-                                image: NetworkImage(
-                                    'https://www.thechunkychef.com/wp-content/uploads/2017/09/Chicken-Stroganoff-feat.jpg'),
-                                fit: BoxFit.cover)),
-                        width: double.infinity,
-                        height: 120,
-                        margin:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                        padding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                       );
                     }),
               ),

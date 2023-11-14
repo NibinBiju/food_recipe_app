@@ -97,8 +97,6 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
                                         borderRadius: BorderRadius.circular(19),
                                         color: Constants.CardColor,
                                       ),
-
-                                      //button for create new cookbook
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceAround,
@@ -108,6 +106,7 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
                                             cursorColor: Colors.grey.shade600,
                                             style: TextStyle(
                                               fontFamily: Constants.mainFont,
+                                              color: Colors.white,
                                               fontSize: 27,
                                             ),
                                             autofocus: true,
@@ -229,7 +228,7 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
                                     ),
                                     Text(
                                       saveProvider
-                                          .mySavedRecipes[index].cookBookName,
+                                          .mySavedRecipes[index].cookBookName!,
                                       style: TextStyle(
                                         fontFamily: Constants.mainFont,
                                         color: Colors.white,
@@ -246,7 +245,16 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
                   ),
                 ),
               ),
-              SavePageRecipeCard()
+              Column(
+                  children: List.generate(
+                      saveProvider.mySavedRecipes.length,
+                      (index) => Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SavePageRecipeCard(
+                              cookBookModel: saveProvider.mySavedRecipes[index],
+                              index: index,
+                            ),
+                          )))
             ],
           ),
         ),
