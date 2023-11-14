@@ -1,13 +1,23 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:recipe_app/constants/constants.dart';
+import 'package:recipe_app/controller/save_page_provider/save_page_controller.dart';
+import 'package:recipe_app/model/save_page_model/save_page_cookbook_model.dart';
 
 class SavePageRecipeCard extends StatelessWidget {
   const SavePageRecipeCard({
     super.key,
+    required this.index,
+    required this.cookBookModel,
   });
+  final int index;
+  final CreateCookBookModel cookBookModel;
 
   @override
   Widget build(BuildContext context) {
+    var saveProvider = Provider.of<SavePageProvider>(context);
     return Column(
       children: [
         Container(
@@ -57,7 +67,7 @@ class SavePageRecipeCard extends StatelessWidget {
                       Container(
                         width: 250,
                         child: Text(
-                          'Name',
+                          'recipe name',
                           style: TextStyle(
                             fontFamily: Constants.mainFont,
                             color: Colors.white,
@@ -68,7 +78,7 @@ class SavePageRecipeCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'time take',
+                        'time',
                         style: TextStyle(
                           fontFamily: Constants.mainFont,
                           color: Colors.white,
