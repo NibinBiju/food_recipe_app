@@ -107,6 +107,7 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 450,
                 child: CardSwiper(
+                    backCardOffset: Offset(40, 30),
                     allowedSwipeDirection:
                         AllowedSwipeDirection.only(right: true, left: false),
                     cardBuilder: (context, index, horizontalOffsetPercentage,
