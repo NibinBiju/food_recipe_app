@@ -71,7 +71,6 @@ class _CreateRecipeState extends State<CreateRecipe> {
       int timeInMinutes = selectedTime.hour * 60 + selectedTime.minute;
 
       if (widget.index != null) {
-        // Update existing recipe
         RecipeController().updateElement(
           widget.index!,
           CreateRecipeModel(
@@ -82,7 +81,6 @@ class _CreateRecipeState extends State<CreateRecipe> {
           ),
         );
       } else {
-        // Add new recipe
         RecipeController().addElement(CreateRecipeModel(
             recipeName: nameController.text,
             date: parsedDate,
@@ -303,8 +301,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
                       return GestureDetector(
                         onTap: () {
                           setState(() {
-                            selectedImageIndex =
-                                index; // Store the selected index
+                            selectedImageIndex = index;
                           });
                         },
                         child: Padding(
