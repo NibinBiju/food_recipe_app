@@ -20,7 +20,7 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
   final List _mainPages = [
     HomeScreen(),
     const SearchPage(),
-    const OwnRecipe(),
+    OwnRecipe(),
     const SchedulePage(),
     const SettingsPage(),
   ];
