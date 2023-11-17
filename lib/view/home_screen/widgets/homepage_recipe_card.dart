@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_app/constants/constants.dart';
+
 import 'package:recipe_app/controller/save_page_provider/save_page_controller.dart';
 import 'package:recipe_app/model/api_model/api_model.dart';
 import 'package:recipe_app/model/save_page_model/save_page_cookbook_model.dart';
@@ -26,13 +27,13 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
 
   @override
   Widget build(BuildContext context) {
-    var saveProvider = Provider.of<SavePageProvider>(context);
+ var saveProvider = Provider.of<SavePageProvider>(context);
     return InkWell(
       onTap: () {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => DetailsPage(imagepath: widget.image),
+ builder: (context) => DetailsPage(imagepath: widget.image),
             ));
       },
       child: Container(
@@ -52,7 +53,7 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(17),
                     image: DecorationImage(
-                        image: AssetImage(widget.image), fit: BoxFit.cover),
+      image: AssetImage(widget.image), fit: BoxFit.cover),
                   ),
                 ),
                 Padding(

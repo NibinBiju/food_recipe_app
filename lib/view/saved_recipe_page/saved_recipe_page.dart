@@ -223,6 +223,7 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
                                     ),
                                     Text(
                                       saveProvider
+
                                               .cookbooks[index].cookBookName ??
                                           'N/a',
                                       style: TextStyle(
@@ -242,7 +243,7 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
                 ),
               ),
               Column(
-                children: List.generate(
+  children: List.generate(
                   //use list view
                   saveProvider
                       .cookbooks[saveProvider.selectedIndex].recipes.length,

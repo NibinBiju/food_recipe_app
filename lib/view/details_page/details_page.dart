@@ -409,8 +409,10 @@ Step 3
                               child: Center(
                                 child: IconButton(
 
-                                    //share recipe link
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+
                                     icon: Icon(
                                       Icons.share,
                                       color: Colors.white,
@@ -426,8 +428,14 @@ Step 3
                               child: Center(
                                 child: IconButton(
 
+
                                     //save recipe
-                                    onPressed: () {},
+                            
+
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+
                                     icon: Icon(
                                       Icons.bookmark_border_outlined,
                                       color: Colors.white,

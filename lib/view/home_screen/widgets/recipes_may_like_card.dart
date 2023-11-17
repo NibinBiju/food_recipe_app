@@ -48,7 +48,7 @@ class _RecipesMayLikeCardState extends State<RecipesMayLikeCard> {
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.blueGrey,
                   image: DecorationImage(
-                    image: NetworkImage(apiRecipeModel?.image ?? ''),
+  image: NetworkImage(apiRecipeModel?.image ?? ''),
                     fit: BoxFit.cover,
                   ),
                 ),
