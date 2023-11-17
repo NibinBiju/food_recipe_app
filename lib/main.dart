@@ -15,6 +15,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        //provider for recipe page
+        // ChangeNotifierProvider<HomeProvider>(
+        //   create: (context) => HomeProvider(),
+        // ),
         //provider for save page
         ChangeNotifierProvider<SavePageProvider>(
           create: (context) => SavePageProvider(),

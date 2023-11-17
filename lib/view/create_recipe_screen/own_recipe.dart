@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:recipe_app/constants/constants.dart';
+import 'package:recipe_app/controller/save_page_provider/save_page_controller.dart';
 import 'package:recipe_app/view/create_recipe_screen/create_recipe.dart';
 import 'package:recipe_app/view/details_page/details_page.dart';
 import 'package:recipe_app/view/saved_recipe_page/saved_recipe_page.dart';
@@ -14,6 +16,7 @@ class OwnRecipe extends StatefulWidget {
 class _OwnRecipeState extends State<OwnRecipe> {
   @override
   Widget build(BuildContext context) {
+    var saveProvider = Provider.of<SavePageProvider>(context);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 5, 16, 77),
       appBar: AppBar(
@@ -61,7 +64,7 @@ class _OwnRecipeState extends State<OwnRecipe> {
                         color: Colors.white,
                       ),
                       Text(
-                        '0',
+                        '${saveProvider.cookbooks.length}',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'InriaSans',

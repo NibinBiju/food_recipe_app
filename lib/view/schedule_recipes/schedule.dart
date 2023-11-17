@@ -1,5 +1,9 @@
 import 'package:calendar_timeline/calendar_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:recipe_app/constants/constants.dart';
+import 'package:recipe_app/controller/save_page_provider/save_page_controller.dart';
+import 'package:recipe_app/view/saved_recipe_page/saved_recipe_page.dart';
 
 class SchedulePage extends StatefulWidget {
   const SchedulePage({Key? key}) : super(key: key);
@@ -40,21 +44,71 @@ class _HomePageState extends State<SchedulePage> {
 
   @override
   Widget build(BuildContext context) {
+    var saveProvider = Provider.of<SavePageProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 12, 10, 83),
-        leading: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: SizedBox(
-            width: 20,
-            height: 20,
-            child: CircleAvatar(
-              radius: 4,
-              backgroundColor: Colors.white,
-            ),
+        toolbarHeight: 70,
+        title: Text(
+          'BigBite',
+          style: TextStyle(
+            fontFamily: Constants.mainFont,
+            color: Colors.white,
           ),
         ),
         elevation: 0,
+        backgroundColor: Constants.primaryColor,
+        leading: Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Image.asset(Constants.logo)),
+        actions: [
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SavedRecipePage(),
+                      ));
+                },
+                child: Container(
+                  height: 37,
+                  width: 70,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 3,
+                      color: Colors.black,
+                    ),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(
+                        Icons.bookmark,
+                        size: 27,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        '${saveProvider.cookbooks.length}',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'InriaSans',
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            width: 20,
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xFF0216CC),
