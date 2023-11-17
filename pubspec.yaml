@@ -28,15 +28,14 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  calendar_timeline: ^1.1.2
   carousel_slider: ^4.2.1
   cupertino_icons: ^1.0.2
-  calendar_timeline: ^1.1.2
-
   flutter:
     sdk: flutter
   flutter_card_swiper: ^6.0.0
-
   google_nav_bar: ^5.0.6
+  http: ^1.1.0
   line_icons: ^2.0.3
   percent_indicator: ^4.2.3
   provider: ^6.0.5

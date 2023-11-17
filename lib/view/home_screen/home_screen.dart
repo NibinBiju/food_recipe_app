@@ -1,21 +1,64 @@
+import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
+import 'package:provider/provider.dart';
 import 'package:recipe_app/constants/constants.dart';
+import 'package:recipe_app/controller/save_page_provider/save_page_controller.dart';
+import 'package:recipe_app/model/api_model/api_model.dart';
 import 'package:recipe_app/view/saved_recipe_page/saved_recipe_page.dart';
 import 'package:recipe_app/view/home_screen/widgets/homepage_recipe_card.dart';
 import 'package:recipe_app/view/home_screen/widgets/recipes_may_like_card.dart';
+import 'package:http/http.dart' as http;
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
 
-  final List dailyInspirationCardList = [
-    const DailyInspirationCard(image: 'assets/images/Rectangle 17 (1).png'),
-    const DailyInspirationCard(image: 'assets/images/Rectangle 17.png'),
-    const DailyInspirationCard(image: 'assets/images/Rectangle 34.png'),
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  List images = [
+    'assets/images/Rectangle 17 (1).png',
+    'assets/images/Rectangle 17.png',
+    'assets/images/Rectangle 34.png'
   ];
+
+  ApiRecipeModel? apiRecipeModel;
+  List data = [];
+
+  Future<void> fetchData() async {
+    var uri = Uri.parse(
+        'https://api.spoonacular.com/recipes/716429/information?apiKey=fecb801beb464341a290d1e04871cce2&includeNutrition=false');
+
+    try {
+      var response = await http.get(uri);
+
+      if (response.statusCode == 200) {
+        log(response.statusCode);
+        print(response.body);
+        var jsonData = jsonDecode(response.body);
+        // Assuming ApiRecipeModel.fromJson is a method that converts JSON to your model
+        apiRecipeModel = ApiRecipeModel.fromJson(jsonData);
+      } else {
+        print('Error: ${response.statusCode}');
+        print('Response body: ${response.body}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  @override
+  void initState() {
+    fetchData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    var saveprovider = Provider.of<SavePageProvider>(context);
     return Scaffold(
       backgroundColor: Constants.primaryColor,
       appBar: AppBar(
@@ -66,7 +109,7 @@ class HomeScreen extends StatelessWidget {
                         color: Colors.white,
                       ),
                       Text(
-                        '0',
+                        '${saveprovider.cookbooks.length}',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'InriaSans',
@@ -112,8 +155,9 @@ class HomeScreen extends StatelessWidget {
                         AllowedSwipeDirection.only(right: true, left: false),
                     cardBuilder: (context, index, horizontalOffsetPercentage,
                             verticalOffsetPercentage) =>
-                        dailyInspirationCardList[index],
-                    cardsCount: dailyInspirationCardList.length),
+                        DailyInspirationCard(
+                            image: images[index], index: index),
+                    cardsCount: images.length),
               ),
               const SizedBox(
                 height: 16,
@@ -141,12 +185,13 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: List.generate(
-                      dailyInspirationCardList.length,
+                      images.length,
                       (index) => Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
-                            dailyInspirationCardList[index],
+                            DailyInspirationCard(
+                                image: images[index], index: index),
                           ],
                         ),
                       ),
@@ -176,12 +221,13 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: List.generate(
-                      dailyInspirationCardList.length,
+                      images.length,
                       (index) => Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
-                            dailyInspirationCardList[index],
+                            DailyInspirationCard(
+                                image: images[index], index: index),
                           ],
                         ),
                       ),
@@ -212,12 +258,13 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: List.generate(
-                      dailyInspirationCardList.length,
+                      images.length,
                       (index) => Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
-                            dailyInspirationCardList[index],
+                            DailyInspirationCard(
+                                image: images[index], index: index),
                           ],
                         ),
                       ),
@@ -248,12 +295,13 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: List.generate(
-                      dailyInspirationCardList.length,
+                      images.length,
                       (index) => Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
-                            dailyInspirationCardList[index],
+                            DailyInspirationCard(
+                                image: images[index], index: index),
                           ],
                         ),
                       ),
@@ -284,7 +332,7 @@ class HomeScreen extends StatelessWidget {
                   physics: NeverScrollableScrollPhysics(),
                   crossAxisCount: 2,
                   children: List.generate(
-                    12,
+                    32,
                     (index) => Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Card(
@@ -296,7 +344,10 @@ class HomeScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(14),
                             color: Constants.CardColor,
                           ),
-                          child: RecipesMayLikeCard(),
+                          child: RecipesMayLikeCard(
+                            index: index,
+                            recipeList: data,
+                          ),
                         ),
                       ),
                     ),
