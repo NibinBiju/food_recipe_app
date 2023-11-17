@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_app/controller/save_page_provider/save_page_controller.dart';
 import 'package:recipe_app/controller/search_ingredients_provider/search_ingredient_provider.dart';
+import 'package:recipe_app/model/recipe_page_model/recipe_model.dart';
+import 'package:recipe_app/view/create_recipe_screen/own_recipe.dart';
 import 'package:recipe_app/view/feature_screen/feature_screen.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Hive.initFlutter();
+  Hive.registerAdapter(CreateRecipeModelAdapter());
+
+  await Hive.openBox<CreateRecipeModel>('recipeBox');
+
   runApp(const MyApp());
 }
 
@@ -25,10 +35,9 @@ class MyApp extends StatelessWidget {
           create: (context) => SearchIngredientProvdier(),
         ),
       ],
-      child: const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: FeatureScreen(),
-      ),
+      child: MaterialApp(debugShowCheckedModeBanner: false, home: OwnRecipe()
+          // FeatureScreen(),
+          ),
     );
   }
 }

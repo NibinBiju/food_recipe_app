@@ -7,3 +7,10 @@ class Constants {
   static Color CardColor = Color(0xFF271B54);
   static String logo = 'assets/images/main logo (1).png';
 }
+
+List<String> assetImages = [
+  'assets/images/a.jpg',
+  'assets/images/b.jpg',
+  'assets/images/c.jpg',
+  'assets/images/d.jpg'
+];
