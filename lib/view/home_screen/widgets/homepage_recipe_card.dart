@@ -45,6 +45,7 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
                 index: widget.index,
                 recipeList: widget.recipeList,
                 ingredients: widget.recipeList[widget.index]['ingredients'],
+                steps: widget.recipeList[widget.index]['instructions'],
               ),
             ));
       },
@@ -111,12 +112,14 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
                                                             .addRecipeToCookbook(
                                                           createCookBookModel,
                                                           SavedRecipes(
-                                                              image:
-                                                                  widget.image,
-                                                              rating: '4.4',
-                                                              recipeName:
-                                                                  'Name',
-                                                              time: '30m'),
+                                                            index: index,
+                                                            image: widget.image,
+                                                            rating:
+                                                                widget.rating,
+                                                            recipeName:
+                                                                widget.name,
+                                                            time: widget.time,
+                                                          ),
                                                         );
                                                       },
                                                       icon: Icon(

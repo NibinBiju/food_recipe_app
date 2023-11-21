@@ -8,7 +8,8 @@ class SavePageProvider with ChangeNotifier {
   final List<CreateCookBookModel> cookbooks = [
     CreateCookBookModel(index: 0, cookBookName: 'Favorite', recipes: [
       SavedRecipes(
-          image: 'assets/images/Rectangle 34.png',
+          image:
+              'https://www.recipetineats.com/wp-content/uploads/2020/05/Pizza-Crust-without-yeast_5-SQ.jpg',
           rating: '4.3',
           recipeName: 'Chilli Chicken',
           time: '30m'),

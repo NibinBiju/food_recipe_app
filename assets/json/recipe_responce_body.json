@@ -6,7 +6,11 @@
         "title": "Classic Margherita Pizza",
         "category": "trending_now",
         "time_to_cook": "15 minutes",
-        "rating": 4.8
+        "rating": 4.8,
+        "calories":320,
+        "protien":45,
+        "nutrients":130,
+        "fat":"9.7g"
       },
       "ingredients": [
         {"name": "Pizza dough", "image": "https://joyfoodsunshine.com/wp-content/uploads/2018/09/easy-homemade-pizza-dough-recipe-2-1.jpg"},

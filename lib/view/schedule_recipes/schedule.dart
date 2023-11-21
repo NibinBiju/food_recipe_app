@@ -164,7 +164,7 @@ class _HomePageState extends State<SchedulePage> {
                   'Year',
                   style: Theme.of(context)
                       .textTheme
-                      .headline6!
+                      .titleLarge!
                       .copyWith(color: Colors.tealAccent[100]),
                 ),
               ),
@@ -181,7 +181,8 @@ class _HomePageState extends State<SchedulePage> {
                 activeDayColor: Colors.white,
                 activeBackgroundDayColor: Colors.redAccent[100],
                 dotsColor: const Color(0xFF333A47),
-                selectableDayPredicate: (date) => date.day != 23,
+                selectableDayPredicate: (date) =>
+                    date.day != 23 || date.isAtSameMomentAs(_selectedDate),
                 locale: 'en',
               ),
               const SizedBox(height: 20),

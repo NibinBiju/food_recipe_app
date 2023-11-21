@@ -38,6 +38,7 @@ class _RecipesMayLikeCardState extends State<RecipesMayLikeCard> {
                   index: widget.index,
                   recipeList: widget.recipeList,
                   ingredients: widget.recipeList[widget.index]['ingredients'],
+                  steps: widget.recipeList[widget.index]['instructions'],
                 ),
               ));
         },
@@ -113,30 +114,33 @@ class _RecipesMayLikeCardState extends State<RecipesMayLikeCard> {
                                                           .addRecipeToCookbook(
                                                         createCookBookModel,
                                                         SavedRecipes(
+                                                          //image to save page
+                                                          image: widget
+                                                                      .recipeList[
+                                                                  widget.index]
+                                                              ['recipe_image'],
 
-                                                            //image to save page
-                                                            image: widget
-                                                                    .recipeList[widget.index]
-                                                                [
-                                                                'recipe_image'],
+                                                          //rating
+                                                          rating: widget
+                                                              .recipeList[
+                                                                  widget.index]
+                                                                  ['header']
+                                                                  ['rating']
+                                                              .toString(),
 
-                                                            //rating
-                                                            rating: widget
-                                                                .recipeList[widget.index]
-                                                                    ['header']
-                                                                    ['rating']
-                                                                .toString(),
+                                                          //recipe title
+                                                          recipeName: widget
+                                                                      .recipeList[
+                                                                  widget.index][
+                                                              'header']['title'],
 
-                                                            //recipe title
-                                                            recipeName:
-                                                                widget.recipeList[widget.index]
-                                                                        ['header']
-                                                                    ['title'],
-
-                                                            //time to cook
-                                                            time: widget.recipeList[widget.index]
-                                                                    ['header']
-                                                                ['time_to_cook']),
+                                                          //time to cook
+                                                          time: widget.recipeList[
+                                                                      widget
+                                                                          .index]
+                                                                  ['header']
+                                                              ['time_to_cook'],
+                                                        ),
                                                       );
                                                     },
                                                     icon: Icon(

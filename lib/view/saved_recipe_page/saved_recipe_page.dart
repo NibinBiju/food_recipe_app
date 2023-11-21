@@ -247,10 +247,8 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
               ),
               Column(
                 children: List.generate(
-                  //use list view
                   saveProvider
                       .cookbooks[saveProvider.selectedIndex].recipes.length,
-
                   (index) => Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: SavePageRecipeCard(

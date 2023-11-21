@@ -59,7 +59,10 @@ class SavePageRecipeCard extends StatelessWidget {
                                   //     position:
                                   //     items: items);
                                 },
-                                icon: Icon(Icons.more_vert_outlined)),
+                                icon: Icon(
+                                  Icons.more_vert_outlined,
+                                  color: Colors.grey.shade300,
+                                )),
                           ),
                         ),
                       ],

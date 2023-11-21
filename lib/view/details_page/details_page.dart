@@ -7,10 +7,12 @@ class DetailsPage extends StatelessWidget {
     required this.index,
     required this.recipeList,
     required this.ingredients,
+    required this.steps,
   });
   final int index;
   final List recipeList;
   final List ingredients;
+  final List steps;
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +149,9 @@ class DetailsPage extends StatelessWidget {
                                               height: 9,
                                             ),
                                             Text(
-                                              '200',
+                                              recipeList[index]['header']
+                                                      ['protien']
+                                                  .toString(),
                                               style: TextStyle(
                                                 fontFamily: Constants.mainFont,
                                                 color: Colors.white,
@@ -166,7 +170,7 @@ class DetailsPage extends StatelessWidget {
                                         Column(
                                           children: [
                                             Text(
-                                              'CALORIES',
+                                              'PROTIEN',
                                               style: TextStyle(
                                                 fontFamily: Constants.mainFont,
                                                 color: Colors.white,
@@ -178,7 +182,9 @@ class DetailsPage extends StatelessWidget {
                                               height: 9,
                                             ),
                                             Text(
-                                              '200',
+                                              recipeList[index]['header']
+                                                      ['protien']
+                                                  .toString(),
                                               style: TextStyle(
                                                 fontFamily: Constants.mainFont,
                                                 color: Colors.white,
@@ -197,7 +203,7 @@ class DetailsPage extends StatelessWidget {
                                         Column(
                                           children: [
                                             Text(
-                                              'CALORIES',
+                                              'CARBS',
                                               style: TextStyle(
                                                 fontFamily: Constants.mainFont,
                                                 color: Colors.white,
@@ -209,7 +215,9 @@ class DetailsPage extends StatelessWidget {
                                               height: 9,
                                             ),
                                             Text(
-                                              '200',
+                                              recipeList[index]['header']
+                                                      ['nutrients']
+                                                  .toString(),
                                               style: TextStyle(
                                                 fontFamily: Constants.mainFont,
                                                 color: Colors.white,
@@ -228,7 +236,7 @@ class DetailsPage extends StatelessWidget {
                                         Column(
                                           children: [
                                             Text(
-                                              'CALORIES',
+                                              'FAT',
                                               style: TextStyle(
                                                 fontFamily: Constants.mainFont,
                                                 color: Colors.white,
@@ -240,7 +248,8 @@ class DetailsPage extends StatelessWidget {
                                               height: 9,
                                             ),
                                             Text(
-                                              '200',
+                                              recipeList[index]['header']
+                                                  ['fat'],
                                               style: TextStyle(
                                                 fontFamily: Constants.mainFont,
                                                 color: Colors.white,
@@ -340,57 +349,58 @@ class DetailsPage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(29),
                               ),
                               child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: List.generate(
-                                      5,
-                                      (index) => Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Container(
-                                              padding: EdgeInsets.all(8),
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(19),
-                                                color: Constants.primaryColor,
-                                              ),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: List.generate(
+                                  steps.length,
+                                  (index) => Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      padding: EdgeInsets.all(8),
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(19),
+                                        color: Constants.primaryColor,
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Column(
+                                            children: [
+                                              Row(
                                                 children: [
-                                                  Row(
-                                                    children: [
-                                                      Text(
-                                                        'Step ${index + 1}',
-                                                        style: TextStyle(
-                                                          fontFamily: Constants
-                                                              .mainFont,
-                                                          color: Colors.white,
-                                                          fontSize: 27,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
                                                   Text(
-                                                    'bachbashcbabhc uhaihcianhoicniajnicocbakbckabkcbkabeckhb akhabckabcb akbsckb ahkbschb',
+                                                    'Step ${index + 1}',
                                                     style: TextStyle(
-                                                      color:
-                                                          const Color.fromARGB(
-                                                              255,
-                                                              153,
-                                                              153,
-                                                              153),
                                                       fontFamily:
                                                           Constants.mainFont,
-                                                      fontSize: 25,
+                                                      color: Colors.white,
+                                                      fontSize: 27,
                                                     ),
-                                                    textAlign: TextAlign.center,
-                                                  )
+                                                  ),
                                                 ],
                                               ),
-                                            ),
-                                          ))),
+                                              Text(
+                                                steps[index],
+                                                style: TextStyle(
+                                                  color: const Color.fromARGB(
+                                                      255, 153, 153, 153),
+                                                  fontFamily:
+                                                      Constants.mainFont,
+                                                  fontSize: 25,
+                                                ),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
                           ],
                         ),
