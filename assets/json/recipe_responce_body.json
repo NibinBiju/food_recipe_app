@@ -1,0 +1,242 @@
+{
+  "recipes": [
+    {
+      "id": 1,
+      "header": {
+        "title": "Classic Margherita Pizza",
+        "category": "trending_now",
+        "time_to_cook": "15 minutes",
+        "rating": 4.8
+      },
+      "ingredients": [
+        {"name": "Pizza dough", "image": "https://joyfoodsunshine.com/wp-content/uploads/2018/09/easy-homemade-pizza-dough-recipe-2-1.jpg"},
+        {"name": "Tomato sauce", "image": "https://i2.wp.com/www.downshiftology.com/wp-content/uploads/2019/06/Marinara-Sauce-main.jpg"},
+        {"name": "Fresh mozzarella", "image": "https://www.seriouseats.com/thmb/0LrG8tB4BkzQarr2fqrpykcaDBg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__serious_eats__seriouseats.com__recipes__images__2015__10__20151017-pies-vicky-wasik-2-6f491edb6065485a86d6af639a592298.jpg"},
+        {"name": "Fresh basil", "image": "https://m.media-amazon.com/images/I/51W8xfdp-iL.jpg"},
+        {"name": "Olive oil", "image": "https://www.greendna.in/cdn/shop/products/oliveoil_1024x1024@2x.jpg?v=1627216046"},
+        {"name": "Salt", "image": "https://static.toiimg.com/photo/67741201.cms"}
+      ],
+      "instructions": [
+        "Roll out pizza dough and spread tomato sauce.",
+        "Add slices of fresh mozzarella and sprinkle with salt.",
+        "Bake in a preheated oven until crust is golden.",
+        "Top with fresh basil and drizzle with olive oil before serving."
+      ],
+      "recipe_image": "https://uk.ooni.com/cdn/shop/articles/20220211142645-margherita-9920.jpg?crop=center&height=800&v=1660843558&width=800"
+    },
+    {
+      "id": 2,
+      "header": {
+        "title": "Chicken Alfredo Pasta",
+        "category": "new_releases",
+        "time_to_cook": "25 minutes",
+        "rating": 4.5
+      },
+      "ingredients": [
+        {"name": "Fettuccine pasta", "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Fettucine1.JPG/1200px-Fettucine1.JPG"},
+        {"name": "Chicken breast", "image": "https://www.foodiecrush.com/wp-content/uploads/2018/08/Instant-Pot-Chicken-Breasts-foodiecrush.com-006A.jpg"},
+        {"name": "Heavy cream", "image": "https://sugarspunrun.com/wp-content/uploads/2021/04/Homemade-Whipped-Cream-Recipe-1-of-1.jpg"},
+        {"name": "Parmesan cheese", "image": "https://5.imimg.com/data5/SELLER/Default/2021/11/AU/LK/AI/121899387/parmesan-cheese-block.jpg"},
+        {"name": "Garlic", "image": "https://i0.wp.com/post.healthline.com/wp-content/uploads/2018/06/garlic-1296x728-header.jpg?w=1155&h=1528"},
+        {"name": "Butter", "image": "https://images-prod.healthline.com/hlcmsresource/images/AN_images/benefits-of-butter-1296x728-feature.jpg"}
+      ],
+      "instructions": [
+        "Cook fettuccine pasta according to package instructions.",
+        "Sauté chicken in garlic and butter until cooked through.",
+        "Pour in heavy cream and Parmesan cheese.",
+        "Combine with cooked pasta and serve."
+      ],
+      "recipe_image": "https://thecozycook.com/wp-content/uploads/2022/08/Chicken-Alfredo-Pasta-1-1.jpg"
+    },
+    {
+      "id": 3,
+      "header": {
+        "title": "Vegetarian Quinoa Bowl",
+        "category": "daily_inspiration",
+        "time_to_cook": "20 minutes",
+        "rating": 4.3
+      },
+      "ingredients": [
+        {"name": "Quinoa", "image": "https://nuttyyogi.com/cdn/shop/products/Quinoa_White.jpg?v=1677652891"},
+        {"name": "Cherry tomatoes", "image": "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2Farchive%2F52a7c6f0fd276f3a7902f30090549523607c4f87"},
+        {"name": "Avocado", "image": "https://www.bigbasket.com/media/uploads/p/l/10000312_19-fresho-avocado.jpg"},
+        {"name": "Black beans", "image": "https://www.realsimple.com/thmb/HN_UFnuD1MJ086vsXB0ULF6aaNA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/black-beans-health-benefits-GettyImages-1268890779-ba643ccca3254398acdca809552d66de.jpg"},
+        {"name": "Cilantro", "image": "https://cdn-prod.medicalnewstoday.com/content/images/articles/277/277627/bunch-of-fresh-coriander-or-cilantro-on-a-wooden-table.jpg"},
+        {"name": "Lime", "image": "https://www.foodrepublic.com/img/gallery/11-types-of-limes-and-what-makes-them-unique/l-intro-1690475086.jpg"}
+      ],
+      "instructions": [
+        "Cook quinoa according to package instructions.",
+        "Assemble bowl with quinoa, halved cherry tomatoes, sliced avocado, and black beans.",
+        "Garnish with chopped cilantro and squeeze lime juice over the top."
+      ],
+      "recipe_image": "https://avocadopesto.com/wp-content/uploads/2014/07/Thai-Veggie-Quinoa-Bowl.jpg"
+    },
+    {
+      "id": 4,
+      "header": {
+        "title": "Salmon Teriyaki Skewers",
+        "category": "daily_inspiration",
+        "time_to_cook": "18 minutes",
+        "rating": 4.6
+      },
+      "ingredients": [
+        {"name": "Salmon fillets", "image": "https://www.bigsams.in/wp-content/uploads/2023/01/Fresh-Norwegian-Salmon-Fillets-Skin-on-1.jpg"},
+        {"name": "Teriyaki sauce", "image": "https://thewoodenskillet.com/wp-content/uploads/2017/01/teriyaki-sauce-recipe-1.jpg"},
+        {"name": "Capsicum", "image": "https://fruitboxco.com/cdn/shop/products/Green_bell_pepper_800x.jpg?v=1579689894"},
+        {"name": "Red onion", "image": "https://m.media-amazon.com/images/I/71GUFttn0jL._AC_UF1000,1000_QL80_.jpg"},
+        {"name": "Sesame seeds", "image": "https://www.tradeindia.com/_next/image/?url=https%3A%2F%2Ftiimg.tistatic.com%2Ffp%2F1%2F008%2F417%2F99-pure-edible-natural-sesame-seed-with-12-months-shelf-life-265.jpg&w=750&q=75"},
+        {"name": "Green onions", "image": "https://www.runningtothekitchen.com/wp-content/uploads/2023/04/how-to-cut-green-onions-4.jpg"}
+      ],
+      "instructions": [
+        "Cut salmon into cubes and marinate in teriyaki sauce.",
+        "Thread salmon, bell peppers, and red onion onto skewers.",
+        "Grill skewers until salmon is cooked through.",
+        "Sprinkle with sesame seeds and chopped green onions before serving."
+      ],
+      "recipe_image": "https://jennyshearawn.com/wp-content/uploads/2021/06/Teriyaki-Salmon-Kabobs-8.jpg"
+    },
+    {
+      "id": 5,
+      "header": {
+        "title": "Caprese Salad",
+        "category": "daily_inspiration",
+        "time_to_cook": "10 minutes",
+        "rating": 4.7
+      },
+      "ingredients": [
+        {"name": "Tomatoes", "image": "https://img.freepik.com/free-photo/tomatoes_144627-15413.jpg?size=626&ext=jpg&ga=GA1.1.386372595.1697673600&semt=ais"},
+        {"name": "Fresh mozzarella", "image": "https://static.toiimg.com/thumb/75296834.cms?imgsize=1585767&width=800&height=800"},
+        {"name": "Fresh basil", "image": "https://m.media-amazon.com/images/I/51W8xfdp-iL.jpg"},
+        {"name": "Balsamic glaze", "image": "https://www.themediterraneandish.com/wp-content/uploads/2023/07/TMD-Balsamic-Glaze-WEB-29.jpg"},
+        {"name": "Olive oil", "image": "https://www.greendna.in/cdn/shop/products/oliveoil_1024x1024@2x.jpg?v=1627216046"},
+        {"name": "Salt", "image": "https://static.toiimg.com/photo/67741201.cms"}
+      ],
+      "instructions": [
+        "Slice tomatoes and fresh mozzarella.",
+        "Arrange on a plate, alternating with fresh basil leaves.",
+        "Drizzle with balsamic glaze and olive oil.",
+        "Sprinkle with salt before serving."
+      ],
+      "recipe_image": "https://www.foodnetwork.com/content/dam/images/food/fullset/2003/9/22/0/tm1a35_caprese_salad.jpg"
+    },
+    {
+      "id": 6,
+      "header": {
+        "title": "Chicken Caesar Wrap",
+        "category": "trending_now",
+        "time_to_cook": "15 minutes",
+        "rating": 4.4
+      },
+      "ingredients": [
+        {"name": "Grilled chicken", "image": "https://www.inspiredtaste.net/wp-content/uploads/2023/06/Grilled-Chicken-Recipe-Video.jpg"},
+        {"name": "Romaine lettuce", "image": "https://m.media-amazon.com/images/I/51g4XZv6KPL._AC_UF1000,1000_QL80_.jpg"},
+        {"name": "Caesar dressing", "image": "https://www.wellseasonedstudio.com/wp-content/uploads/2020/09/Creamy-caesar-salad-dressing-in-a-bowl.jpg"},
+        {"name": "Parmesan cheese", "image": "https://health.clevelandclinic.org/wp-content/uploads/sites/3/2021/08/ParmesanCheese-471343790-770x533-1.jpg"},
+        {"name": "Flour tortilla", "image": "https://www.cookingclassy.com/wp-content/uploads/2020/03/flour-tortillas-11.jpg"},
+        {"name": "Cherry tomatoes", "image": "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2Farchive%2F52a7c6f0fd276f3a7902f30090549523607c4f87"}
+      ],
+      "instructions": [
+        "Chop grilled chicken into bite-sized pieces.",
+       
+
+ "Spread Caesar dressing on a flour tortilla.",
+        "Layer with Romaine lettuce, chopped chicken, cherry tomatoes, and Parmesan cheese.",
+        "Roll the tortilla and secure with toothpicks."
+      ],
+      "recipe_image": "https://www.twopeasandtheirpod.com/wp-content/uploads/2023/08/Chicken-Caesar-Wraps-14.jpg"
+    },
+    {
+      "id": 7,
+      "header": {
+        "title": "Pumpkin Spice Latte",
+        "category": "new_releases",
+        "time_to_cook": "10 minutes",
+        "rating": 4.2
+      },
+      "ingredients": [
+        {"name": "Espresso", "image": "https://www.thespruceeats.com/thmb/HJrjMfXdLGHbgMhnM0fMkDx9XPQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/what-is-espresso-765702-hero-03_cropped-ffbc0c7cf45a46ff846843040c8f370c.jpg"},
+        {"name": "Pumpkin puree", "image": "https://www.vegrecipesofindia.com/wp-content/uploads/2020/11/pumpkin-puree-3.jpg"},
+        {"name": "Milk", "image": "https://www.southernliving.com/thmb/zCKBQZG85v0gxUpn5Nm_8elGJaA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1413944242-79c406e0bbe4435596bc671f95a949cb.jpg"},
+        {"name": "Pumpkin spice", "image": "https://lovingitvegan.com/wp-content/uploads/2016/11/Homemade-Pumpkin-Pie-Spice-8.jpg"},
+        {"name": "Whipped cream", "image": "https://loveandflourbypooja.com/wp-content/uploads/2020/05/Make-Your-Own-Whipped-Cream-at-Home.jpg"},
+        {"name": "Cinnamon", "image": "https://plantura.garden/uk/wp-content/uploads/sites/2/2021/10/cinnamon-in-the-garden.jpg"}
+      ],
+      "instructions": [
+        "Brew espresso and mix with pumpkin puree.",
+        "Froth milk and add to the espresso mixture.",
+        "Sprinkle with pumpkin spice and top with whipped cream.",
+        "Garnish with a dash of cinnamon."
+      ],
+      "recipe_image": "https://detoxinista.com/wp-content/uploads/2019/08/pumpkin-spice-latte-with-whip.jpg"
+    },
+    {
+      "id": 8,
+      "header": {
+        "title": "Mango Avocado Salsa",
+        "category": "daily_inspiration",
+        "time_to_cook": "12 minutes",
+        "rating": 4.6
+      },
+      "ingredients": [
+        {"name": "Mango", "image": "https://via.placeholder.com/150"},
+        {"name": "Avocado", "image": "https://via.placeholder.com/150"},
+        {"name": "Red onion", "image": "https://via.placeholder.com/150"},
+        {"name": "Cilantro", "image": "https://via.placeholder.com/150"},
+        {"name": "Lime", "image": "https://via.placeholder.com/150"},
+        {"name": "Jalapeno", "image": "https://via.placeholder.com/150"}
+      ],
+      "instructions": [
+        "Dice mango, avocado, and red onion.",
+        "Chop cilantro and jalapeno.",
+        "Mix all ingredients and squeeze lime juice over the salsa.",
+        "Serve with tortilla chips."
+      ],
+      "recipe_image": "https://therecipecritic.com/wp-content/uploads/2017/08/Mango-Salsa1-500x500.jpg"
+    },
+    {
+      "id": 9,
+      "header": {
+        "title": "Greek Salad with Feta",
+        "category": "daily_inspiration",
+        "time_to_cook": "10 minutes",
+        "rating": 4.7
+      },
+      "ingredients": [
+        {"name": "Cucumber", "image": "https://via.placeholder.com/150"},
+        {"name": "Tomatoes", "image": "https://via.placeholder.com/150"},
+        {"name": "Kalamata olives", "image": "https://via.placeholder.com/150"},
+        {"name": "Feta cheese", "image": "https://via.placeholder.com/150"},
+        {"name": "Red onion", "image": "https://via.placeholder.com/150"},
+        {"name": "Olive oil", "image": "https://via.placeholder.com/150"}
+      ],
+      "instructions": [
+        "Dice cucumber, tomatoes, and red onion.",
+        "Combine with Kalamata olives and crumbled feta cheese.",
+        "Drizzle with olive oil before serving."
+      ],
+      "recipe_image": "https://www.wellplated.com/wp-content/uploads/2022/05/Greek-Salad-Recipe-Easy.jpg"
+    },
+    {
+      "id": 10,
+      "header": {
+        "title": "Berry Smoothie Bowl",
+        "category": "daily_inspiration",
+        "time_to_cook": "8 minutes",
+        "rating": 4.4
+      },
+      "ingredients": [
+        {"name": "Mixed berries", "image": "https://via.placeholder.com/150"},
+        {"name": "Greek yogurt", "image": "https://via.placeholder.com/150"},
+        {"name": "Granola", "image": "https://via.placeholder.com/150"},
+        {"name": "Honey", "image": "https://via.placeholder.com/150"},
+        {"name": "Chia seeds", "image": "https://via.placeholder.com/150"},
+        {"name": "Banana", "image": "https://via.placeholder.com/150"}
+      ],
+      "instructions": [
+        "Blend mixed berries and Greek yogurt until smooth.",
+        "Pour into a bowl and top with granola, honey, chia seeds, and sliced banana."
+      ],
+      "recipe_image": "https://www.darngoodveggies.com/wp-content/uploads/2021/07/Strawberry-Smoothie-Bowl-6.jpg"
+    }
+  ]
+}

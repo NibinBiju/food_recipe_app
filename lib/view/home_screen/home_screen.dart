@@ -1,15 +1,13 @@
-import 'dart:convert';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_app/constants/constants.dart';
+import 'package:recipe_app/controller/home_page_provider/homepage_provider.dart';
 import 'package:recipe_app/controller/save_page_provider/save_page_controller.dart';
 import 'package:recipe_app/model/api_model/api_model.dart';
 import 'package:recipe_app/view/saved_recipe_page/saved_recipe_page.dart';
 import 'package:recipe_app/view/home_screen/widgets/homepage_recipe_card.dart';
 import 'package:recipe_app/view/home_screen/widgets/recipes_may_like_card.dart';
-import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
@@ -25,40 +23,40 @@ class _HomeScreenState extends State<HomeScreen> {
     'assets/images/Rectangle 34.png'
   ];
 
-  ApiRecipeModel? apiRecipeModel;
-  List data = [];
+  RecipeModel? apiRecipeModel;
 
-  Future<void> fetchData() async {
-    var uri = Uri.parse(
-        'https://api.spoonacular.com/recipes/716429/information?apiKey=fecb801beb464341a290d1e04871cce2&includeNutrition=false');
+  // bool isLoading = false;
 
-    try {
-      var response = await http.get(uri);
+  // Future<void> fetchdata() async {
+  //   setState(() {
+  //     isLoading = true;
+  //   });
+  //   var uri = Uri.parse(
+  //       'https://api.edamam.com/api/recipes/v2?type=public&q=recipes%20you%20may%20like&app_id=a14512e5&app_key=%2082e16695d1a1908fce3decdc9e71dd01%09');
+  //   var response = await http.get(uri);
+  //   print(response.statusCode);
+  //   print(response.body);
+  //   if (response.statusCode == 200) {
+  //     var jsondata = jsonDecode(response.body);
+  //     apiRecipeModel = ApiRecipeModel.fromJson(jsondata);
+  //   } else {
+  //     throw 'operation failed';
+  //   }
 
-      if (response.statusCode == 200) {
-        log(response.statusCode);
-        print(response.body);
-        var jsonData = jsonDecode(response.body);
-        // Assuming ApiRecipeModel.fromJson is a method that converts JSON to your model
-        apiRecipeModel = ApiRecipeModel.fromJson(jsonData);
-      } else {
-        print('Error: ${response.statusCode}');
-        print('Response body: ${response.body}');
-      }
-    } catch (e) {
-      print('Error: $e');
-    }
-  }
+  //   isLoading = false;
+  //   setState(() {});
+  // }
 
   @override
   void initState() {
-    fetchData();
+    Provider.of<HomeProvider>(context, listen: false).fetchData();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     var saveprovider = Provider.of<SavePageProvider>(context);
+    var homeprovider = Provider.of<HomeProvider>(context);
     return Scaffold(
       backgroundColor: Constants.primaryColor,
       appBar: AppBar(
@@ -154,10 +152,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     allowedSwipeDirection:
                         AllowedSwipeDirection.only(right: true, left: false),
                     cardBuilder: (context, index, horizontalOffsetPercentage,
-                            verticalOffsetPercentage) =>
-                        DailyInspirationCard(
-                            image: images[index], index: index),
-                    cardsCount: images.length),
+                        verticalOffsetPercentage) {
+                      // Map<String, dynamic> dailyrecipe =
+                      //     homeprovider.getDailyInspirationRecipes()[index];
+                      return DailyInspirationCard(
+                        image: homeprovider.apimodelList[index]['recipe_image'],
+                        index: index,
+                        name: homeprovider.apimodelList[index]['header']
+                            ['title'],
+                        rating: homeprovider.apimodelList[index]['header']
+                                ['rating']
+                            .toString(),
+                        time: homeprovider.apimodelList[index]['header']
+                            ['time_to_cook'],
+                        recipeList: homeprovider.apimodelList,
+                      );
+                    },
+                    cardsCount: homeprovider.apimodelList.length),
               ),
               const SizedBox(
                 height: 16,
@@ -191,7 +202,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Row(
                           children: [
                             DailyInspirationCard(
-                                image: images[index], index: index),
+                              image: homeprovider.apimodelList[index]
+                                  ['recipe_image'],
+                              index: index,
+                              name: homeprovider.apimodelList[index]['header']
+                                  ['title'],
+                              rating: homeprovider.apimodelList[index]['header']
+                                      ['rating']
+                                  .toString(),
+                              time: homeprovider.apimodelList[index]['header']
+                                  ['time_to_cook'],
+                              recipeList: homeprovider.apimodelList,
+                            ),
                           ],
                         ),
                       ),
@@ -227,7 +249,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Row(
                           children: [
                             DailyInspirationCard(
-                                image: images[index], index: index),
+                              image: homeprovider.apimodelList[index]
+                                  ['recipe_image'],
+                              index: index,
+                              name: homeprovider.apimodelList[index]['header']
+                                  ['title'],
+                              rating: homeprovider.apimodelList[index]['header']
+                                      ['rating']
+                                  .toString(),
+                              time: homeprovider.apimodelList[index]['header']
+                                  ['time_to_cook'],
+                              recipeList: homeprovider.apimodelList,
+                            ),
                           ],
                         ),
                       ),
@@ -264,7 +297,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Row(
                           children: [
                             DailyInspirationCard(
-                                image: images[index], index: index),
+                              image: homeprovider.apimodelList[index]
+                                  ['recipe_image'],
+                              index: index,
+                              name: homeprovider.apimodelList[index]['header']
+                                  ['title'],
+                              rating: homeprovider.apimodelList[index]['header']
+                                      ['rating']
+                                  .toString(),
+                              time: homeprovider.apimodelList[index]['header']
+                                  ['time_to_cook'],
+                              recipeList: homeprovider.apimodelList,
+                            ),
                           ],
                         ),
                       ),
@@ -301,7 +345,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Row(
                           children: [
                             DailyInspirationCard(
-                                image: images[index], index: index),
+                              image: homeprovider.apimodelList[index]
+                                  ['recipe_image'],
+                              index: index,
+                              name: homeprovider.apimodelList[index]['header']
+                                  ['title'],
+                              rating: homeprovider.apimodelList[index]['header']
+                                      ['rating']
+                                  .toString(),
+                              time: homeprovider.apimodelList[index]['header']
+                                  ['time_to_cook'],
+                              recipeList: homeprovider.apimodelList,
+                            ),
                           ],
                         ),
                       ),
@@ -325,34 +380,38 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               SizedBox(
-                height: 1200,
-                child: GridView.count(
-                  //grid container width and height
-                  childAspectRatio: 140 / 180,
-                  physics: NeverScrollableScrollPhysics(),
-                  crossAxisCount: 2,
-                  children: List.generate(
-                    32,
-                    (index) => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Card(
-                        elevation: 0,
-                        color: Colors.transparent,
-                        shadowColor: Colors.black87,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(14),
-                            color: Constants.CardColor,
-                          ),
-                          child: RecipesMayLikeCard(
-                            index: index,
-                            recipeList: data,
+                height: 1334,
+                child: homeprovider.apimodelList.where(
+                            (element) => element['header']['category']) ==
+                        'daily_inspiration'
+                    ? Container()
+                    : GridView.count(
+                        //grid container width and height
+                        childAspectRatio: 140 / 200,
+                        physics: NeverScrollableScrollPhysics(),
+                        crossAxisCount: 2,
+                        children: List.generate(
+                          10,
+                          (index) => Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Card(
+                              elevation: 0,
+                              color: Colors.transparent,
+                              shadowColor: Colors.black87,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(14),
+                                  color: Constants.CardColor,
+                                ),
+                                child: RecipesMayLikeCard(
+                                  index: index,
+                                  recipeList: homeprovider.apimodelList,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
               )
             ],
           ),

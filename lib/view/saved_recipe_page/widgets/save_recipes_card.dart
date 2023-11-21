@@ -36,7 +36,8 @@ class SavePageRecipeCard extends StatelessWidget {
                     height: 150,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage(cookBookModel.recipes[index].image),
+                          image:
+                              NetworkImage(cookBookModel.recipes[index].image),
                           fit: BoxFit.cover,
                         ),
                         borderRadius: BorderRadius.circular(16)),
@@ -75,7 +76,7 @@ class SavePageRecipeCard extends StatelessWidget {
                       Container(
                         width: 250,
                         child: Text(
- cookBookModel.recipes[index].recipeName,
+                          cookBookModel.recipes[index].recipeName,
                           style: TextStyle(
                             fontFamily: Constants.mainFont,
                             color: Colors.white,
@@ -86,7 +87,7 @@ class SavePageRecipeCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-cookBookModel.recipes[index].time,
+                        cookBookModel.recipes[index].time,
                         style: TextStyle(
                           fontFamily: Constants.mainFont,
                           color: Colors.white,

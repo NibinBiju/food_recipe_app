@@ -98,13 +98,13 @@ class _OwnRecipeState extends State<OwnRecipe> {
                     itemBuilder: (BuildContext context, int index) {
                       return InkWell(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DetailsPage(
-                                    imagepath:
-                                        'assets/images/Rectangle 17 (1).png'),
-                              ));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => DetailsPage(
+                          //           imagepath:
+                          //               'assets/images/Rectangle 17 (1).png'),
+                          //     ));
                         },
                         child: Container(
                           child: Column(

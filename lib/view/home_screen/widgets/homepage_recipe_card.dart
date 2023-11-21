@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_app/constants/constants.dart';
-
 import 'package:recipe_app/controller/save_page_provider/save_page_controller.dart';
 import 'package:recipe_app/model/api_model/api_model.dart';
 import 'package:recipe_app/model/save_page_model/save_page_cookbook_model.dart';
@@ -12,28 +11,41 @@ class DailyInspirationCard extends StatefulWidget {
     super.key,
     required this.image,
     required this.index,
+    required this.name,
+    required this.rating,
+    required this.time,
+    required this.recipeList,
   });
 
   final String image;
   final int index;
+  final String name;
+  final String rating;
+  final String time;
+  final List recipeList;
 
   @override
   State<DailyInspirationCard> createState() => _DailyInspirationCardState();
 }
 
 class _DailyInspirationCardState extends State<DailyInspirationCard> {
-  ApiRecipeModel? apiRecipeModel;
+  RecipeModel? recipeModel;
   SavedRecipes? savedRecipes;
 
   @override
   Widget build(BuildContext context) {
- var saveProvider = Provider.of<SavePageProvider>(context);
+    var saveProvider = Provider.of<SavePageProvider>(context);
+    saveProvider.recipeLength = widget.index;
     return InkWell(
       onTap: () {
         Navigator.push(
             context,
             MaterialPageRoute(
- builder: (context) => DetailsPage(imagepath: widget.image),
+              builder: (context) => DetailsPage(
+                index: widget.index,
+                recipeList: widget.recipeList,
+                ingredients: widget.recipeList[widget.index]['ingredients'],
+              ),
             ));
       },
       child: Container(
@@ -48,12 +60,13 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
             Stack(
               children: [
                 Container(
+                  padding: EdgeInsets.all(15),
                   width: 290,
-                  height: 270,
+                  height: 260,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(17),
                     image: DecorationImage(
-      image: AssetImage(widget.image), fit: BoxFit.cover),
+                        image: NetworkImage(widget.image), fit: BoxFit.cover),
                   ),
                 ),
                 Padding(
@@ -143,16 +156,21 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Name",
-                        style: TextStyle(
-                          fontFamily: Constants.mainFont,
-                          color: Colors.white,
-                          fontSize: 27,
+                      SizedBox(
+                        width: 220,
+                        child: Text(
+                          widget.name,
+                          style: TextStyle(
+                            fontFamily: Constants.mainFont,
+                            color: Colors.white,
+                            fontSize: 24,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
                         ),
                       ),
                       Text(
-                        "30 min",
+                        widget.time,
                         style: TextStyle(
                           fontFamily: Constants.mainFont,
                           color: Colors.white,
@@ -164,7 +182,7 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
                   Row(
                     children: [
                       Text(
-                        '4.5',
+                        widget.rating,
                         style: TextStyle(
                           color: Colors.orangeAccent,
                           fontFamily: Constants.mainFont,
