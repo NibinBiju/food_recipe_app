@@ -2,18 +2,45 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_app/constants/constants.dart';
 import 'package:recipe_app/controller/save_page_provider/save_page_controller.dart';
+import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
+import 'package:recipe_app/controller/recipe_page/recipe_controller.dart';
+import 'package:recipe_app/model/recipe_page_model/recipe_model.dart';
 import 'package:recipe_app/view/create_recipe_screen/create_recipe.dart';
-import 'package:recipe_app/view/details_page/details_page.dart';
 import 'package:recipe_app/view/saved_recipe_page/saved_recipe_page.dart';
 
 class OwnRecipe extends StatefulWidget {
-  const OwnRecipe({super.key});
+  OwnRecipe({super.key});
 
   @override
   State<OwnRecipe> createState() => _OwnRecipeState();
 }
 
 class _OwnRecipeState extends State<OwnRecipe> {
+  String? name;
+  DateTime? date;
+  int? time;
+  int? ind;
+  @override
+  void initState() {
+    super.initState();
+    loadRecipe();
+  }
+
+  void loadRecipe() async {
+    final box = Hive.box<CreateRecipeModel>('recipeBox');
+
+    CreateRecipeModel? rec = box.getAt(0);
+    if (rec != null) {
+      setState(() {
+        name = rec.recipeName;
+        date = rec.date;
+        time = rec.timeInMinutes;
+        ind = rec.imgIndex;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var saveProvider = Provider.of<SavePageProvider>(context);
@@ -83,88 +110,110 @@ class _OwnRecipeState extends State<OwnRecipe> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: SizedBox(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Container(
+      body: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Container(
                 padding: EdgeInsets.only(top: 5),
                 height: MediaQuery.of(context).size.height,
                 width: double.infinity,
                 child: ListView.builder(
-                    itemCount: 1,
-                    itemBuilder: (BuildContext context, int index) {
-                      return InkWell(
-                        onTap: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (context) => DetailsPage(
-                          //           imagepath:
-                          //               'assets/images/Rectangle 17 (1).png'),
-                          //     ));
-                        },
-                        child: Container(
-                          child: Column(
+  itemCount: Hive.box<CreateRecipeModel>('recipeBox').length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final box = Hive.box<CreateRecipeModel>('recipeBox');
+                    CreateRecipeModel? food = box.getAt(index);
+                    print("Asset Path: ${food?.imgIndex?.toString() ?? ""}");
+
+                    return Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Constants.buttonColor,
+                      ),
+                      width: double.infinity,
+                      height: 180,
+                      margin:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            height: 80,
+                            width: MediaQuery.of(context).size.width,
+                            child: Image.asset(
+                              assetImages[food!.imgIndex ?? 0] ??
+                                  "default_asset_path",
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          SizedBox(height: 5),
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                children: [
-                                  Align(
-                                      alignment: Alignment.topCenter,
-                                      child: Text(
-                                        "RECIPE NAME",
-                                        style: TextStyle(
-                                          fontSize: 22,
-                                          fontWeight: FontWeight.w900,
-                                          fontFamily: Constants.mainFont,
-                                          color: Colors.white,
-                                        ),
-                                      )),
-                                  Spacer(),
-                                  Text(
-                                    "Date Created",
-                                    style: TextStyle(
-                                      fontFamily: Constants.mainFont,
-                                      color: Colors.white,
-                                    ),
-                                  )
-                                ],
+                              Expanded(
+                                child: Text(
+                                  food!.recipeName ?? "no name",
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w900,
+                                    fontFamily: Constants.mainFont,
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
-                              Row(
-                                children: [
-                                  Text(
-                                    'Time take',
-                                    style: TextStyle(
-                                      fontFamily: Constants.mainFont,
-                                      color: Colors.white,
+                              Text(
+                                food.date != null
+                                    ? DateFormat('yyyy-MM-dd')
+                                        .format(food.date!)
+                                    : 'No Date',
+                                style: TextStyle(
+                                  fontFamily: Constants.mainFont,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          CreateRecipe(index: index),
                                     ),
-                                  )
-                                ],
+                                  );
+                                  setState(() {});
+                                },
+                                icon: Icon(Icons.edit, color: Colors.white),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  RecipeController().deleteElement(index);
+                                  setState(() {});
+                                },
+                                icon: Icon(Icons.delete, color: Colors.white),
                               ),
                             ],
                           ),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Constants.buttonColor,
-                              image: DecorationImage(
-                                  image: AssetImage(
-                                      'assets/images/Rectangle 17 (1).png'),
-                                  fit: BoxFit.cover)),
-                          width: double.infinity,
-                          height: 120,
-                          margin: EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 10),
-                          padding: EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 10),
-                        ),
-                      );
-                    }),
-              ),
-            )),
-      ),
+                          SizedBox(height: 5),
+                          Text(
+                            food.timeInMinutes != null
+                                ? TimeOfDay(
+                                    hour: food.timeInMinutes! ~/ 60,
+                                    minute: food.timeInMinutes! % 60,
+                                  ).format(context)
+                                : 'No Time',
+                            style: TextStyle(
+                              fontFamily: Constants.mainFont,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                )),
+          )),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await Navigator.push(
