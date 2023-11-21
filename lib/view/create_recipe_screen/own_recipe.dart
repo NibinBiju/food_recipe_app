@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:recipe_app/constants/constants.dart';
+import 'package:recipe_app/controller/save_page_provider/save_page_controller.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
-
-import 'package:recipe_app/constants/constants.dart';
 import 'package:recipe_app/controller/recipe_page/recipe_controller.dart';
 import 'package:recipe_app/model/recipe_page_model/recipe_model.dart';
 import 'package:recipe_app/view/create_recipe_screen/create_recipe.dart';
@@ -42,6 +43,7 @@ class _OwnRecipeState extends State<OwnRecipe> {
 
   @override
   Widget build(BuildContext context) {
+    var saveProvider = Provider.of<SavePageProvider>(context);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 5, 16, 77),
       appBar: AppBar(
@@ -89,7 +91,7 @@ class _OwnRecipeState extends State<OwnRecipe> {
                         color: Colors.white,
                       ),
                       Text(
-                        '0',
+                        '${saveProvider.cookbooks.length}',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'InriaSans',
@@ -118,7 +120,7 @@ class _OwnRecipeState extends State<OwnRecipe> {
                 height: MediaQuery.of(context).size.height,
                 width: double.infinity,
                 child: ListView.builder(
-                  itemCount: Hive.box<CreateRecipeModel>('recipeBox').length,
+  itemCount: Hive.box<CreateRecipeModel>('recipeBox').length,
                   itemBuilder: (BuildContext context, int index) {
                     final box = Hive.box<CreateRecipeModel>('recipeBox');
                     CreateRecipeModel? food = box.getAt(index);

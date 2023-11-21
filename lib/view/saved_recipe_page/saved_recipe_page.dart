@@ -6,20 +6,22 @@ import 'package:recipe_app/model/save_page_model/save_page_cookbook_model.dart';
 import 'package:recipe_app/view/saved_recipe_page/widgets/save_recipes_card.dart';
 
 class SavedRecipePage extends StatefulWidget {
-  SavedRecipePage({super.key});
+  SavedRecipePage({
+    super.key,
+  });
 
   @override
   State<SavedRecipePage> createState() => _SavedRecipePageState();
 }
 
 class _SavedRecipePageState extends State<SavedRecipePage> {
-  int selectedIndex = 0;
-
   TextEditingController _cookbookTextfield = TextEditingController();
+  CreateCookBookModel? cookBookModel;
 
   @override
   Widget build(BuildContext context) {
     var saveProvider = Provider.of<SavePageProvider>(context);
+
     return Scaffold(
       backgroundColor: Constants.primaryColor,
       appBar: AppBar(
@@ -36,14 +38,14 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'My Saved Recipes',
+                    'My Cookbooks',
                     style: TextStyle(
                       fontFamily: Constants.mainFont,
                       color: Colors.white,
                       fontSize: 28,
                     ),
                   ),
-                  selectedIndex == 0
+                  saveProvider.selectedIndex == 0
                       ? CircleAvatar(
                           backgroundColor: Constants.primaryColor,
                           radius: 18,
@@ -72,13 +74,13 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: List.generate(
-                    saveProvider.mySavedRecipes.length + 1,
+                    saveProvider.cookbooks.length + 1,
                     (index) => Padding(
                       padding: const EdgeInsets.only(
                         top: 20,
                         bottom: 17,
                       ),
-                      child: saveProvider.mySavedRecipes.length == index
+                      child: saveProvider.cookbooks.length == index
 
                           //add button to create new list
                           ? InkWell(
@@ -118,25 +120,21 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
                                               border: OutlineInputBorder(),
                                             ),
                                             onSubmitted: (value) {
-                                              saveProvider.createNewCookBook(
-                                                  CreateCookBookModel(
-                                                      index: index,
-                                                      cookBookName:
-                                                          _cookbookTextfield
-                                                              .text));
-
                                               Navigator.of(context).pop();
                                             },
                                           ),
                                           InkWell(
+                                            //create cookbook
                                             onTap: () {
-                                              saveProvider.createNewCookBook(
-                                                  CreateCookBookModel(
-                                                      index: index,
-                                                      cookBookName:
-                                                          _cookbookTextfield
-                                                              .text));
-
+                                              saveProvider.createCookBook(
+                                                CreateCookBookModel(
+                                                  index: index,
+                                                  cookBookName:
+                                                      _cookbookTextfield.text,
+                                                  recipes: [],
+                                                ),
+                                              );
+                                              print('$index');
                                               Navigator.of(context).pop();
                                             },
                                             child: Container(
@@ -167,7 +165,7 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
                                 );
                               },
                               child: Container(
-                                width: 130,
+                                width: 140,
                                 height: 110,
                                 child: Column(
                                   children: [
@@ -200,7 +198,7 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
                               highlightColor: Colors.black12,
                               splashColor: Constants.primaryColor,
                               onTap: () {
-                                selectedIndex = index;
+                                saveProvider.selectedIndex = index;
                                 setState(() {});
                               },
                               child: Container(
@@ -210,9 +208,10 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
                                   children: [
                                     CircleAvatar(
                                       radius: 42,
-                                      backgroundColor: selectedIndex == index
-                                          ? Colors.white
-                                          : Colors.grey,
+                                      backgroundColor:
+                                          saveProvider.selectedIndex == index
+                                              ? Colors.white
+                                              : Colors.grey,
                                       child: Center(
                                         child: CircleAvatar(
                                           radius: 38,
@@ -228,7 +227,8 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
                                     ),
                                     Text(
                                       saveProvider
-                                          .mySavedRecipes[index].cookBookName!,
+                                              .cookbooks[index].cookBookName ??
+                                          'N/a',
                                       style: TextStyle(
                                         fontFamily: Constants.mainFont,
                                         color: Colors.white,
@@ -246,15 +246,18 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
                 ),
               ),
               Column(
-                  children: List.generate(
-                      saveProvider.mySavedRecipes.length,
-                      (index) => Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SavePageRecipeCard(
-                              cookBookModel: saveProvider.mySavedRecipes[index],
-                              index: index,
-                            ),
-                          )))
+                children: List.generate(
+                  saveProvider
+                      .cookbooks[saveProvider.selectedIndex].recipes.length,
+                  (index) => Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SavePageRecipeCard(
+                      cookBookModel: saveProvider.cookbooks[index],
+                      index: saveProvider.selectedIndex,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

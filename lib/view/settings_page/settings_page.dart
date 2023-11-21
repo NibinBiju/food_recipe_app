@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:recipe_app/constants/constants.dart';
+import 'package:recipe_app/controller/save_page_provider/save_page_controller.dart';
 import 'package:recipe_app/view/saved_recipe_page/saved_recipe_page.dart';
 import 'package:recipe_app/view/settings_page/widgets/settings_card.dart';
 
@@ -14,6 +16,7 @@ class _SettingsPageState extends State<SettingsPage> {
   bool onSlideButton = false;
   @override
   Widget build(BuildContext context) {
+    var saveProvdier = Provider.of<SavePageProvider>(context);
     return Scaffold(
       backgroundColor: Constants.primaryColor,
       appBar: AppBar(
@@ -62,7 +65,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         color: Colors.white,
                       ),
                       Text(
-                        '0',
+                        '${saveProvdier.cookbooks.length}',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'InriaSans',
