@@ -31,7 +31,6 @@ dependencies:
   calendar_timeline: ^1.1.2
   carousel_slider: ^4.2.1
   cupertino_icons: ^1.0.2
- calendar_timeline: ^1.1.2
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   intl: ^0.17.0
