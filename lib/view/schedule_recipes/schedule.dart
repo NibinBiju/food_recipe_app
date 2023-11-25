@@ -116,7 +116,8 @@ class _HomePageState extends State<SchedulePage> {
               ),
               CalendarTimeline(
                 showYears: true,
-                initialDate: _selectedDate,
+                //error
+                initialDate: DateTime.now().add(const Duration(days: 1)),
                 firstDate: DateTime.now(),
                 lastDate: DateTime.now().add(const Duration(days: 365 * 4)),
                 onDateSelected: (date) => setState(() => _selectedDate = date),
@@ -127,7 +128,9 @@ class _HomePageState extends State<SchedulePage> {
                 activeDayColor: Colors.white,
                 activeBackgroundDayColor: Colors.redAccent[100],
                 dotsColor: const Color(0xFF333A47),
-                selectableDayPredicate: (date) => date.day != 23,
+                //error
+                selectableDayPredicate: (date) =>
+                    date.day != 23 || date.isAtSameMomentAs(_selectedDate),
                 locale: 'en',
               ),
               const SizedBox(height: 20),

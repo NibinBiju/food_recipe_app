@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:recipe_app/controller/save_page_provider/save_page_controller.dart';
 import 'package:recipe_app/controller/search_ingredients_provider/search_ingredient_provider.dart';
 import 'package:recipe_app/model/recipe_page_model/recipe_model.dart';
-import 'package:recipe_app/view/create_recipe_screen/own_recipe.dart';
 import 'package:recipe_app/view/feature_screen/feature_screen.dart';
 
 Future main() async {
@@ -35,9 +34,10 @@ class MyApp extends StatelessWidget {
           create: (context) => SearchIngredientProvdier(),
         ),
       ],
-      child: MaterialApp(debugShowCheckedModeBanner: false, home: OwnRecipe()
-          // FeatureScreen(),
-          ),
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: FeatureScreen(),
+      ),
     );
   }
 }
