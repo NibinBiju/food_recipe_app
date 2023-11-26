@@ -71,6 +71,7 @@ class _FeatureScreenState extends State<FeatureScreen> {
                             Container(
                               decoration: BoxDecoration(
                                 color: const Color.fromARGB(120, 0, 0, 0),
+                                backgroundBlendMode: BlendMode.dstATop,
                                 borderRadius: BorderRadius.circular(22),
                               ),
                               padding: const EdgeInsets.all(10),
@@ -110,6 +111,7 @@ class _FeatureScreenState extends State<FeatureScreen> {
                 right: 10,
               ),
               child: InkWell(
+                highlightColor: Constants.primaryColor,
                 onTap: () {
                   Navigator.pushReplacement(
                       context,

@@ -1,12 +1,12 @@
 class CreateCookBookModel {
-  int? index;
+ int index;
   String? cookBookName;
-  List<SavedRecipes>? recipes;
+  List<SavedRecipes> recipes;
 
   CreateCookBookModel({
-    this.index,
+    required this.index,
     this.cookBookName,
-    this.recipes,
+    required this.recipes,
   });
 }
 

@@ -94,7 +94,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
         timeController.clear();
       });
 
-      Navigator.pushReplacement(
+      Navigator.pop(
         context,
         MaterialPageRoute(
           builder: (context) => OwnRecipe(),

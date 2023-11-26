@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_app/constants/constants.dart';
+import 'package:recipe_app/controller/save_page_provider/save_page_controller.dart';
 import 'package:recipe_app/controller/search_ingredients_provider/search_ingredient_provider.dart';
 import 'package:recipe_app/model/search_ingredient_model/search_ingredient_model.dart';
 import 'package:recipe_app/view/saved_recipe_page/saved_recipe_page.dart';
 import 'package:recipe_app/view/search_page/ingredients_search.dart';
+import 'package:recipe_app/view/search_page/search_page2.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
@@ -13,6 +15,7 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var searchIngredientProvider =
         Provider.of<SearchIngredientProvdier>(context);
+    var saveProvider = Provider.of<SavePageProvider>(context);
     return Scaffold(
         backgroundColor: Constants.primaryColor,
         appBar: AppBar(
@@ -60,7 +63,7 @@ class SearchPage extends StatelessWidget {
                           color: Colors.white,
                         ),
                         Text(
-                          '0',
+                          '${saveProvider.cookbooks.length}',
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'InriaSans',
@@ -106,23 +109,31 @@ class SearchPage extends StatelessWidget {
 
                   //search field
                   child: TextField(
-                    cursorColor: const Color.fromARGB(255, 107, 107, 107),
+                    showCursor: false,
+                    keyboardType: TextInputType.none,
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return SearchScreen();
+                        },
+                      ));
+                    },
                     style: TextStyle(
                       fontSize: 24,
                       fontFamily: Constants.mainFont,
                       color: const Color.fromARGB(255, 107, 107, 107),
                     ),
                     decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'search recipes',
-                      suffixIcon: Icon(
-                        Icons.search,
-                        size: 32,
-                      ),
-                    ),
-
-                    //function for search submit
-                    onSubmitted: (value) {},
+                        border: InputBorder.none,
+                        hintText: 'search recipes',
+                        suffixIcon: Icon(
+                          Icons.search,
+                          size: 32,
+                          color: Constants.primaryColor,
+                        ),
+                        hintStyle: TextStyle(
+                          color: Constants.primaryColor,
+                        )),
                   ),
                 ),
                 Padding(
@@ -137,6 +148,9 @@ class SearchPage extends StatelessWidget {
                   ),
                 ),
 
+                ///
+                ///
+                ///
                 //ingredients for search
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
@@ -189,6 +203,10 @@ class SearchPage extends StatelessWidget {
                     ),
                   ),
                 ),
+
+                ///
+                ///
+                ///search by meal
                 Padding(
                   padding: const EdgeInsets.only(top: 7, bottom: 7),
                   child: Text(

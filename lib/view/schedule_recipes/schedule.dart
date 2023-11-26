@@ -1,5 +1,10 @@
 import 'package:calendar_timeline/calendar_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:recipe_app/constants/constants.dart';
+import 'package:recipe_app/controller/save_page_provider/save_page_controller.dart';
+import 'package:recipe_app/view/create_recipe_screen/create_recipe.dart';
+import 'package:recipe_app/view/saved_recipe_page/saved_recipe_page.dart';
 
 class SchedulePage extends StatefulWidget {
   const SchedulePage({Key? key}) : super(key: key);
@@ -38,23 +43,82 @@ class _HomePageState extends State<SchedulePage> {
     );
   }
 
+  Divider createCustomDividerWithColor(Color color) {
+    return Divider(
+      color: color,
+      indent: 19,
+      endIndent: 19,
+      thickness: 1,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    var saveProvider = Provider.of<SavePageProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 12, 10, 83),
-        leading: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: SizedBox(
-            width: 20,
-            height: 20,
-            child: CircleAvatar(
-              radius: 4,
-              backgroundColor: Colors.white,
-            ),
+        toolbarHeight: 70,
+        title: Text(
+          'BigBite',
+          style: TextStyle(
+            fontFamily: Constants.mainFont,
+            color: Colors.white,
           ),
         ),
         elevation: 0,
+        backgroundColor: Constants.primaryColor,
+        leading: Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Image.asset(Constants.logo)),
+        actions: [
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SavedRecipePage(),
+                      ));
+                },
+                child: Container(
+                  height: 37,
+                  width: 70,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 3,
+                      color: Colors.black,
+                    ),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(
+                        Icons.bookmark,
+                        size: 27,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        '${saveProvider.cookbooks.length}',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'InriaSans',
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            width: 20,
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xFF0216CC),
@@ -65,7 +129,7 @@ class _HomePageState extends State<SchedulePage> {
             context: context,
             builder: (BuildContext context) {
               return Container(
-                height: 220,
+                height: 232,
                 decoration: BoxDecoration(
                   color: Color.fromARGB(255, 36, 55, 231),
                   borderRadius: BorderRadius.only(
@@ -74,22 +138,32 @@ class _HomePageState extends State<SchedulePage> {
                   ),
                 ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
+                    createCustomDividerWithColor(
+                      Color.fromARGB(255, 36, 55, 231),
+                    ),
                     buildListTile(Icons.bookmark, "Add from save"),
-                    Divider(
-                      color: Colors.white,
-                      indent: 19,
-                      endIndent: 19,
-                      thickness: 1,
+                    createCustomDividerWithColor(
+                      Colors.white,
                     ),
                     buildListTile(Icons.search, "Search recipe"),
-                    Divider(
-                      color: Colors.white,
-                      indent: 19,
-                      endIndent: 19,
-                      thickness: 1,
+                    createCustomDividerWithColor(
+                      Colors.white,
                     ),
-                    buildListTile(Icons.edit, "Create recipe"),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CreateRecipe()),
+                        );
+                      },
+                      child: buildListTile(Icons.edit, "Create recipe"),
+                    ),
+                    createCustomDividerWithColor(
+                      Color.fromARGB(255, 36, 55, 231),
+                    ),
                   ],
                 ),
               );
@@ -104,18 +178,8 @@ class _HomePageState extends State<SchedulePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Text(
-                  'Year',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline6!
-                      .copyWith(color: Colors.tealAccent[100]),
-                ),
-              ),
               CalendarTimeline(
-                showYears: true,
+                showYears: false,
                 //error
                 initialDate: DateTime.now().add(const Duration(days: 1)),
                 firstDate: DateTime.now(),
@@ -130,25 +194,12 @@ class _HomePageState extends State<SchedulePage> {
                 dotsColor: const Color(0xFF333A47),
                 //error
                 selectableDayPredicate: (date) =>
-                    date.day != 23 || date.isAtSameMomentAs(_selectedDate),
+                    date.day != 23 ||
+                    date.isAtSameMomentAs(_selectedDate) ||
+                    date.isAtSameMomentAs(_selectedDate),
                 locale: 'en',
               ),
-              const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.only(left: 16),
-                child: TextButton(
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.teal[200]),
-                  ),
-                  child: const Text(
-                    'RESET',
-                    style: TextStyle(color: Color(0xFF333A47)),
-                  ),
-                  onPressed: () => setState(() => _resetSelectedDate()),
-                ),
-              ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               Center(
                 child: Text(
                   'Selected date is $_selectedDate',
@@ -162,7 +213,7 @@ class _HomePageState extends State<SchedulePage> {
                     borderRadius: BorderRadiusDirectional.vertical(
                         top: Radius.circular(30)),
                     color: Color.fromARGB(255, 62, 37, 153)),
-                height: MediaQuery.of(context).size.height * 0.52,
+                height: MediaQuery.of(context).size.height * 0.72,
                 child: SingleChildScrollView(
                   physics: ClampingScrollPhysics(),
                   child: Column(
