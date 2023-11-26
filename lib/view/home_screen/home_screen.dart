@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Colors.white,
                       ),
                       Text(
-                        '${saveprovider.cookbooks.length}',
+                        '${saveprovider.cookbooks[saveprovider.selectedIndex].recipes.length}',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'InriaSans',
@@ -153,22 +153,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         AllowedSwipeDirection.only(right: true, left: false),
                     cardBuilder: (context, index, horizontalOffsetPercentage,
                         verticalOffsetPercentage) {
-                      // Map<String, dynamic> dailyrecipe =
-                      //     homeprovider.getDailyInspirationRecipes()[index];
+                      List dailyInspiartion =
+                          homeprovider.getDailyInspirationRecipes();
+                      dynamic recipe = dailyInspiartion[index];
                       return DailyInspirationCard(
-                        image: homeprovider.apimodelList[index]['recipe_image'],
+                        // category: dailyInspirations,
+                        image: recipe['recipe_image'],
                         index: index,
-                        name: homeprovider.apimodelList[index]['header']
-                            ['title'],
-                        rating: homeprovider.apimodelList[index]['header']
-                                ['rating']
-                            .toString(),
-                        time: homeprovider.apimodelList[index]['header']
-                            ['time_to_cook'],
-                        recipeList: homeprovider.apimodelList,
+                        name: recipe['header']['title'],
+                        rating: recipe['header']['rating'].toString(),
+                        time: recipe['header']['time_to_cook'],
+                        recipeList: recipe,
                       );
                     },
-                    cardsCount: homeprovider.apimodelList.length),
+                    cardsCount:
+                        homeprovider.getDailyInspirationRecipes().length),
               ),
               const SizedBox(
                 height: 16,
@@ -196,28 +195,25 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: List.generate(
-                      images.length,
-                      (index) => Padding(
+                        homeprovider.getTrendingNow().length, (index) {
+                      List trendingRecipes = homeprovider.getTrendingNow();
+                      dynamic recipe = trendingRecipes[index];
+                      return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
                             DailyInspirationCard(
-                              image: homeprovider.apimodelList[index]
-                                  ['recipe_image'],
+                              image: recipe['recipe_image'],
                               index: index,
-                              name: homeprovider.apimodelList[index]['header']
-                                  ['title'],
-                              rating: homeprovider.apimodelList[index]['header']
-                                      ['rating']
-                                  .toString(),
-                              time: homeprovider.apimodelList[index]['header']
-                                  ['time_to_cook'],
-                              recipeList: homeprovider.apimodelList,
+                              name: recipe['header']['title'],
+                              rating: recipe['header']['rating'].toString(),
+                              time: recipe['header']['time_to_cook'],
+                              recipeList: recipe,
                             ),
                           ],
                         ),
-                      ),
-                    ),
+                      );
+                    }),
                   ),
                 ),
               ),
@@ -242,29 +238,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
-                    children: List.generate(
-                      images.length,
-                      (index) => Padding(
+                    children: List.generate(homeprovider.getNewRelease().length,
+                        (index) {
+                      List newRecipes = homeprovider.getNewRelease();
+                      dynamic recipe = newRecipes[index];
+                      return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
                             DailyInspirationCard(
-                              image: homeprovider.apimodelList[index]
-                                  ['recipe_image'],
+                              image: recipe['recipe_image'],
                               index: index,
-                              name: homeprovider.apimodelList[index]['header']
-                                  ['title'],
-                              rating: homeprovider.apimodelList[index]['header']
-                                      ['rating']
-                                  .toString(),
-                              time: homeprovider.apimodelList[index]['header']
-                                  ['time_to_cook'],
-                              recipeList: homeprovider.apimodelList,
+                              name: recipe['header']['title'],
+                              rating: recipe['header']['rating'].toString(),
+                              time: recipe['header']['time_to_cook'],
+                              recipeList: recipe,
                             ),
                           ],
                         ),
-                      ),
-                    ),
+                      );
+                    }),
                   ),
                 ),
               ),
@@ -291,28 +284,26 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: List.generate(
-                      images.length,
-                      (index) => Padding(
+                        homeprovider.getNewEveryDayDishes().length, (index) {
+                      List newEverydayDishes =
+                          homeprovider.getNewEveryDayDishes();
+                      dynamic recipes = newEverydayDishes[index];
+                      return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
                             DailyInspirationCard(
-                              image: homeprovider.apimodelList[index]
-                                  ['recipe_image'],
+                              image: recipes['recipe_image'],
                               index: index,
-                              name: homeprovider.apimodelList[index]['header']
-                                  ['title'],
-                              rating: homeprovider.apimodelList[index]['header']
-                                      ['rating']
-                                  .toString(),
-                              time: homeprovider.apimodelList[index]['header']
-                                  ['time_to_cook'],
-                              recipeList: homeprovider.apimodelList,
+                              name: recipes['header']['title'],
+                              rating: recipes['header']['rating'].toString(),
+                              time: recipes['header']['time_to_cook'],
+                              recipeList: recipes,
                             ),
                           ],
                         ),
-                      ),
-                    ),
+                      );
+                    }),
                   ),
                 ),
               ),
@@ -339,28 +330,25 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: List.generate(
-                      images.length,
-                      (index) => Padding(
+                        homeprovider.getEasyRecipes().length, (index) {
+                      List easyRecipes = homeprovider.getEasyRecipes();
+                      dynamic recipes = easyRecipes[index];
+                      return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
                             DailyInspirationCard(
-                              image: homeprovider.apimodelList[index]
-                                  ['recipe_image'],
+                              image: recipes['recipe_image'],
                               index: index,
-                              name: homeprovider.apimodelList[index]['header']
-                                  ['title'],
-                              rating: homeprovider.apimodelList[index]['header']
-                                      ['rating']
-                                  .toString(),
-                              time: homeprovider.apimodelList[index]['header']
-                                  ['time_to_cook'],
-                              recipeList: homeprovider.apimodelList,
+                              name: recipes['header']['title'],
+                              rating: recipes['header']['rating'].toString(),
+                              time: recipes['header']['time_to_cook'],
+                              recipeList: recipes,
                             ),
                           ],
                         ),
-                      ),
-                    ),
+                      );
+                    }),
                   ),
                 ),
               ),
@@ -381,37 +369,33 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(
                 height: 1334,
-                child: homeprovider.apimodelList.where(
-                            (element) => element['header']['category']) ==
-                        'daily_inspiration'
-                    ? Container()
-                    : GridView.count(
-                        //grid container width and height
-                        childAspectRatio: 140 / 200,
-                        physics: NeverScrollableScrollPhysics(),
-                        crossAxisCount: 2,
-                        children: List.generate(
-                          10,
-                          (index) => Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Card(
-                              elevation: 0,
-                              color: Colors.transparent,
-                              shadowColor: Colors.black87,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(14),
-                                  color: Constants.CardColor,
-                                ),
-                                child: RecipesMayLikeCard(
-                                  index: index,
-                                  recipeList: homeprovider.apimodelList,
-                                ),
-                              ),
-                            ),
+                child: GridView.count(
+                  //grid container width and height
+                  childAspectRatio: 140 / 200,
+                  physics: NeverScrollableScrollPhysics(),
+                  crossAxisCount: 2,
+                  children: List.generate(
+                    10,
+                    (index) => Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Card(
+                        elevation: 0,
+                        color: Colors.transparent,
+                        shadowColor: Colors.black87,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(14),
+                            color: Constants.CardColor,
+                          ),
+                          child: RecipesMayLikeCard(
+                            index: index,
+                            recipeList: homeprovider.apimodelList,
                           ),
                         ),
                       ),
+                    ),
+                  ),
+                ),
               )
             ],
           ),

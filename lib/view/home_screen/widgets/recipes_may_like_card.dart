@@ -14,7 +14,7 @@ class RecipesMayLikeCard extends StatefulWidget {
   });
 
   final int index;
-  final List recipeList;
+  final dynamic recipeList;
 
   @override
   State<RecipesMayLikeCard> createState() => _RecipesMayLikeCardState();
@@ -31,14 +31,18 @@ class _RecipesMayLikeCardState extends State<RecipesMayLikeCard> {
     return InkWell(
         onTap: () {
           //navigate to details page
+          var ingredients = widget.recipeList['ingredients'];
+          var instructions = widget.recipeList['instructions'];
           Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => DetailsPage(
+                  steps: instructions,
+                  ingredients: ingredients,
                   index: widget.index,
                   recipeList: widget.recipeList,
-                  ingredients: widget.recipeList[widget.index]['ingredients'],
-                  steps: widget.recipeList[widget.index]['instructions'],
+
+                  // steps: widget.recipeList[widget.index]['instructions'],
                 ),
               ));
         },
@@ -49,17 +53,26 @@ class _RecipesMayLikeCardState extends State<RecipesMayLikeCard> {
             Stack(
               children: [
                 Container(
-                  padding: EdgeInsets.all(14),
                   width: 180,
                   height: 160,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Colors.blueGrey,
                     image: DecorationImage(
-                      image: NetworkImage(
-                        widget.recipeList[widget.index]['recipe_image'],
+                      image: AssetImage('assets/images/shimmer image.jpg'),
+                    ),
+                  ),
+                  child: Container(
+                    padding: EdgeInsets.all(14),
+                    width: 180,
+                    height: 160,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          widget.recipeList[widget.index]['recipe_image'],
+                        ),
+                        fit: BoxFit.cover,
                       ),
-                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
