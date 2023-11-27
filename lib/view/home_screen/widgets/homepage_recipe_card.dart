@@ -67,7 +67,6 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
                   width: 290,
                   height: 260,
                   decoration: BoxDecoration(
-                    // color: Color.fromARGB(179, 114, 114, 114),
                     borderRadius: BorderRadius.circular(17),
                     image: DecorationImage(
                       image: AssetImage(

@@ -21,7 +21,10 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
   @override
   Widget build(BuildContext context) {
     var saveProvider = Provider.of<SavePageProvider>(context);
-
+    final recipedemo =
+        saveProvider.cookbooks.elementAt(saveProvider.recipeLength);
+    final createCookBookModel =
+        saveProvider.cookbooks[saveProvider.selectedIndex];
     return Scaffold(
       backgroundColor: Constants.primaryColor,
       appBar: AppBar(
@@ -246,17 +249,16 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
                 ),
               ),
               Column(
-                children: List.generate(
-                  saveProvider
-                      .cookbooks[saveProvider.selectedIndex].recipes.length,
-                  (index) => Padding(
+                children:
+                    List.generate(createCookBookModel.recipes.length, (index) {
+                  return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: SavePageRecipeCard(
                       cookBookModel: saveProvider.cookbooks[index],
                       index: saveProvider.selectedIndex,
                     ),
-                  ),
-                ),
+                  );
+                }),
               ),
             ],
           ),

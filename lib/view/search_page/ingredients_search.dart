@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:recipe_app/constants/constants.dart';
 import 'package:recipe_app/controller/search_ingredients_provider/search_ingredient_provider.dart';
 import 'package:recipe_app/model/search_ingredient_model/search_ingredient_model.dart';
+import 'package:recipe_app/view/search_page/search_page2.dart';
 
 class IngredientSearch extends StatelessWidget {
   IngredientSearch({super.key, required this.index});
@@ -101,7 +102,7 @@ class IngredientSearch extends StatelessWidget {
                                     fontSize: 15,
                                     color: Colors.white,
                                   ),
-                                  overflow: TextOverflow.clip,
+                                  overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
                                 ),
                               ],
@@ -116,8 +117,11 @@ class IngredientSearch extends StatelessWidget {
                                 child: CircleAvatar(
                                   radius: 14,
                                   backgroundColor: Constants.CardColor,
-                                  child:
-                                      Center(child: Icon(Icons.close_rounded)),
+                                  child: Center(
+                                      child: Icon(
+                                    Icons.close_rounded,
+                                    color: Colors.white,
+                                  )),
                                 ),
                               ),
                             ),
@@ -145,10 +149,15 @@ class IngredientSearch extends StatelessWidget {
                       32,
                       (index) => InkWell(
                         onTap: () {
-                          ingredientProvider.addToSearch(SearchIngredientsModel(
-                              imagepath:
-                                  'https://5.imimg.com/data5/SELLER/Default/2023/9/345985590/NP/ND/CY/191842402/frozen-skin-whole-chicken-meat-for-restaurant-500x500.jpeg',
-                              ingredientName: 'Ingredients'));
+                          //add to search list
+                          ingredientProvider.addToSearch(
+                            SearchIngredientsModel(
+                              imagepath: ingredientProvider.ofIngredients[index]
+                                  ['image'],
+                              ingredientName: ingredientProvider
+                                  .ofIngredients[index]['name'],
+                            ),
+                          );
                         },
                         child: Container(
                           width: 80,
@@ -159,17 +168,17 @@ class IngredientSearch extends StatelessWidget {
                               CircleAvatar(
                                 backgroundColor: Colors.black,
                                 radius: 32,
-                                foregroundImage: NetworkImage(
-                                    'https://5.imimg.com/data5/SELLER/Default/2023/9/345985590/NP/ND/CY/191842402/frozen-skin-whole-chicken-meat-for-restaurant-500x500.jpeg'),
+                                foregroundImage: NetworkImage(ingredientProvider
+                                    .ofIngredients[index]['image']),
                               ),
                               Text(
-                                'Ingredients',
+                                ingredientProvider.ofIngredients[index]['name'],
                                 style: TextStyle(
                                   fontFamily: Constants.mainFont,
                                   fontSize: 15,
                                   color: Colors.white,
                                 ),
-                                overflow: TextOverflow.clip,
+                                overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
                               ),
                             ],
@@ -207,8 +216,14 @@ class IngredientSearch extends StatelessWidget {
                         ),
                       )
                     : InkWell(
+                        highlightColor: Constants.CardColor,
                         //function for search by ingredients
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return SearchScreen();
+                          }));
+                        },
                         child: Container(
                           width: double.infinity,
                           height: 70,

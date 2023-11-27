@@ -12,7 +12,6 @@ class HomeProvider with ChangeNotifier {
     Future.delayed(Duration(seconds: 2), () {
       isLoad = true;
     });
-    notifyListeners();
 
     final String responce =
         await rootBundle.loadString('assets/json/recipe_responce_body.json');
@@ -51,6 +50,12 @@ class HomeProvider with ChangeNotifier {
   List getEasyRecipes() {
     return apimodelList
         .where((recipe) => recipe['header']['category'] == "easy_recipes")
+        .toList();
+  }
+
+  List getSearchedRceipe(String search) {
+    return apimodelList
+        .where((recipe) => recipe['header']['category'] == '${search}')
         .toList();
   }
 }
