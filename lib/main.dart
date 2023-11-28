@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
           create: (context) => SearchRecipesProvider(),
         ),
       ],
-      child: MaterialApp(
+ child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: FeatureScreen(),
       ),
