@@ -1,10 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:recipe_app/model/search_ingredient_model/search_ingredient_model.dart';
 
-class SearchIngredientProvdier with ChangeNotifier {
+class SearchRecipesProvider with ChangeNotifier {
   List<SearchIngredientsModel> ingredientSearch = [];
   List ofIngredients = [];
 

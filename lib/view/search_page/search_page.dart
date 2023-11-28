@@ -18,15 +18,14 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
-    Provider.of<SearchIngredientProvdier>(context, listen: false)
+    Provider.of<SearchRecipesProvider>(context, listen: false)
         .fetchIngredients();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    var searchIngredientProvider =
-        Provider.of<SearchIngredientProvdier>(context);
+    var searchIngredientProvider = Provider.of<SearchRecipesProvider>(context);
     var saveProvider = Provider.of<SavePageProvider>(context);
     return Scaffold(
         backgroundColor: Constants.primaryColor,

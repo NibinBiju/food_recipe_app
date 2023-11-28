@@ -11,7 +11,7 @@ class IngredientSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var ingredientProvider = Provider.of<SearchIngredientProvdier>(context);
+    var ingredientProvider = Provider.of<SearchRecipesProvider>(context);
     return Scaffold(
       backgroundColor: Constants.primaryColor,
       appBar: AppBar(
