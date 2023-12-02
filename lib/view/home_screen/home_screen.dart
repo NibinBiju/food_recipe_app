@@ -1,21 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
-import 'package:recipe_app/constants/color_constants.dart';
+import 'package:provider/provider.dart';
+import 'package:recipe_app/constants/constants.dart';
+import 'package:recipe_app/controller/api_controller/api_controller.dart';
+import 'package:recipe_app/controller/home_page_provider/homepage_provider.dart';
+import 'package:recipe_app/controller/save_page_provider/save_page_controller.dart';
+import 'package:recipe_app/model/api_model/api_model.dart';
 import 'package:recipe_app/view/saved_recipe_page/saved_recipe_page.dart';
-import 'package:recipe_app/view/widgets/daily_inspiration_card.dart';
-import 'package:recipe_app/view/widgets/recipes_may_like_card.dart';
+import 'package:recipe_app/view/home_screen/widgets/homepage_recipe_card.dart';
+import 'package:recipe_app/view/home_screen/widgets/recipes_may_like_card.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
 
-  final List dailyInspirationCardList = [
-    const DailyInspirationCard(image: 'assets/images/Rectangle 17 (1).png'),
-    const DailyInspirationCard(image: 'assets/images/Rectangle 17.png'),
-    const DailyInspirationCard(image: 'assets/images/Rectangle 34.png'),
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  List images = [
+    'assets/images/Rectangle 17 (1).png',
+    'assets/images/Rectangle 17.png',
+    'assets/images/Rectangle 34.png'
   ];
+
+  RecipeModel? apiRecipeModel;
+
+  // bool isLoading = false;
+
+  // Future<void> fetchdata() async {
+  //   setState(() {
+  //     isLoading = true;
+  //   });
+  //   var uri = Uri.parse(
+  //       'https://api.edamam.com/api/recipes/v2?type=public&q=recipes%20you%20may%20like&app_id=a14512e5&app_key=%2082e16695d1a1908fce3decdc9e71dd01%09');
+  //   var response = await http.get(uri);
+  //   print(response.statusCode);
+  //   print(response.body);
+  //   if (response.statusCode == 200) {
+  //     var jsondata = jsonDecode(response.body);
+  //     apiRecipeModel = ApiRecipeModel.fromJson(jsondata);
+  //   } else {
+  //     throw 'operation failed';
+  //   }
+
+  //   isLoading = false;
+  //   setState(() {});
+  // }
+
+  @override
+  void initState() {
+    Provider.of<HomeProvider>(context, listen: false).fetchData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    var saveprovider = Provider.of<SavePageProvider>(context);
+    var homeprovider = Provider.of<HomeProvider>(context);
     return Scaffold(
       backgroundColor: Constants.primaryColor,
       appBar: AppBar(
@@ -31,12 +73,14 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Constants.primaryColor,
         leading: Padding(
             padding: const EdgeInsets.only(left: 20),
-            child: Image.asset('assets/images/logo (1).png')),
+            child: Image.asset(Constants.logo)),
         actions: [
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               InkWell(
+                splashColor: Colors.black,
+                highlightColor: Colors.transparent,
                 //for navigate to save recipe page
                 onTap: () {
                   Navigator.push(
@@ -64,7 +108,7 @@ class HomeScreen extends StatelessWidget {
                         color: Colors.white,
                       ),
                       Text(
-                        '0',
+ '${saveprovider.cookbooks.length}',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'InriaSans',
@@ -104,15 +148,27 @@ class HomeScreen extends StatelessWidget {
               //card swiper
               SizedBox(
                 height: 450,
-                child: Flexible(
-                  child: CardSwiper(
-                      allowedSwipeDirection:
-                          AllowedSwipeDirection.only(left: false, right: true),
-                      cardBuilder: (context, index, horizontalOffsetPercentage,
-                              verticalOffsetPercentage) =>
-                          dailyInspirationCardList[index],
-                      cardsCount: dailyInspirationCardList.length),
-                ),
+                child: CardSwiper(
+                    backCardOffset: Offset(40, 30),
+                    allowedSwipeDirection:
+                        AllowedSwipeDirection.only(right: true, left: false),
+                    cardBuilder: (context, index, horizontalOffsetPercentage,
+                        verticalOffsetPercentage) {
+                      List dailyInspiartion =
+                          homeprovider.getDailyInspirationRecipes();
+                      dynamic recipe = dailyInspiartion[index];
+                      return DailyInspirationCard(
+                        // category: dailyInspirations,
+                        image: recipe['recipe_image'],
+                        index: index,
+                        name: recipe['header']['title'],
+                        rating: recipe['header']['rating'].toString(),
+                        time: recipe['header']['time_to_cook'],
+                        recipeList: recipe,
+                      );
+                    },
+                    cardsCount:
+                        homeprovider.getDailyInspirationRecipes().length),
               ),
               const SizedBox(
                 height: 16,
@@ -140,16 +196,25 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: List.generate(
-                      dailyInspirationCardList.length,
-                      (index) => Padding(
+                        homeprovider.getTrendingNow().length, (index) {
+                      List trendingRecipes = homeprovider.getTrendingNow();
+                      dynamic recipe = trendingRecipes[index];
+                      return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
-                            dailyInspirationCardList[index],
+                            DailyInspirationCard(
+                              image: recipe['recipe_image'],
+                              index: index,
+                              name: recipe['header']['title'],
+                              rating: recipe['header']['rating'].toString(),
+                              time: recipe['header']['time_to_cook'],
+                              recipeList: recipe,
+                            ),
                           ],
                         ),
-                      ),
-                    ),
+                      );
+                    }),
                   ),
                 ),
               ),
@@ -174,17 +239,26 @@ class HomeScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
-                    children: List.generate(
-                      dailyInspirationCardList.length,
-                      (index) => Padding(
+                    children: List.generate(homeprovider.getNewRelease().length,
+                        (index) {
+                      List newRecipes = homeprovider.getNewRelease();
+                      dynamic recipe = newRecipes[index];
+                      return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
-                            dailyInspirationCardList[index],
+                            DailyInspirationCard(
+                              image: recipe['recipe_image'],
+                              index: index,
+                              name: recipe['header']['title'],
+                              rating: recipe['header']['rating'].toString(),
+                              time: recipe['header']['time_to_cook'],
+                              recipeList: recipe,
+                            ),
                           ],
                         ),
-                      ),
-                    ),
+                      );
+                    }),
                   ),
                 ),
               ),
@@ -211,16 +285,26 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: List.generate(
-                      dailyInspirationCardList.length,
-                      (index) => Padding(
+                        homeprovider.getNewEveryDayDishes().length, (index) {
+                      List newEverydayDishes =
+                          homeprovider.getNewEveryDayDishes();
+                      dynamic recipes = newEverydayDishes[index];
+                      return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
-                            dailyInspirationCardList[index],
+                            DailyInspirationCard(
+                              image: recipes['recipe_image'],
+                              index: index,
+                              name: recipes['header']['title'],
+                              rating: recipes['header']['rating'].toString(),
+                              time: recipes['header']['time_to_cook'],
+                              recipeList: recipes,
+                            ),
                           ],
                         ),
-                      ),
-                    ),
+                      );
+                    }),
                   ),
                 ),
               ),
@@ -247,16 +331,25 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: List.generate(
-                      dailyInspirationCardList.length,
-                      (index) => Padding(
+                        homeprovider.getEasyRecipes().length, (index) {
+                      List easyRecipes = homeprovider.getEasyRecipes();
+                      dynamic recipes = easyRecipes[index];
+                      return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
-                            dailyInspirationCardList[index],
+                            DailyInspirationCard(
+                              image: recipes['recipe_image'],
+                              index: index,
+                              name: recipes['header']['title'],
+                              rating: recipes['header']['rating'].toString(),
+                              time: recipes['header']['time_to_cook'],
+                              recipeList: recipes,
+                            ),
                           ],
                         ),
-                      ),
-                    ),
+                      );
+                    }),
                   ),
                 ),
               ),
@@ -276,14 +369,14 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 1200,
+                height: 1334,
                 child: GridView.count(
                   //grid container width and height
-                  childAspectRatio: 140 / 180,
+                  childAspectRatio: 140 / 200,
                   physics: NeverScrollableScrollPhysics(),
                   crossAxisCount: 2,
                   children: List.generate(
-                    12,
+                    10,
                     (index) => Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Card(
@@ -295,7 +388,10 @@ class HomeScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(14),
                             color: Constants.CardColor,
                           ),
-                          child: RecipesMayLikeCard(),
+                          child: RecipesMayLikeCard(
+                            index: index,
+ recipeList: ApiController.apimodelList,
+                          ),
                         ),
                       ),
                     ),

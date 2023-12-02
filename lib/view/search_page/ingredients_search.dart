@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:recipe_app/constants/color_constants.dart';
+import 'package:recipe_app/constants/constants.dart';
 import 'package:recipe_app/controller/search_ingredients_provider/search_ingredient_provider.dart';
 import 'package:recipe_app/model/search_ingredient_model/search_ingredient_model.dart';
+import 'package:recipe_app/view/search_page/search_page2.dart';
 
-class IngredientSearch extends StatefulWidget {
+class IngredientSearch extends StatelessWidget {
   IngredientSearch({super.key, required this.index});
   final int index;
 
   @override
-  State<IngredientSearch> createState() => _IngredientSearchState();
-}
-
-class _IngredientSearchState extends State<IngredientSearch> {
-  @override
   Widget build(BuildContext context) {
-    var ingredientProvider = Provider.of<SearchIngredientProvdier>(context);
+    var ingredientProvider = Provider.of<SearchRecipesProvider>(context);
     return Scaffold(
       backgroundColor: Constants.primaryColor,
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+              ingredientProvider.clearAll();
+            },
+            icon: Icon(Icons.arrow_back_ios)),
         elevation: 0,
         backgroundColor: Constants.primaryColor,
         toolbarHeight: 120,
@@ -32,24 +34,31 @@ class _IngredientSearchState extends State<IngredientSearch> {
 
           //search field
           child: TextField(
-            cursorColor: const Color.fromARGB(255, 107, 107, 107),
+            showCursor: false,
+            keyboardType: TextInputType.none,
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return SearchScreen();
+                },
+              ));
+            },
             style: TextStyle(
               fontSize: 24,
-              fontWeight: FontWeight.w300,
               fontFamily: Constants.mainFont,
               color: const Color.fromARGB(255, 107, 107, 107),
             ),
             decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: 'search common ingredients',
-              suffixIcon: Icon(
-                Icons.search,
-                size: 32,
-              ),
-            ),
-
-            //function for search submit
-            onSubmitted: (value) {},
+                border: InputBorder.none,
+                hintText: 'search recipes',
+                suffixIcon: Icon(
+                  Icons.search,
+                  size: 32,
+                  color: Constants.primaryColor,
+                ),
+                hintStyle: TextStyle(
+                  color: Constants.primaryColor,
+                )),
           ),
         ),
       ),
@@ -100,7 +109,7 @@ class _IngredientSearchState extends State<IngredientSearch> {
                                     fontSize: 15,
                                     color: Colors.white,
                                   ),
-                                  overflow: TextOverflow.clip,
+                                  overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
                                 ),
                               ],
@@ -115,8 +124,11 @@ class _IngredientSearchState extends State<IngredientSearch> {
                                 child: CircleAvatar(
                                   radius: 14,
                                   backgroundColor: Constants.CardColor,
-                                  child:
-                                      Center(child: Icon(Icons.close_rounded)),
+                                  child: Center(
+                                      child: Icon(
+                                    Icons.close_rounded,
+                                    color: Colors.white,
+                                  )),
                                 ),
                               ),
                             ),
@@ -144,10 +156,16 @@ class _IngredientSearchState extends State<IngredientSearch> {
                       32,
                       (index) => InkWell(
                         onTap: () {
-                          ingredientProvider.addToSearch(SearchIngredientsModel(
-                              imagepath:
-                                  'https://5.imimg.com/data5/SELLER/Default/2023/9/345985590/NP/ND/CY/191842402/frozen-skin-whole-chicken-meat-for-restaurant-500x500.jpeg',
-                              ingredientName: 'Ingredients'));
+                          //add to search list
+ ingredientProvider.index = index;
+                          ingredientProvider.addToSearch(
+                            SearchIngredientsModel(
+                              imagepath: ingredientProvider.ofIngredients[index]
+                                  ['image'],
+                              ingredientName: ingredientProvider
+                                  .ofIngredients[index]['name'],
+                            ),
+                          );
                         },
                         child: Container(
                           width: 80,
@@ -158,17 +176,18 @@ class _IngredientSearchState extends State<IngredientSearch> {
                               CircleAvatar(
                                 backgroundColor: Colors.black,
                                 radius: 32,
-                                foregroundImage: NetworkImage(
-                                    'https://5.imimg.com/data5/SELLER/Default/2023/9/345985590/NP/ND/CY/191842402/frozen-skin-whole-chicken-meat-for-restaurant-500x500.jpeg'),
+  foregroundImage: NetworkImage( ingredientProvider.ofIngredients[index]
+                                      ['image'],
+                                ),
                               ),
                               Text(
-                                'Ingredients',
+                                ingredientProvider.ofIngredients[index]['name'],
                                 style: TextStyle(
                                   fontFamily: Constants.mainFont,
                                   fontSize: 15,
                                   color: Colors.white,
                                 ),
-                                overflow: TextOverflow.clip,
+                                overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
                               ),
                             ],
@@ -206,8 +225,15 @@ class _IngredientSearchState extends State<IngredientSearch> {
                         ),
                       )
                     : InkWell(
+                        highlightColor: Constants.CardColor,
                         //function for search by ingredients
-                        onTap: () {},
+                        onTap: () {
+ ingredientProvider.searchRecipeByIngredients();
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return SearchScreen();
+                          }));
+                        },
                         child: Container(
                           width: double.infinity,
                           height: 70,

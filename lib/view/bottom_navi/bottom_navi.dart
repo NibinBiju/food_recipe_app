@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:recipe_app/constants/color_constants.dart';
+import 'package:recipe_app/constants/constants.dart';
 import 'package:recipe_app/view/home_screen/home_screen.dart';
 import 'package:recipe_app/view/create_recipe_screen/own_recipe.dart';
-import 'package:recipe_app/view/schedule_recipes/schedule_recipes.dart';
+import 'package:recipe_app/view/schedule_recipes/schedule.dart';
 import 'package:recipe_app/view/search_page/search_page.dart';
 import 'package:recipe_app/view/settings_page/settings_page.dart';
 
@@ -20,8 +20,8 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
   final List _mainPages = [
     HomeScreen(),
     const SearchPage(),
-    const OwnRecipe(),
-    ScheduleRecipes(),
+    OwnRecipe(),
+    const SchedulePage(),
     const SettingsPage(),
   ];
   @override
@@ -59,11 +59,11 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
                 ),
                 GButton(
                   icon: LineIcons.plusSquare,
-                  text: 'Create\nRecipe',
+                  text: 'Create',
                 ),
                 GButton(
                   icon: LineIcons.calendarCheckAlt,
-                  text: 'Meal\nPlan',
+                  text: 'Meal Plan',
                 ),
                 GButton(
                   icon: LineIcons.cog,
