@@ -5,19 +5,10 @@ class SavePageProvider with ChangeNotifier {
   int selectedIndex = 0;
   int recipeLength = 0;
   int cookbookIndex = 0;
-
-  final List<CreateCookBookModel> cookbooks = [
-    CreateCookBookModel(index: 0, cookBookName: 'Favorite', recipes: [
-      SavedRecipes(
-          image:
-              'https://www.recipetineats.com/wp-content/uploads/2020/05/Pizza-Crust-without-yeast_5-SQ.jpg',
-          rating: '4.3',
-          recipeName: 'Chilli Chicken',
-          time: '30m'),
-    ]),
+ final List<CreateCookBookModel> cookbooks = [
+    CreateCookBookModel(index: 0, cookBookName: 'Favorite', recipes: []),
   ];
   List<SavedRecipes> savedRecipe = [];
-
   void createCookBook(CreateCookBookModel createCookBookModel) {
     cookbooks.add(createCookBookModel);
     notifyListeners();
@@ -39,8 +30,11 @@ class SavePageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // void addNewRecipe(SavedRecipes recipes) {
-  //   savedRecipes.add(recipes);
-  //   notifyListeners();
-  // }
+ Map<String, int> getRecipesCount() {
+    Map<String, int> recipeCountMap = {};
+    for (CreateCookBookModel cookbook in cookbooks) {
+      recipeCountMap[cookbook.cookBookName!] = cookbook.recipes.length;
+    }
+    return recipeCountMap;
+  }
 }

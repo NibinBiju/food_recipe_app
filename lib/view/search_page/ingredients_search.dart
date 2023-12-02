@@ -34,24 +34,31 @@ class IngredientSearch extends StatelessWidget {
 
           //search field
           child: TextField(
-            cursorColor: const Color.fromARGB(255, 107, 107, 107),
+            showCursor: false,
+            keyboardType: TextInputType.none,
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return SearchScreen();
+                },
+              ));
+            },
             style: TextStyle(
               fontSize: 24,
-              fontWeight: FontWeight.w300,
               fontFamily: Constants.mainFont,
               color: const Color.fromARGB(255, 107, 107, 107),
             ),
             decoration: InputDecoration(
-              border: InputBorder.none,
-              hintText: 'search common ingredients',
-              suffixIcon: Icon(
-                Icons.search,
-                size: 32,
-              ),
-            ),
-
-            //function for search submit
-            onSubmitted: (value) {},
+                border: InputBorder.none,
+                hintText: 'search recipes',
+                suffixIcon: Icon(
+                  Icons.search,
+                  size: 32,
+                  color: Constants.primaryColor,
+                ),
+                hintStyle: TextStyle(
+                  color: Constants.primaryColor,
+                )),
           ),
         ),
       ),
@@ -150,6 +157,7 @@ class IngredientSearch extends StatelessWidget {
                       (index) => InkWell(
                         onTap: () {
                           //add to search list
+ ingredientProvider.index = index;
                           ingredientProvider.addToSearch(
                             SearchIngredientsModel(
                               imagepath: ingredientProvider.ofIngredients[index]
@@ -168,8 +176,9 @@ class IngredientSearch extends StatelessWidget {
                               CircleAvatar(
                                 backgroundColor: Colors.black,
                                 radius: 32,
-                                foregroundImage: NetworkImage(ingredientProvider
-                                    .ofIngredients[index]['image']),
+  foregroundImage: NetworkImage( ingredientProvider.ofIngredients[index]
+                                      ['image'],
+                                ),
                               ),
                               Text(
                                 ingredientProvider.ofIngredients[index]['name'],
@@ -219,6 +228,7 @@ class IngredientSearch extends StatelessWidget {
                         highlightColor: Constants.CardColor,
                         //function for search by ingredients
                         onTap: () {
+ ingredientProvider.searchRecipeByIngredients();
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
                             return SearchScreen();

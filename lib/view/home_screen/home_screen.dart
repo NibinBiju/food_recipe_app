@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_app/constants/constants.dart';
+import 'package:recipe_app/controller/api_controller/api_controller.dart';
 import 'package:recipe_app/controller/home_page_provider/homepage_provider.dart';
 import 'package:recipe_app/controller/save_page_provider/save_page_controller.dart';
 import 'package:recipe_app/model/api_model/api_model.dart';
@@ -107,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Colors.white,
                       ),
                       Text(
-                        '${saveprovider.cookbooks[saveprovider.selectedIndex].recipes.length}',
+ '${saveprovider.cookbooks.length}',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'InriaSans',
@@ -389,7 +390,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           child: RecipesMayLikeCard(
                             index: index,
-                            recipeList: homeprovider.apimodelList,
+ recipeList: ApiController.apimodelList,
                           ),
                         ),
                       ),
