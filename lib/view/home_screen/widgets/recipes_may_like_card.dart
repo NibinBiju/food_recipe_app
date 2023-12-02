@@ -31,16 +31,19 @@ class _RecipesMayLikeCardState extends State<RecipesMayLikeCard> {
 
     return InkWell(
         onTap: () {
-          //navigate to details page
-          var ingredients = widget.recipeList['ingredients'];
-          var instructions = widget.recipeList['instructions'];
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return DetailsPage(
-                index: 10,
-                recipeList: widget.recipeList,
-                ingredients: widget.recipeList['ingredients'],
-                steps: widget.recipeList['instructions']);
-          }));
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return DetailsPage(
+                  index: widget.index,
+                  recipeList: widget.recipeList,
+                  ingredients: widget.recipeList['ingredients'],
+                  steps: widget.recipeList['instructions'],
+                );
+              },
+            ),
+          );
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
