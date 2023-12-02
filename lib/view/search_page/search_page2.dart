@@ -14,7 +14,6 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   // List<SearchRecipe> ofSearchRescipes = [];
   TextEditingController searchrecipetextcontroller = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     var searchProvider = Provider.of<SearchRecipesProvider>(context);
@@ -42,7 +41,7 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Center(
               child: TextField(
                 onSubmitted: (query) {
-                  searchProvider.performSearch(query.trim());
+   searchProvider.performSearch(query.trim());
                 },
                 onChanged: (query) {
                   searchProvider.performSearch(query.trim());
@@ -53,7 +52,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 cursorColor: Constants.primaryColor,
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  suffixIcon: IconButton(
+  suffixIcon: IconButton(
                       onPressed: () {
                         searchrecipetextcontroller.clear();
                       },
@@ -73,7 +72,7 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
           ),
         ),
-        body: searchProvider.searchResult.length == 0
+ body: searchProvider.searchResult.length == 0
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

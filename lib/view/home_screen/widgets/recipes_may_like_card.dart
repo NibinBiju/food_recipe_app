@@ -31,7 +31,7 @@ class _RecipesMayLikeCardState extends State<RecipesMayLikeCard> {
 
     return InkWell(
         onTap: () {
-          Navigator.push(
+  Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) {

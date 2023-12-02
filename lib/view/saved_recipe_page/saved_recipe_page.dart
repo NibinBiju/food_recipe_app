@@ -1,4 +1,5 @@
 // ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_app/constants/constants.dart';
@@ -18,14 +19,14 @@ class SavedRecipePage extends StatefulWidget {
 class _SavedRecipePageState extends State<SavedRecipePage> {
   TextEditingController _cookbookTextfield = TextEditingController();
   CreateCookBookModel? cookBookModel;
-  int selectindex = 0;
+ int selectindex = 0;
 
   @override
   Widget build(BuildContext context) {
     var saveProvider = Provider.of<SavePageProvider>(context);
     final recipedemo =
         saveProvider.cookbooks.elementAt(saveProvider.recipeLength);
-    Map<String, int> recipeCountPerCookbook = saveProvider.getRecipesCount();
+ Map<String, int> recipeCountPerCookbook = saveProvider.getRecipesCount();
     return Scaffold(
       backgroundColor: Constants.primaryColor,
       appBar: AppBar(
@@ -85,7 +86,7 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children:
+   children:
                       List.generate(saveProvider.cookbooks.length + 1, (index) {
                     return Padding(
                       padding: const EdgeInsets.only(
@@ -210,8 +211,7 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
                               highlightColor: Colors.black12,
                               splashColor: Constants.primaryColor,
                               onTap: () {
-                                print(saveProvider
-                                    .cookbooks[index].recipes.length);
+ print(saveProvider.cookbooks[index].recipes.length);
                                 saveProvider.selectedIndex = index;
                                 setState(() {});
                               },
@@ -260,7 +260,7 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
                 ),
               ),
               Column(
-                children: List.generate(
+ children: List.generate(
                   //error
                   cookBookModel!.recipes.length,
                   (receipeeIndex) {

@@ -7,7 +7,7 @@ import 'package:recipe_app/model/search_ingredient_model/search_ingredient_model
 class SearchRecipesProvider with ChangeNotifier {
   List<SearchIngredientsModel> ingredientSearch = [];
   List ofIngredients = [];
-  List searchResult = [];
+ List searchResult = [];
   int index = 0;
 
   void addToSearch(SearchIngredientsModel searchIngredientsModel) {

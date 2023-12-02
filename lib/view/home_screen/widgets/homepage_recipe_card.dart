@@ -117,7 +117,7 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
                                           trailing: CircleAvatar(
                                             backgroundColor: Colors.black54,
                                             child: IconButton(
-                                              //add recipe to cookbook
+ //add recipe to cookbook
                                               onPressed: () {
                                                 CreateCookBookModel
                                                     createCookBookModel =
@@ -134,7 +134,7 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
                                                     time: widget.time,
                                                   ),
                                                 );
-                                                Navigator.pop(context);
+ Navigator.pop(context);
                                               },
                                               icon: Icon(
                                                 Icons.add,

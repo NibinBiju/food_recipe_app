@@ -6,6 +6,9 @@ import 'package:recipe_app/model/api_model/api_model.dart';
 // import 'package:recipe_app/constants/api_constants/api_constants.dart';
 
 class HomeProvider with ChangeNotifier {
+
+  List apimodelList = [];
+
   RecipeModel? apiModel;
   bool isLoad = false;
   Future<void> fetchData() async {
@@ -16,39 +19,39 @@ class HomeProvider with ChangeNotifier {
     final String responce =
         await rootBundle.loadString('assets/json/recipe_responce_body.json');
     final data = await json.decode(responce);
-    ApiController.apimodelList = data['recipes'];
+ApiController.apimodelList = data['recipes'];
 
     isLoad = false;
     notifyListeners();
   }
 
   List getDailyInspirationRecipes() {
-    return ApiController.apimodelList
+ return ApiController.apimodelList
         .where((recipe) => recipe['header']['category'] == "daily_inspiration")
         .toList();
   }
 
   List getNewRelease() {
-    return ApiController.apimodelList
+ return ApiController.apimodelList
         .where((recipe) => recipe['header']['category'] == "new_releases")
         .toList();
   }
 
   List getTrendingNow() {
-    return ApiController.apimodelList
+ return ApiController.apimodelList
         .where((recipe) => recipe['header']['category'] == "trending_now")
         .toList();
   }
 
   List getNewEveryDayDishes() {
-    return ApiController.apimodelList
+ return ApiController.apimodelList
         .where(
             (recipe) => recipe['header']['category'] == "new_everyday_dishes")
         .toList();
   }
 
   List getEasyRecipes() {
-    return ApiController.apimodelList
+ return ApiController.apimodelList
         .where((recipe) => recipe['header']['category'] == "easy_recipes")
         .toList();
   }

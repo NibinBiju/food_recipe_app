@@ -157,7 +157,7 @@ class IngredientSearch extends StatelessWidget {
                       (index) => InkWell(
                         onTap: () {
                           //add to search list
-                          ingredientProvider.index = index;
+ ingredientProvider.index = index;
                           ingredientProvider.addToSearch(
                             SearchIngredientsModel(
                               imagepath: ingredientProvider.ofIngredients[index]
@@ -176,8 +176,7 @@ class IngredientSearch extends StatelessWidget {
                               CircleAvatar(
                                 backgroundColor: Colors.black,
                                 radius: 32,
-                                foregroundImage: NetworkImage(
-                                  ingredientProvider.ofIngredients[index]
+  foregroundImage: NetworkImage( ingredientProvider.ofIngredients[index]
                                       ['image'],
                                 ),
                               ),
@@ -229,7 +228,7 @@ class IngredientSearch extends StatelessWidget {
                         highlightColor: Constants.CardColor,
                         //function for search by ingredients
                         onTap: () {
-                          ingredientProvider.searchRecipeByIngredients();
+ ingredientProvider.searchRecipeByIngredients();
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
                             return SearchScreen();
