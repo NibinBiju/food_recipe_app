@@ -464,7 +464,7 @@ class DetailsPage extends StatelessWidget {
 
                 //floating card
                 Positioned(
-                  top: 300,
+top: 300,
                   left: 29,
                   child: Container(
                     padding: EdgeInsets.all(12),

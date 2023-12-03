@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'package:recipe_app/constants/constants.dart';
 import 'package:recipe_app/controller/search_ingredients_provider/search_ingredient_provider.dart';
 import 'package:recipe_app/view/details_page/details_page.dart';
@@ -16,9 +15,15 @@ class _SearchScreenState extends State<SearchScreen> {
   // List<SearchRecipe> ofSearchRescipes = [];
   TextEditingController searchrecipetextcontroller = TextEditingController();
   @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+  // List<SearchRecipe> ofSearchRescipes = [];
+  TextEditingController searchrecipetextcontroller = TextEditingController();
+  @override
   Widget build(BuildContext context) {
     var searchProvider = Provider.of<SearchRecipesProvider>(context);
-
     return Scaffold(
         backgroundColor: Constants.primaryColor,
         appBar: AppBar(

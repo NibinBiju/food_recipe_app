@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Colors.white,
                       ),
                       Text(
-                        '${saveprovider.cookbooks.length}',
+ '${saveprovider.cookbooks.length}',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'InriaSans',
@@ -390,7 +390,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   physics: NeverScrollableScrollPhysics(),
                   crossAxisCount: 2,
                   children: List.generate(
-                      10,
+  10,
                       (index) => Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Card(

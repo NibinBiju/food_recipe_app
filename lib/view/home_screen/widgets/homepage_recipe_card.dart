@@ -64,13 +64,12 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
             Stack(
               children: [
                 Container(
-                  padding: EdgeInsets.all(15),
                   width: 290,
                   height: 260,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(17),
                     image: DecorationImage(
-                      image: NetworkImage(
+ image: NetworkImage(
                         widget.image,
                       ),
                       fit: BoxFit.cover,
@@ -107,7 +106,7 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
                                           trailing: CircleAvatar(
                                             backgroundColor: Colors.black54,
                                             child: IconButton(
-                                              //add recipe to cookbook
+                                               //add recipe to cookbook
                                               onPressed: () {
                                                 CreateCookBookModel
                                                     createCookBookModel =
@@ -124,7 +123,7 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
                                                     time: widget.time,
                                                   ),
                                                 );
-                                                Navigator.pop(context);
+ Navigator.pop(context);
                                               },
                                               icon: Icon(
                                                 Icons.add,
