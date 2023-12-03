@@ -36,7 +36,8 @@ class SavePageRecipeCard extends StatelessWidget {
                     height: 150,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage('assets/images/Rectangle 34.png'),
+                          image:
+                              NetworkImage(cookBookModel.recipes[index].image),
                           fit: BoxFit.cover,
                         ),
                         borderRadius: BorderRadius.circular(16)),
@@ -50,8 +51,13 @@ class SavePageRecipeCard extends StatelessWidget {
                           backgroundColor: Colors.black54,
                           child: Center(
                             child: IconButton(
-                                onPressed: () {},
-                                icon: Icon(Icons.more_vert_outlined)),
+
+                                //menu button inside recipe card
+   onPressed: () {},
+                                icon: Icon(
+                                  Icons.more_vert_outlined,
+                                  color: Colors.grey.shade300,
+                                )),
                           ),
                         ),
                       ],
@@ -60,6 +66,7 @@ class SavePageRecipeCard extends StatelessWidget {
                 ],
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +74,7 @@ class SavePageRecipeCard extends StatelessWidget {
                       Container(
                         width: 250,
                         child: Text(
-                          'recipe name',
+cookBookModel.recipes[index].recipeName,
                           style: TextStyle(
                             fontFamily: Constants.mainFont,
                             color: Colors.white,
@@ -78,12 +85,33 @@ class SavePageRecipeCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'time',
+cookBookModel.recipes[index].time,
                         style: TextStyle(
                           fontFamily: Constants.mainFont,
                           color: Colors.white,
                           fontSize: 25,
                         ),
+                      )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+ cookBookModel.recipes[index].rating,
+                        style: TextStyle(
+                          fontFamily: Constants.mainFont,
+                          color: Colors.orangeAccent,
+                          fontSize: 24,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Icon(
+                        Icons.star,
+                        color: Colors.orangeAccent,
+                        size: 26,
                       )
                     ],
                   )

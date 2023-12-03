@@ -20,7 +20,7 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
   final List _mainPages = [
     HomeScreen(),
     const SearchPage(),
-    const OwnRecipe(),
+    OwnRecipe(),
     const SchedulePage(),
     const SettingsPage(),
   ];
@@ -59,11 +59,11 @@ class _BottomNaviBarState extends State<BottomNaviBar> {
                 ),
                 GButton(
                   icon: LineIcons.plusSquare,
-                  text: 'Create\nRecipe',
+                  text: 'Create',
                 ),
                 GButton(
                   icon: LineIcons.calendarCheckAlt,
-                  text: 'Meal\nPlan',
+                  text: 'Meal Plan',
                 ),
                 GButton(
                   icon: LineIcons.cog,

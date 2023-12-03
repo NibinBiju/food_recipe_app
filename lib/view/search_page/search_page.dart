@@ -1,18 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_app/constants/constants.dart';
+import 'package:recipe_app/controller/save_page_provider/save_page_controller.dart';
 import 'package:recipe_app/controller/search_ingredients_provider/search_ingredient_provider.dart';
 import 'package:recipe_app/model/search_ingredient_model/search_ingredient_model.dart';
 import 'package:recipe_app/view/saved_recipe_page/saved_recipe_page.dart';
 import 'package:recipe_app/view/search_page/ingredients_search.dart';
+import 'package:recipe_app/view/search_page/search_page2.dart';
 
-class SearchPage extends StatelessWidget {
+class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
 
   @override
+  State<SearchPage> createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchPage> {
+  @override
+  void initState() {
+    Provider.of<SearchRecipesProvider>(context, listen: false)
+        .fetchIngredients();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var searchIngredientProvider =
-        Provider.of<SearchIngredientProvdier>(context);
+ var searchIngredientProvider = Provider.of<SearchRecipesProvider>(context);
+    var saveProvider = Provider.of<SavePageProvider>(context);
     return Scaffold(
         backgroundColor: Constants.primaryColor,
         appBar: AppBar(
@@ -60,7 +74,7 @@ class SearchPage extends StatelessWidget {
                           color: Colors.white,
                         ),
                         Text(
-                          '0',
+                          '${saveProvider.cookbooks.length}',
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'InriaSans',
@@ -106,23 +120,31 @@ class SearchPage extends StatelessWidget {
 
                   //search field
                   child: TextField(
-                    cursorColor: const Color.fromARGB(255, 107, 107, 107),
+                    showCursor: false,
+                    keyboardType: TextInputType.none,
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return SearchScreen();
+                        },
+                      ));
+                    },
                     style: TextStyle(
                       fontSize: 24,
                       fontFamily: Constants.mainFont,
                       color: const Color.fromARGB(255, 107, 107, 107),
                     ),
                     decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'search recipes',
-                      suffixIcon: Icon(
-                        Icons.search,
-                        size: 32,
-                      ),
-                    ),
-
-                    //function for search submit
-                    onSubmitted: (value) {},
+                        border: InputBorder.none,
+                        hintText: 'search recipes',
+                        suffixIcon: Icon(
+                          Icons.search,
+                          size: 32,
+                          color: Constants.primaryColor,
+                        ),
+                        hintStyle: TextStyle(
+                          color: Constants.primaryColor,
+                        )),
                   ),
                 ),
                 Padding(
@@ -137,21 +159,27 @@ class SearchPage extends StatelessWidget {
                   ),
                 ),
 
+                ///
+                ///
+                ///
                 //ingredients for search
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: List.generate(
-                      10,
-                      (index) => Padding(
+                        searchIngredientProvider.ofIngredients.length, (index) {
+                      var ingredients =
+                          searchIngredientProvider.ofIngredients[index];
+                      return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: InkWell(
                           onTap: () {
                             searchIngredientProvider.addToSearch(
-                                SearchIngredientsModel(
-                                    imagepath:
-                                        'https://5.imimg.com/data5/SELLER/Default/2023/9/345985590/NP/ND/CY/191842402/frozen-skin-whole-chicken-meat-for-restaurant-500x500.jpeg',
-                                    ingredientName: 'Ingredients'));
+                              SearchIngredientsModel(
+                                imagepath: ingredients['image'],
+                                ingredientName: ingredients['name'],
+                              ),
+                            );
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -169,26 +197,31 @@ class SearchPage extends StatelessWidget {
                                   backgroundColor: Colors.black,
                                   radius: 32,
                                   foregroundImage: NetworkImage(
-                                      'https://5.imimg.com/data5/SELLER/Default/2023/9/345985590/NP/ND/CY/191842402/frozen-skin-whole-chicken-meat-for-restaurant-500x500.jpeg'),
+                                    ingredients['image'],
+                                  ),
                                 ),
                                 Text(
-                                  'Ingredients',
+                                  ingredients['name'],
                                   style: TextStyle(
                                     fontFamily: Constants.mainFont,
                                     fontSize: 15,
                                     color: Colors.white,
                                   ),
-                                  overflow: TextOverflow.clip,
+                                  overflow: TextOverflow.ellipsis,
                                   maxLines: 1,
                                 ),
                               ],
                             ),
                           ),
                         ),
-                      ),
-                    ),
+                      );
+                    }),
                   ),
                 ),
+
+                ///
+                ///
+                ///search by meal
                 Padding(
                   padding: const EdgeInsets.only(top: 7, bottom: 7),
                   child: Text(
