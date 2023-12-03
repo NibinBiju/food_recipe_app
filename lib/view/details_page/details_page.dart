@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/constants/constants.dart';
 
 class DetailsPage extends StatelessWidget {
- DetailsPage({
+  DetailsPage({
     super.key,
     required this.index,
     required this.recipeList,
@@ -17,7 +17,7 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-backgroundColor: Constants.primaryColor,
+      backgroundColor: Constants.primaryColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -131,7 +131,7 @@ backgroundColor: Constants.primaryColor,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Column(
-        children: [
+                                        children: [
                                           Text(
                                             'CALORIES',
                                             style: TextStyle(
@@ -156,7 +156,7 @@ backgroundColor: Constants.primaryColor,
                                           )
                                         ],
                                       ),
- VerticalDivider(
+                                      VerticalDivider(
                                         width: 20,
                                         thickness: 1,
                                         color: const Color.fromARGB(
@@ -185,7 +185,7 @@ backgroundColor: Constants.primaryColor,
                                               fontSize: 17,
                                               fontStyle: FontStyle.italic,
                                             ),
-  )
+                                          )
                                         ],
                                       ),
                                       VerticalDivider(
@@ -217,7 +217,7 @@ backgroundColor: Constants.primaryColor,
                                               fontSize: 17,
                                               fontStyle: FontStyle.italic,
                                             ),
-  )
+                                          )
                                         ],
                                       ),
                                       VerticalDivider(
@@ -249,7 +249,6 @@ backgroundColor: Constants.primaryColor,
                                               fontSize: 17,
                                               fontStyle: FontStyle.italic,
                                             ),
-
                                           )
                                         ],
                                       ),
@@ -281,7 +280,7 @@ backgroundColor: Constants.primaryColor,
                               //ingredients list
                               child: Column(
                                 children: List.generate(
-   1,
+                                    1,
                                     (index) => Column(
                                           children: ingredients
                                               .map(
@@ -317,7 +316,7 @@ backgroundColor: Constants.primaryColor,
                                               )
                                               .toList(),
                                         )),
-  )),
+                              )),
 
                           SizedBox(
                             height: 30,
@@ -393,7 +392,7 @@ backgroundColor: Constants.primaryColor,
                                 ),
                               ),
                             ),
- ),
+                          ),
                         ],
                       ),
                     )
@@ -451,7 +450,7 @@ backgroundColor: Constants.primaryColor,
                                   Navigator.of(context).pop();
                                 },
                                 icon: Icon(
-  Icons.bookmark_border_outlined,
+                                  Icons.bookmark_border_outlined,
                                   color: Colors.white,
                                 ),
                               ),
@@ -465,7 +464,7 @@ backgroundColor: Constants.primaryColor,
 
                 //floating card
                 Positioned(
-                  top: 340,
+                  top: 300,
                   left: 29,
                   child: Container(
                     padding: EdgeInsets.all(12),
@@ -496,7 +495,7 @@ backgroundColor: Constants.primaryColor,
                                 fontWeight: FontWeight.w300,
                               ),
                             ),
- Text(
+                            Text(
                               recipeList['header']['title'],
                               style: TextStyle(
                                 fontFamily: Constants.mainFont,
@@ -519,7 +518,7 @@ backgroundColor: Constants.primaryColor,
                                   color: Colors.orangeAccent,
                                 ),
                               ),
- SizedBox(
+                              SizedBox(
                                 width: 4,
                               ),
                               Icon(
@@ -528,7 +527,7 @@ backgroundColor: Constants.primaryColor,
                               )
                             ],
                           ),
- )
+                        )
                       ],
                     ),
                   ),

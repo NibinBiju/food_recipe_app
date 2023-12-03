@@ -7,7 +7,7 @@ import 'package:recipe_app/model/save_page_model/save_page_cookbook_model.dart';
 import 'package:recipe_app/view/details_page/details_page.dart';
 
 class RecipesMayLikeCard extends StatefulWidget {
- RecipesMayLikeCard({
+  RecipesMayLikeCard({
     super.key,
     required this.index,
     required this.recipeList,
@@ -28,9 +28,9 @@ class _RecipesMayLikeCardState extends State<RecipesMayLikeCard> {
   @override
   Widget build(BuildContext context) {
     var saveProvider = Provider.of<SavePageProvider>(context);
- return InkWell(
+    return InkWell(
         onTap: () {
- Navigator.push(
+          Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) {
@@ -51,28 +51,15 @@ class _RecipesMayLikeCardState extends State<RecipesMayLikeCard> {
             Stack(
               children: [
                 Container(
-padding: EdgeInsets.all(14),
+                  padding: EdgeInsets.all(14),
                   width: 180,
                   height: 160,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
- image: DecorationImage(
-                      image: AssetImage('assets/images/shimmer image.jpg'),
-                    ),
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.all(14),
-                    width: 180,
-                    height: 160,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
+                    image: DecorationImage(
                         image: NetworkImage(
-                          widget.recipeList[widget.index]['recipe_image'],
-                        ),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                            widget.recipeList[widget.index]['recipe_image']),
+                        fit: BoxFit.cover),
                   ),
                 ),
                 Positioned(
@@ -87,7 +74,7 @@ padding: EdgeInsets.all(14),
                       onPressed: () {
                         showModalBottomSheet(
                           context: context,
- builder: (context) => Wrap(
+                          builder: (context) => Wrap(
                             children: [
                               Container(
                                 color: Constants.primaryColor,
@@ -191,7 +178,7 @@ padding: EdgeInsets.all(14),
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-widget.recipeList[widget.index]["header"]["time_to_cook"],
+                    widget.recipeList[widget.index]["header"]["time_to_cook"],
                     style: TextStyle(
                       fontFamily: Constants.mainFont,
                       color: Colors.white,
