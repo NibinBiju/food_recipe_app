@@ -127,6 +127,10 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
+
+      ///
+      ///
+      ///body
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -218,6 +222,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
+
+              ///
+              ///
+              ///
               //new releases
               Padding(
                 padding: const EdgeInsets.only(left: 12),
@@ -263,6 +271,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
+              ///
+              ///
               //new every day dishes
               Padding(
                 padding: const EdgeInsets.only(left: 12),
@@ -309,6 +319,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
+              ///
+              ///
               //easy recipes
               Padding(
                 padding: const EdgeInsets.only(left: 12),
@@ -353,6 +365,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
+
+              ///recipes you may like
               Padding(
                 padding: const EdgeInsets.only(left: 12),
                 child: Row(
@@ -376,28 +390,27 @@ class _HomeScreenState extends State<HomeScreen> {
                   physics: NeverScrollableScrollPhysics(),
                   crossAxisCount: 2,
                   children: List.generate(
-                    10,
-                    (index) => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Card(
-                        elevation: 0,
-                        color: Colors.transparent,
-                        shadowColor: Colors.black87,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(14),
-                            color: Constants.CardColor,
-                          ),
-                          child: RecipesMayLikeCard(
-                            index: index,
- recipeList: ApiController.apimodelList,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+  10,
+                      (index) => Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Card(
+                              elevation: 0,
+                              color: Colors.transparent,
+                              shadowColor: Colors.black87,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(14),
+                                  color: Constants.CardColor,
+                                ),
+                                child: RecipesMayLikeCard(
+                                  index: index,
+                                  recipeList: ApiController.apimodelList,
+                                ),
+                              ),
+                            ),
+                          )),
                 ),
-              )
+              ),
             ],
           ),
         ),

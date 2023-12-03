@@ -446,7 +446,6 @@ class DetailsPage extends StatelessWidget {
                             child: Center(
                               child: IconButton(
                                 //save recipe
-
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
@@ -465,7 +464,7 @@ class DetailsPage extends StatelessWidget {
 
                 //floating card
                 Positioned(
-                  top: 340,
+top: 300,
                   left: 29,
                   child: Container(
                     padding: EdgeInsets.all(12),

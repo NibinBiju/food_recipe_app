@@ -69,21 +69,10 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(17),
                     image: DecorationImage(
-                      image: AssetImage(
-                        'assets/images/shimmer image.jpg',
+ image: NetworkImage(
+                        widget.image,
                       ),
                       fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: Container(
-                    width: 290,
-                    height: 260,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(17),
-                      image: DecorationImage(
-                        image: NetworkImage(widget.image),
-                        fit: BoxFit.cover,
-                      ),
                     ),
                   ),
                 ),
@@ -117,7 +106,7 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
                                           trailing: CircleAvatar(
                                             backgroundColor: Colors.black54,
                                             child: IconButton(
- //add recipe to cookbook
+                                               //add recipe to cookbook
                                               onPressed: () {
                                                 CreateCookBookModel
                                                     createCookBookModel =

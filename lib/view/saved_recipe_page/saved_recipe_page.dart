@@ -19,12 +19,12 @@ class SavedRecipePage extends StatefulWidget {
 class _SavedRecipePageState extends State<SavedRecipePage> {
   TextEditingController _cookbookTextfield = TextEditingController();
   CreateCookBookModel? cookBookModel;
- int selectindex = 0;
+int selectindex = 0;
 
   @override
   Widget build(BuildContext context) {
     var saveProvider = Provider.of<SavePageProvider>(context);
-    final recipedemo =
+final recipedemo =
         saveProvider.cookbooks.elementAt(saveProvider.recipeLength);
  Map<String, int> recipeCountPerCookbook = saveProvider.getRecipesCount();
     return Scaffold(
@@ -86,7 +86,7 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-   children:
+ children:
                       List.generate(saveProvider.cookbooks.length + 1, (index) {
                     return Padding(
                       padding: const EdgeInsets.only(
@@ -211,7 +211,7 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
                               highlightColor: Colors.black12,
                               splashColor: Constants.primaryColor,
                               onTap: () {
- print(saveProvider.cookbooks[index].recipes.length);
+print(saveProvider.cookbooks[index].recipes.length);
                                 saveProvider.selectedIndex = index;
                                 setState(() {});
                               },
@@ -241,7 +241,7 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
                                     ),
                                     Text(
                                       saveProvider
-                                              .cookbooks[index].cookBookName ??
+ .cookbooks[index].cookBookName ??
                                           'N/a',
                                       style: TextStyle(
                                         fontFamily: Constants.mainFont,
@@ -260,7 +260,7 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
                 ),
               ),
               Column(
- children: List.generate(
+children: List.generate(
                   //error
                   cookBookModel!.recipes.length,
                   (receipeeIndex) {
@@ -276,6 +276,7 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
                   },
                 ),
               ),
+
             ],
           ),
         ),

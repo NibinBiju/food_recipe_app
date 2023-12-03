@@ -6,8 +6,7 @@ import 'package:recipe_app/model/api_model/api_model.dart';
 // import 'package:recipe_app/constants/api_constants/api_constants.dart';
 
 class HomeProvider with ChangeNotifier {
-
-  List apimodelList = [];
+ List apimodelList = [];
 
   RecipeModel? apiModel;
   bool isLoad = false;
