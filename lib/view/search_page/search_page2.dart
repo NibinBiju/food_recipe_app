@@ -15,13 +15,6 @@ class _SearchScreenState extends State<SearchScreen> {
   // List<SearchRecipe> ofSearchRescipes = [];
   TextEditingController searchrecipetextcontroller = TextEditingController();
   @override
-  State<SearchScreen> createState() => _SearchScreenState();
-}
-
-class _SearchScreenState extends State<SearchScreen> {
-  // List<SearchRecipe> ofSearchRescipes = [];
-  TextEditingController searchrecipetextcontroller = TextEditingController();
-  @override
   Widget build(BuildContext context) {
     var searchProvider = Provider.of<SearchRecipesProvider>(context);
     return Scaffold(
@@ -45,7 +38,7 @@ class _SearchScreenState extends State<SearchScreen> {
               borderRadius: BorderRadius.circular(19),
               color: Color(0xFFD9D9D9),
             ),
- child: Center(
+            child: Center(
               child: TextField(
                 onSubmitted: (query) {
                   searchProvider.performSearch(query.trim());
@@ -68,7 +61,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   hintStyle: TextStyle(
                     color: Constants.CardColor,
                     fontSize: 24,
- ),
+                  ),
                 ),
                 style: TextStyle(
                   fontSize: 24,
