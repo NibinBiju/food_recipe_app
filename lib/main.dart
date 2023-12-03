@@ -35,11 +35,11 @@ class MyApp extends StatelessWidget {
         ),
 
         //provider for searchpage
-        ChangeNotifierProvider<SearchIngredientProvdier>(
-          create: (context) => SearchIngredientProvdier(),
+        ChangeNotifierProvider<SearchRecipesProvider>(
+          create: (context) => SearchRecipesProvider(),
         ),
       ],
-      child: MaterialApp(
+child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: FeatureScreen(),
       ),

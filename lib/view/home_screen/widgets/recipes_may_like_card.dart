@@ -7,14 +7,14 @@ import 'package:recipe_app/model/save_page_model/save_page_cookbook_model.dart';
 import 'package:recipe_app/view/details_page/details_page.dart';
 
 class RecipesMayLikeCard extends StatefulWidget {
-  const RecipesMayLikeCard({
+ RecipesMayLikeCard({
     super.key,
     required this.index,
     required this.recipeList,
   });
 
   final int index;
-  final List recipeList;
+  final dynamic recipeList;
 
   @override
   State<RecipesMayLikeCard> createState() => _RecipesMayLikeCardState();
@@ -22,6 +22,7 @@ class RecipesMayLikeCard extends StatefulWidget {
 
 class _RecipesMayLikeCardState extends State<RecipesMayLikeCard> {
   RecipeModel? recipeModel;
+
   SavedRecipes? savedRecipes;
 
   @override
@@ -30,17 +31,19 @@ class _RecipesMayLikeCardState extends State<RecipesMayLikeCard> {
 
     return InkWell(
         onTap: () {
-          //navigate to details page
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DetailsPage(
+ Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return DetailsPage(
                   index: widget.index,
                   recipeList: widget.recipeList,
-                  ingredients: widget.recipeList[widget.index]['ingredients'],
-                  steps: widget.recipeList[widget.index]['instructions'],
-                ),
-              ));
+                  ingredients: widget.recipeList['ingredients'],
+                  steps: widget.recipeList['instructions'],
+                );
+              },
+            ),
+          );
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,17 +52,27 @@ class _RecipesMayLikeCardState extends State<RecipesMayLikeCard> {
             Stack(
               children: [
                 Container(
-                  padding: EdgeInsets.all(14),
+padding: EdgeInsets.all(14),
                   width: 180,
                   height: 160,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Colors.blueGrey,
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        widget.recipeList[widget.index]['recipe_image'],
+ image: DecorationImage(
+                      image: AssetImage('assets/images/shimmer image.jpg'),
+                    ),
+                  ),
+                  child: Container(
+                    padding: EdgeInsets.all(14),
+                    width: 180,
+                    height: 160,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          widget.recipeList[widget.index]['recipe_image'],
+                        ),
+                        fit: BoxFit.cover,
                       ),
-                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
@@ -75,88 +88,84 @@ class _RecipesMayLikeCardState extends State<RecipesMayLikeCard> {
                       onPressed: () {
                         showModalBottomSheet(
                           context: context,
-                          builder: (context) => Wrap(children: [
-                            Container(
-                              color: Constants.primaryColor,
-                              child: Column(
+ builder: (context) => Wrap(
+                            children: [
+                              Container(
+                                color: Constants.primaryColor,
+                                child: Column(
                                   children: List.generate(
-                                      saveProvider.cookbooks.length,
-                                      (index) => Column(
-                                            children: [
-                                              ListTile(
-                                                title: Text(
-                                                  "Add to ${saveProvider.cookbooks[index].cookBookName}",
-                                                  style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontFamily:
-                                                        Constants.mainFont,
-                                                    fontSize: 26,
+                                    saveProvider.cookbooks.length,
+                                    (index) => Column(
+                                      children: [
+                                        ListTile(
+                                          title: Text(
+                                            "Add to ${saveProvider.cookbooks[index].cookBookName}",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: Constants.mainFont,
+                                              fontSize: 26,
+                                            ),
+                                          ),
+                                          trailing: CircleAvatar(
+                                            backgroundColor: Colors.black54,
+                                            child: IconButton(
+                                              //add to save
+                                              onPressed: () {
+                                                saveProvider.recipeLength =
+                                                    saveProvider
+                                                        .cookbooks[index]
+                                                        .recipes
+                                                        .length;
+                                                CreateCookBookModel
+                                                    createCookBookModel =
+                                                    saveProvider
+                                                        .cookbooks[index];
+
+                                                saveProvider
+                                                    .addRecipeToCookbook(
+                                                  createCookBookModel,
+                                                  SavedRecipes(
+                                                    //image to save page
+                                                    image:
+                                                        widget.recipeList[index]
+                                                            ['recipe_image'],
+
+                                                    //rating
+                                                    rating: widget
+                                                        .recipeList[index]
+                                                            ['header']['rating']
+                                                        .toString(),
+
+                                                    //recipe title
+                                                    recipeName:
+                                                        widget.recipeList[index]
+                                                            ['header']['title'],
+
+                                                    //time to cook
+                                                    time:
+                                                        widget.recipeList[index]
+                                                                ['header']
+                                                            ['time_to_cook'],
                                                   ),
-                                                ),
-                                                trailing: CircleAvatar(
-                                                  backgroundColor:
-                                                      Colors.black54,
-                                                  child: IconButton(
-                                                    //add to save
-                                                    onPressed: () {
-                                                      saveProvider
-                                                              .recipeLength =
-                                                          saveProvider
-                                                              .cookbooks[index]
-                                                              .recipes
-                                                              .length;
-                                                      CreateCookBookModel
-                                                          createCookBookModel =
-                                                          saveProvider
-                                                              .cookbooks[index];
-
-                                                      saveProvider
-                                                          .addRecipeToCookbook(
-                                                        createCookBookModel,
-                                                        SavedRecipes(
-                                                          //image to save page
-                                                          image: widget
-                                                                      .recipeList[
-                                                                  widget.index]
-                                                              ['recipe_image'],
-
-                                                          //rating
-                                                          rating: widget
-                                                              .recipeList[
-                                                                  widget.index]
-                                                                  ['header']
-                                                                  ['rating']
-                                                              .toString(),
-
-                                                          //recipe title
-                                                          recipeName: widget
-                                                                      .recipeList[
-                                                                  widget.index][
-                                                              'header']['title'],
-
-                                                          //time to cook
-                                                          time: widget.recipeList[
-                                                                      widget
-                                                                          .index]
-                                                                  ['header']
-                                                              ['time_to_cook'],
-                                                        ),
-                                                      );
-                                                    },
-                                                    icon: Icon(
-                                                      Icons.add,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ),
+                                                );
+                                              },
+                                              icon: Icon(
+                                                Icons.add,
+                                                color: Colors.white,
                                               ),
-                                              Divider(
-                                                height: 8,
-                                              ),
-                                            ],
-                                          ))),
-                            ),
-                          ]),
+                                            ),
+                                          ),
+                                        ),
+                                        Divider(
+                                          height: 8,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         );
                       },
                       icon: Icon(
@@ -183,8 +192,7 @@ class _RecipesMayLikeCardState extends State<RecipesMayLikeCard> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.recipeList[widget.index]["header"]["time_to_cook"]
-                        .toString(),
+widget.recipeList[widget.index]["header"]["time_to_cook"],
                     style: TextStyle(
                       fontFamily: Constants.mainFont,
                       color: Colors.white,

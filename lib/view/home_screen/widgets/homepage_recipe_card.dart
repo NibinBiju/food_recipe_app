@@ -22,7 +22,7 @@ class DailyInspirationCard extends StatefulWidget {
   final String name;
   final String rating;
   final String time;
-  final List recipeList;
+  final dynamic recipeList;
 
   @override
   State<DailyInspirationCard> createState() => _DailyInspirationCardState();
@@ -38,16 +38,19 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
     saveProvider.recipeLength = widget.index;
     return InkWell(
       onTap: () {
+        var ingredients = widget.recipeList['ingredients'];
+        var instructions = widget.recipeList['instructions'];
         Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => DetailsPage(
-                index: widget.index,
-                recipeList: widget.recipeList,
-                ingredients: widget.recipeList[widget.index]['ingredients'],
-                steps: widget.recipeList[widget.index]['instructions'],
-              ),
-            ));
+  context,
+          MaterialPageRoute(
+            builder: (context) => DetailsPage(
+              steps: instructions,
+              ingredients: ingredients,
+              index: widget.index,
+              recipeList: widget.recipeList,
+            ),
+          ),
+        );
       },
       child: Container(
         width: 290,
@@ -67,7 +70,22 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(17),
                     image: DecorationImage(
-                        image: NetworkImage(widget.image), fit: BoxFit.cover),
+ image: AssetImage(
+                        'assets/images/shimmer image.jpg',
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: Container(
+                    width: 290,
+                    height: 260,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(17),
+                      image: DecorationImage(
+                        image: NetworkImage(widget.image),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 ),
                 Padding(
@@ -84,56 +102,55 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
                               Container(
                                 color: Constants.primaryColor,
                                 child: Column(
-                                    children: List.generate(
-                                        saveProvider.cookbooks.length,
-                                        (index) => Column(
-                                              children: [
-                                                ListTile(
-                                                  title: Text(
-                                                    "Add to ${saveProvider.cookbooks[index].cookBookName}",
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontFamily:
-                                                          Constants.mainFont,
-                                                      fontSize: 26,
-                                                    ),
+           children: List.generate(
+                                    saveProvider.cookbooks.length,
+                                    (index) => Column(
+                                      children: [
+                                        ListTile(
+                                          title: Text(
+                                            "Add to ${saveProvider.cookbooks[index].cookBookName}",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: Constants.mainFont,
+                                              fontSize: 26,
+                                            ),
+                                          ),
+                                          trailing: CircleAvatar(
+                                            backgroundColor: Colors.black54,
+                                            child: IconButton(
+ //add recipe to cookbook
+                                              onPressed: () {
+                                                CreateCookBookModel
+                                                    createCookBookModel =
+                                                    saveProvider
+                                                        .cookbooks[index];
+                                                saveProvider
+                                                    .addRecipeToCookbook(
+                                                  createCookBookModel,
+                                                  SavedRecipes(
+                                                    index: index,
+                                                    image: widget.image,
+                                                    rating: widget.rating,
+                                                    recipeName: widget.name,
+                                                    time: widget.time,
                                                   ),
-                                                  trailing: CircleAvatar(
-                                                    backgroundColor:
-                                                        Colors.black54,
-                                                    child: IconButton(
-                                                      onPressed: () {
-                                                        CreateCookBookModel
-                                                            createCookBookModel =
-                                                            saveProvider
-                                                                    .cookbooks[
-                                                                index];
-                                                        saveProvider
-                                                            .addRecipeToCookbook(
-                                                          createCookBookModel,
-                                                          SavedRecipes(
-                                                            index: index,
-                                                            image: widget.image,
-                                                            rating:
-                                                                widget.rating,
-                                                            recipeName:
-                                                                widget.name,
-                                                            time: widget.time,
-                                                          ),
-                                                        );
-                                                      },
-                                                      icon: Icon(
-                                                        Icons.add,
-                                                        color: Colors.white,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                Divider(
-                                                  height: 8,
-                                                ),
-                                              ],
-                                            ))),
+                                                );
+ Navigator.pop(context);
+                                              },
+                                              icon: Icon(
+                                                Icons.add,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Divider(
+                                          height: 8,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
                               ),
                             ]),
                           );

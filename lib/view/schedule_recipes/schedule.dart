@@ -178,6 +178,16 @@ class _HomePageState extends State<SchedulePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+  Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text(
+                  'Year',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge!
+                      .copyWith(color: Colors.tealAccent[100]),
+                ),
+              ),
               CalendarTimeline(
                 showYears: false,
                 //error
@@ -192,11 +202,9 @@ class _HomePageState extends State<SchedulePage> {
                 activeDayColor: Colors.white,
                 activeBackgroundDayColor: Colors.redAccent[100],
                 dotsColor: const Color(0xFF333A47),
-                //error
+
                 selectableDayPredicate: (date) =>
-                    date.day != 23 ||
-                    date.isAtSameMomentAs(_selectedDate) ||
-                    date.isAtSameMomentAs(_selectedDate),
+                    date.day != 23 || date.isAtSameMomentAs(_selectedDate),
                 locale: 'en',
               ),
               SizedBox(height: 20),

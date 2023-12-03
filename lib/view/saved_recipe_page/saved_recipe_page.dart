@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_app/constants/constants.dart';
@@ -17,14 +19,25 @@ class SavedRecipePage extends StatefulWidget {
 class _SavedRecipePageState extends State<SavedRecipePage> {
   TextEditingController _cookbookTextfield = TextEditingController();
   CreateCookBookModel? cookBookModel;
+int selectindex = 0;
 
   @override
   Widget build(BuildContext context) {
     var saveProvider = Provider.of<SavePageProvider>(context);
-
+ final recipedemo =
+        saveProvider.cookbooks.elementAt(saveProvider.recipeLength);
+ Map<String, int> recipeCountPerCookbook = saveProvider.getRecipesCount();
     return Scaffold(
       backgroundColor: Constants.primaryColor,
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: Colors.white,
+            )),
         backgroundColor: Constants.primaryColor,
         elevation: 0,
       ),
@@ -73,9 +86,9 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: List.generate(
-                    saveProvider.cookbooks.length + 1,
-                    (index) => Padding(
+ children:
+                      List.generate(saveProvider.cookbooks.length + 1, (index) {
+                    return Padding(
                       padding: const EdgeInsets.only(
                         top: 20,
                         bottom: 17,
@@ -198,6 +211,7 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
                               highlightColor: Colors.black12,
                               splashColor: Constants.primaryColor,
                               onTap: () {
+print(saveProvider.cookbooks[index].recipes.length);
                                 saveProvider.selectedIndex = index;
                                 setState(() {});
                               },
@@ -241,21 +255,25 @@ class _SavedRecipePageState extends State<SavedRecipePage> {
                                 ),
                               ),
                             ),
-                    ),
-                  ),
+                    );
+                  }),
                 ),
               ),
               Column(
-                children: List.generate(
-                  saveProvider
-                      .cookbooks[saveProvider.selectedIndex].recipes.length,
-                  (index) => Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SavePageRecipeCard(
-                      cookBookModel: saveProvider.cookbooks[index],
-                      index: saveProvider.selectedIndex,
-                    ),
-                  ),
+children: List.generate(
+                  //error
+                  cookBookModel!.recipes.length,
+                  (receipeeIndex) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SavePageRecipeCard(
+                        cookBookModel: saveProvider.cookbooks[receipeeIndex],
+
+                        //error
+                        index: receipeeIndex,
+                      ),
+                    );
+                  },
                 ),
               ),
             ],
