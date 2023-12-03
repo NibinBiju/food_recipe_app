@@ -41,7 +41,7 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
         var ingredients = widget.recipeList['ingredients'];
         var instructions = widget.recipeList['instructions'];
         Navigator.push(
-          context,
+  context,
           MaterialPageRoute(
             builder: (context) => DetailsPage(
               steps: instructions,
@@ -64,12 +64,13 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
             Stack(
               children: [
                 Container(
+                  padding: EdgeInsets.all(15),
                   width: 290,
                   height: 260,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(17),
                     image: DecorationImage(
-                      image: AssetImage(
+ image: AssetImage(
                         'assets/images/shimmer image.jpg',
                       ),
                       fit: BoxFit.cover,
@@ -101,7 +102,7 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
                               Container(
                                 color: Constants.primaryColor,
                                 child: Column(
-                                  children: List.generate(
+           children: List.generate(
                                     saveProvider.cookbooks.length,
                                     (index) => Column(
                                       children: [

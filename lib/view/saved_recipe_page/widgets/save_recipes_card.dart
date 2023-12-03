@@ -53,7 +53,7 @@ class SavePageRecipeCard extends StatelessWidget {
                             child: IconButton(
 
                                 //menu button inside recipe card
-                                onPressed: () {},
+   onPressed: () {},
                                 icon: Icon(
                                   Icons.more_vert_outlined,
                                   color: Colors.grey.shade300,
@@ -98,7 +98,7 @@ class SavePageRecipeCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        cookBookModel.recipes[index].rating,
+ cookBookModel.recipes[index].rating,
                         style: TextStyle(
                           fontFamily: Constants.mainFont,
                           color: Colors.orangeAccent,

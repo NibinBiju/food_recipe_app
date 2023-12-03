@@ -25,7 +25,7 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    var searchIngredientProvider = Provider.of<SearchRecipesProvider>(context);
+ var searchIngredientProvider = Provider.of<SearchRecipesProvider>(context);
     var saveProvider = Provider.of<SavePageProvider>(context);
     return Scaffold(
         backgroundColor: Constants.primaryColor,
@@ -159,6 +159,9 @@ class _SearchPageState extends State<SearchPage> {
                   ),
                 ),
 
+                ///
+                ///
+                ///
                 //ingredients for search
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
@@ -215,6 +218,10 @@ class _SearchPageState extends State<SearchPage> {
                     }),
                   ),
                 ),
+
+                ///
+                ///
+                ///search by meal
                 Padding(
                   padding: const EdgeInsets.only(top: 7, bottom: 7),
                   child: Text(

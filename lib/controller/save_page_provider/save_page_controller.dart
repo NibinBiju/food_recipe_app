@@ -4,7 +4,7 @@ import 'package:recipe_app/model/save_page_model/save_page_cookbook_model.dart';
 class SavePageProvider with ChangeNotifier {
   int selectedIndex = 0;
   int recipeLength = 0;
-  int cookbookIndex = 0;
+ int cookbookIndex = 0;
  final List<CreateCookBookModel> cookbooks = [
     CreateCookBookModel(index: 0, cookBookName: 'Favorite', recipes: []),
   ];
@@ -14,7 +14,7 @@ class SavePageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // method for add recipe to cookbook
+ // method for add recipe to cookbook
   void addRecipeToCookbook(
       CreateCookBookModel createCookBookModel, SavedRecipes savedRecipes) {
     cookbookIndex = cookbooks

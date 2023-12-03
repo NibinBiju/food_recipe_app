@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_app/constants/constants.dart';
 import 'package:recipe_app/controller/save_page_provider/save_page_controller.dart';
+import 'package:recipe_app/view/create_recipe_screen/create_recipe.dart';
 import 'package:recipe_app/view/saved_recipe_page/saved_recipe_page.dart';
 
 class SchedulePage extends StatefulWidget {
@@ -39,6 +40,15 @@ class _HomePageState extends State<SchedulePage> {
           ),
         ),
       ],
+    );
+  }
+
+  Divider createCustomDividerWithColor(Color color) {
+    return Divider(
+      color: color,
+      indent: 19,
+      endIndent: 19,
+      thickness: 1,
     );
   }
 
@@ -119,7 +129,7 @@ class _HomePageState extends State<SchedulePage> {
             context: context,
             builder: (BuildContext context) {
               return Container(
-                height: 220,
+                height: 232,
                 decoration: BoxDecoration(
                   color: Color.fromARGB(255, 36, 55, 231),
                   borderRadius: BorderRadius.only(
@@ -128,22 +138,32 @@ class _HomePageState extends State<SchedulePage> {
                   ),
                 ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
+                    createCustomDividerWithColor(
+                      Color.fromARGB(255, 36, 55, 231),
+                    ),
                     buildListTile(Icons.bookmark, "Add from save"),
-                    Divider(
-                      color: Colors.white,
-                      indent: 19,
-                      endIndent: 19,
-                      thickness: 1,
+                    createCustomDividerWithColor(
+                      Colors.white,
                     ),
                     buildListTile(Icons.search, "Search recipe"),
-                    Divider(
-                      color: Colors.white,
-                      indent: 19,
-                      endIndent: 19,
-                      thickness: 1,
+                    createCustomDividerWithColor(
+                      Colors.white,
                     ),
-                    buildListTile(Icons.edit, "Create recipe"),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CreateRecipe()),
+                        );
+                      },
+                      child: buildListTile(Icons.edit, "Create recipe"),
+                    ),
+                    createCustomDividerWithColor(
+                      Color.fromARGB(255, 36, 55, 231),
+                    ),
                   ],
                 ),
               );
@@ -158,7 +178,7 @@ class _HomePageState extends State<SchedulePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(
+  Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
                   'Year',
@@ -169,8 +189,9 @@ class _HomePageState extends State<SchedulePage> {
                 ),
               ),
               CalendarTimeline(
-                showYears: true,
-                initialDate: _selectedDate,
+                showYears: false,
+                //error
+                initialDate: DateTime.now().add(const Duration(days: 1)),
                 firstDate: DateTime.now(),
                 lastDate: DateTime.now().add(const Duration(days: 365 * 4)),
                 onDateSelected: (date) => setState(() => _selectedDate = date),
@@ -181,26 +202,12 @@ class _HomePageState extends State<SchedulePage> {
                 activeDayColor: Colors.white,
                 activeBackgroundDayColor: Colors.redAccent[100],
                 dotsColor: const Color(0xFF333A47),
+
                 selectableDayPredicate: (date) =>
                     date.day != 23 || date.isAtSameMomentAs(_selectedDate),
                 locale: 'en',
               ),
-              const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.only(left: 16),
-                child: TextButton(
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.teal[200]),
-                  ),
-                  child: const Text(
-                    'RESET',
-                    style: TextStyle(color: Color(0xFF333A47)),
-                  ),
-                  onPressed: () => setState(() => _resetSelectedDate()),
-                ),
-              ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               Center(
                 child: Text(
                   'Selected date is $_selectedDate',
@@ -214,7 +221,7 @@ class _HomePageState extends State<SchedulePage> {
                     borderRadius: BorderRadiusDirectional.vertical(
                         top: Radius.circular(30)),
                     color: Color.fromARGB(255, 62, 37, 153)),
-                height: MediaQuery.of(context).size.height * 0.52,
+                height: MediaQuery.of(context).size.height * 0.72,
                 child: SingleChildScrollView(
                   physics: ClampingScrollPhysics(),
                   child: Column(
