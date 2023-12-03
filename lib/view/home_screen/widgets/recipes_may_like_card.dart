@@ -28,8 +28,7 @@ class _RecipesMayLikeCardState extends State<RecipesMayLikeCard> {
   @override
   Widget build(BuildContext context) {
     var saveProvider = Provider.of<SavePageProvider>(context);
-
-    return InkWell(
+ return InkWell(
         onTap: () {
  Navigator.push(
             context,

@@ -241,7 +241,7 @@ print(saveProvider.cookbooks[index].recipes.length);
                                     ),
                                     Text(
                                       saveProvider
-                                              .cookbooks[index].cookBookName ??
+ .cookbooks[index].cookBookName ??
                                           'N/a',
                                       style: TextStyle(
                                         fontFamily: Constants.mainFont,
@@ -276,6 +276,7 @@ children: List.generate(
                   },
                 ),
               ),
+
             ],
           ),
         ),

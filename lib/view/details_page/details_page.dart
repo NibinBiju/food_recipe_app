@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/constants/constants.dart';
 
 class DetailsPage extends StatelessWidget {
-  DetailsPage({
+ DetailsPage({
     super.key,
     required this.index,
     required this.recipeList,
@@ -17,7 +17,7 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
- backgroundColor: Constants.primaryColor,
+backgroundColor: Constants.primaryColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -131,7 +131,7 @@ class DetailsPage extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Column(
-                                        children: [
+        children: [
                                           Text(
                                             'CALORIES',
                                             style: TextStyle(
@@ -281,7 +281,7 @@ class DetailsPage extends StatelessWidget {
                               //ingredients list
                               child: Column(
                                 children: List.generate(
-                                    1,
+   1,
                                     (index) => Column(
                                           children: ingredients
                                               .map(
@@ -447,12 +447,11 @@ class DetailsPage extends StatelessWidget {
                             child: Center(
                               child: IconButton(
                                 //save recipe
-
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
                                 icon: Icon(
-                                  Icons.bookmark_border_outlined,
+  Icons.bookmark_border_outlined,
                                   color: Colors.white,
                                 ),
                               ),

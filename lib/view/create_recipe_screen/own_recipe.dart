@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:recipe_app/controller/recipe_page/recipe_controller.dart';
 import 'package:recipe_app/model/recipe_page_model/recipe_model.dart';
 import 'package:recipe_app/view/create_recipe_screen/create_recipe.dart';
+import 'package:recipe_app/view/details_page/details_page.dart';
 import 'package:recipe_app/view/saved_recipe_page/saved_recipe_page.dart';
 
 class OwnRecipe extends StatefulWidget {

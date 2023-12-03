@@ -34,7 +34,7 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
 
   @override
   Widget build(BuildContext context) {
-    var saveProvider = Provider.of<SavePageProvider>(context);
+ var saveProvider = Provider.of<SavePageProvider>(context);
     saveProvider.recipeLength = widget.index;
     return InkWell(
       onTap: () {
@@ -64,6 +64,7 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
             Stack(
               children: [
                 Container(
+
                   padding: EdgeInsets.all(15),
                   width: 290,
                   height: 260,
