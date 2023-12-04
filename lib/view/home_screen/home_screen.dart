@@ -383,34 +383,32 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               SizedBox(
-                height: 1334,
-                child: GridView.count(
-                  //grid container width and height
-                  childAspectRatio: 140 / 200,
-                  physics: NeverScrollableScrollPhysics(),
-                  crossAxisCount: 2,
-                  children: List.generate(
-  10,
-                      (index) => Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Card(
-                              elevation: 0,
-                              color: Colors.transparent,
-                              shadowColor: Colors.black87,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(14),
-                                  color: Constants.CardColor,
+ height: 1334,
+                  child: GridView.count(
+                      //grid container width and height
+                      childAspectRatio: 140 / 200,
+                      physics: NeverScrollableScrollPhysics(),
+                      crossAxisCount: 2,
+                      children: List.generate(
+                          10,
+                          (index) => Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Card(
+                                  elevation: 0,
+                                  color: Colors.transparent,
+                                  shadowColor: Colors.black87,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(14),
+                                      color: Constants.CardColor,
+                                    ),
+                                    child: RecipesMayLikeCard(
+                                      index: index,
+                                      recipeList: ApiController.apimodelList,
+                                    ),
+                                  ),
                                 ),
-                                child: RecipesMayLikeCard(
-                                  index: index,
-                                  recipeList: ApiController.apimodelList,
-                                ),
-                              ),
-                            ),
-                          )),
-                ),
-              ),
+                              ))))
             ],
           ),
         ),

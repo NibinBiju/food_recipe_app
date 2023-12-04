@@ -69,10 +69,21 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(17),
                     image: DecorationImage(
- image: NetworkImage(
-                        widget.image,
+ image: AssetImage(
+                        'assets/images/shimmer image.jpg',
                       ),
                       fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: Container(
+                    width: 290,
+                    height: 260,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(17),
+                      image: DecorationImage(
+                        image: NetworkImage(widget.image),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
