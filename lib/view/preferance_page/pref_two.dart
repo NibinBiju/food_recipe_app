@@ -1,14 +1,38 @@
 import 'package:flutter/material.dart';
+
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:recipe_app/view/feature_screen/feature_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyPrefTwo extends StatefulWidget {
   const MyPrefTwo({super.key});
 
   @override
-  State<MyPrefTwo> createState() => MyPrefState();
+  State<MyPrefTwo> createState() => _MyPrefState();
 }
 
-class MyPrefState extends State<MyPrefTwo> {
+class _MyPrefState extends State<MyPrefTwo> {
+  double progressPercent = 0.0;
+  int? selectedIndex;
+  @override
+  void initState() {
+    super.initState();
+    loadPreferences();
+  }
+
+  void loadPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    double storedProgress = prefs.getDouble('progress') ?? 0.0;
+    setState(() {
+      progressPercent = storedProgress;
+    });
+  }
+
+  void savePreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setDouble('progress', progressPercent);
+  }
+
   String getTextForIndex(int index) {
     switch (index) {
       case 0:
@@ -69,22 +93,34 @@ class MyPrefState extends State<MyPrefTwo> {
             style: TextStyle(color: Colors.white, fontSize: 30),
           ),
           Expanded(
-            child: InkWell(
-              onTap: () {
-                print("hello");
-              },
-              child: GridView.builder(
-                padding: EdgeInsets.only(top: 30, left: 15, right: 15),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 15,
-                  mainAxisSpacing: 15,
-                ),
-                itemCount: 6,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
+            child: GridView.builder(
+              padding: EdgeInsets.only(top: 30, left: 15, right: 15),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 25,
+                mainAxisSpacing: 10,
+              ),
+              itemCount: 6,
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                  onTap: () {
+                    print('Tapped on item $index');
+                    setState(() {
+                      selectedIndex = index;
+                      print(selectedIndex);
+                    });
+                  },
+                  child: Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: index == selectedIndex && selectedIndex != null
+                              ? Colors.red
+                              : Colors.blue,
+                          width: index == selectedIndex && selectedIndex != null
+                              ? 7.0
+                              : 3.0,
+                        ),
+                        borderRadius: BorderRadius.circular(25),
                         color: const Color.fromARGB(255, 204, 194, 194)),
                     padding: const EdgeInsets.all(8),
                     child: Align(
@@ -97,9 +133,9 @@ class MyPrefState extends State<MyPrefTwo> {
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
           ),
           Padding(
@@ -109,10 +145,20 @@ class MyPrefState extends State<MyPrefTwo> {
                 children: [
                   Expanded(
                     child: Center(
-                      child: Text(
-                        "Explore",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 25, color: Colors.white),
+                      child: InkWell(
+                        onTap: () {
+                          savePreferences();
+
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => FeatureScreen()));
+                        },
+                        child: Text(
+                          "Next",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 25, color: Colors.white),
+                        ),
                       ),
                     ),
                   ),
@@ -124,9 +170,9 @@ class MyPrefState extends State<MyPrefTwo> {
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Color(0xFF0216CC),
+                color: selectedIndex != null ? Color(0xFF0216CC) : Colors.red,
               ),
-              height: 70,
+              height: 60,
               width: 300,
             ),
           ),
