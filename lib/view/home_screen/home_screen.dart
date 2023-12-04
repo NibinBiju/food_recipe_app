@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Colors.white,
                       ),
                       Text(
-'${saveprovider.cookbooks.length}',
+                        '${saveprovider.cookbooks.length}',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'InriaSans',
@@ -158,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         AllowedSwipeDirection.only(right: true, left: false),
                     cardBuilder: (context, index, horizontalOffsetPercentage,
                         verticalOffsetPercentage) {
-  List dailyInspiartion =
+                      List dailyInspiartion =
                           homeprovider.getDailyInspirationRecipes();
                       dynamic recipe = dailyInspiartion[index];
                       return DailyInspirationCard(
@@ -200,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: List.generate(
-  homeprovider.getTrendingNow().length, (index) {
+                        homeprovider.getTrendingNow().length, (index) {
                       List trendingRecipes = homeprovider.getTrendingNow();
                       dynamic recipe = trendingRecipes[index];
                       return Padding(
@@ -208,7 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Row(
                           children: [
                             DailyInspirationCard(
-  image: recipe['recipe_image'],
+                              image: recipe['recipe_image'],
                               index: index,
                               name: recipe['header']['title'],
                               rating: recipe['header']['rating'].toString(),
@@ -247,7 +247,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
- children: List.generate(homeprovider.getNewRelease().length,
+                    children: List.generate(homeprovider.getNewRelease().length,
                         (index) {
                       List newRecipes = homeprovider.getNewRelease();
                       dynamic recipe = newRecipes[index];
@@ -256,7 +256,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Row(
                           children: [
                             DailyInspirationCard(
-  image: recipe['recipe_image'],
+                              image: recipe['recipe_image'],
                               index: index,
                               name: recipe['header']['title'],
                               rating: recipe['header']['rating'].toString(),
@@ -295,7 +295,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: List.generate(
-  homeprovider.getNewEveryDayDishes().length, (index) {
+                        homeprovider.getNewEveryDayDishes().length, (index) {
                       List newEverydayDishes =
                           homeprovider.getNewEveryDayDishes();
                       dynamic recipes = newEverydayDishes[index];
@@ -304,7 +304,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Row(
                           children: [
                             DailyInspirationCard(
-
                               image: recipes['recipe_image'],
                               index: index,
                               name: recipes['header']['title'],
@@ -344,7 +343,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: List.generate(
-   homeprovider.getEasyRecipes().length, (index) {
+                        homeprovider.getEasyRecipes().length, (index) {
                       List easyRecipes = homeprovider.getEasyRecipes();
                       dynamic recipes = easyRecipes[index];
                       return Padding(
@@ -352,7 +351,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Row(
                           children: [
                             DailyInspirationCard(
- image: recipes['recipe_image'],
+                              image: recipes['recipe_image'],
                               index: index,
                               name: recipes['header']['title'],
                               rating: recipes['header']['rating'].toString(),
@@ -387,32 +386,32 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               SizedBox(
-                height: 1334,
- child: GridView.count(
-                  //grid container width and height
-                  childAspectRatio: 140 / 200,
-                  physics: NeverScrollableScrollPhysics(),
-                  crossAxisCount: 2,
-                  children: List.generate(
-                    10,
-                    (index) => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Card(
-                        elevation: 0,
-                        color: Colors.transparent,
-                        shadowColor: Colors.black87,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(14),
-                            color: Constants.CardColor,
-                          ),
-                          child: RecipesMayLikeCard(
-                            index: index,
- recipeList: ApiController.apimodelList,
-                          ),
-                        ),
-                      ),
-              )
+                  height: 1334,
+                  child: GridView.count(
+                      //grid container width and height
+                      childAspectRatio: 140 / 200,
+                      physics: NeverScrollableScrollPhysics(),
+                      crossAxisCount: 2,
+                      children: List.generate(
+                          10,
+                          (index) => Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Card(
+                                  elevation: 0,
+                                  color: Colors.transparent,
+                                  shadowColor: Colors.black87,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(14),
+                                      color: Constants.CardColor,
+                                    ),
+                                    child: RecipesMayLikeCard(
+                                      index: index,
+                                      recipeList: ApiController.apimodelList,
+                                    ),
+                                  ),
+                                ),
+                              ))))
             ],
           ),
         ),
