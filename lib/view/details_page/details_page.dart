@@ -184,8 +184,7 @@ class DetailsPage extends StatelessWidget {
                                               color: Colors.white,
                                               fontSize: 17,
                                               fontStyle: FontStyle.italic,
-                                            ),
-                                          )
+                                            ),)
                                         ],
                                       ),
                                       VerticalDivider(
@@ -317,7 +316,6 @@ class DetailsPage extends StatelessWidget {
                                               .toList(),
                                         )),
                               )),
-
                           SizedBox(
                             height: 30,
                           ),
@@ -392,7 +390,7 @@ class DetailsPage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          ),
+ ),
                         ],
                       ),
                     )
@@ -464,7 +462,7 @@ class DetailsPage extends StatelessWidget {
 
                 //floating card
                 Positioned(
-                  top: 300,
+                   top: 340,
                   left: 29,
                   child: Container(
                     padding: EdgeInsets.all(12),
@@ -517,7 +515,7 @@ class DetailsPage extends StatelessWidget {
                                   fontSize: 21,
                                   color: Colors.orangeAccent,
                                 ),
-                              ),
+                              ),     
                               SizedBox(
                                 width: 4,
                               ),

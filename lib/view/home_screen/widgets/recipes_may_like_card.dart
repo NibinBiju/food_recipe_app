@@ -30,7 +30,7 @@ class _RecipesMayLikeCardState extends State<RecipesMayLikeCard> {
     var saveProvider = Provider.of<SavePageProvider>(context);
     return InkWell(
         onTap: () {
-          Navigator.push(
+  Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) {
@@ -51,15 +51,28 @@ class _RecipesMayLikeCardState extends State<RecipesMayLikeCard> {
             Stack(
               children: [
                 Container(
-                  padding: EdgeInsets.all(14),
+padding: EdgeInsets.all(14),
                   width: 180,
                   height: 160,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(
+ image: DecorationImage(
+                      image: AssetImage('assets/images/shimmer image.jpg'),
+                    ),
+                  ),
+                  child: Container(
+                    padding: EdgeInsets.all(14),
+                    width: 180,
+                    height: 160,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
                         image: NetworkImage(
-                            widget.recipeList[widget.index]['recipe_image']),
-                        fit: BoxFit.cover),
+                          widget.recipeList[widget.index]['recipe_image'],
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 ),
                 Positioned(
