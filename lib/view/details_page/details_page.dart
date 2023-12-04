@@ -17,7 +17,7 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
- backgroundColor: Constants.primaryColor,
+      backgroundColor: Constants.primaryColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -156,7 +156,7 @@ class DetailsPage extends StatelessWidget {
                                           )
                                         ],
                                       ),
- VerticalDivider(
+                                      VerticalDivider(
                                         width: 20,
                                         thickness: 1,
                                         color: const Color.fromARGB(
@@ -184,8 +184,7 @@ class DetailsPage extends StatelessWidget {
                                               color: Colors.white,
                                               fontSize: 17,
                                               fontStyle: FontStyle.italic,
-                                            ),
-  )
+                                            ),)
                                         ],
                                       ),
                                       VerticalDivider(
@@ -217,7 +216,7 @@ class DetailsPage extends StatelessWidget {
                                               fontSize: 17,
                                               fontStyle: FontStyle.italic,
                                             ),
-  )
+                                          )
                                         ],
                                       ),
                                       VerticalDivider(
@@ -249,7 +248,6 @@ class DetailsPage extends StatelessWidget {
                                               fontSize: 17,
                                               fontStyle: FontStyle.italic,
                                             ),
-
                                           )
                                         ],
                                       ),
@@ -317,8 +315,7 @@ class DetailsPage extends StatelessWidget {
                                               )
                                               .toList(),
                                         )),
-  )),
-
+                              )),
                           SizedBox(
                             height: 30,
                           ),
@@ -447,7 +444,6 @@ class DetailsPage extends StatelessWidget {
                             child: Center(
                               child: IconButton(
                                 //save recipe
-
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
@@ -466,7 +462,7 @@ class DetailsPage extends StatelessWidget {
 
                 //floating card
                 Positioned(
-                  top: 340,
+                   top: 340,
                   left: 29,
                   child: Container(
                     padding: EdgeInsets.all(12),
@@ -497,7 +493,7 @@ class DetailsPage extends StatelessWidget {
                                 fontWeight: FontWeight.w300,
                               ),
                             ),
- Text(
+                            Text(
                               recipeList['header']['title'],
                               style: TextStyle(
                                 fontFamily: Constants.mainFont,
@@ -519,8 +515,8 @@ class DetailsPage extends StatelessWidget {
                                   fontSize: 21,
                                   color: Colors.orangeAccent,
                                 ),
-                              ),
- SizedBox(
+                              ),     
+                              SizedBox(
                                 width: 4,
                               ),
                               Icon(
@@ -529,7 +525,7 @@ class DetailsPage extends StatelessWidget {
                               )
                             ],
                           ),
- )
+                        )
                       ],
                     ),
                   ),

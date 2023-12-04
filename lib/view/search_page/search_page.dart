@@ -25,7 +25,7 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
- var searchIngredientProvider = Provider.of<SearchRecipesProvider>(context);
+var searchIngredientProvider = Provider.of<SearchRecipesProvider>(context);
     var saveProvider = Provider.of<SavePageProvider>(context);
     return Scaffold(
         backgroundColor: Constants.primaryColor,

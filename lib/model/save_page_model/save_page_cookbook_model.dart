@@ -1,5 +1,5 @@
 class CreateCookBookModel {
- int index;
+int index;
   String? cookBookName;
   List<SavedRecipes> recipes;
 

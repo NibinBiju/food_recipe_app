@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Colors.white,
                       ),
                       Text(
-                        '${saveprovider.cookbooks.length}',
+ '${saveprovider.cookbooks.length}',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'InriaSans',
@@ -366,9 +366,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
-              ///
-              ///
-              ///
               ///recipes you may like
               Padding(
                 padding: const EdgeInsets.only(left: 12),
@@ -386,7 +383,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               SizedBox(
-                  height: 1334,
+ height: 1334,
                   child: GridView.count(
                       //grid container width and height
                       childAspectRatio: 140 / 200,

@@ -7,7 +7,7 @@ import 'package:recipe_app/model/save_page_model/save_page_cookbook_model.dart';
 import 'package:recipe_app/view/details_page/details_page.dart';
 
 class RecipesMayLikeCard extends StatefulWidget {
- RecipesMayLikeCard({
+  RecipesMayLikeCard({
     super.key,
     required this.index,
     required this.recipeList,
@@ -28,10 +28,9 @@ class _RecipesMayLikeCardState extends State<RecipesMayLikeCard> {
   @override
   Widget build(BuildContext context) {
     var saveProvider = Provider.of<SavePageProvider>(context);
-
     return InkWell(
         onTap: () {
- Navigator.push(
+  Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) {
@@ -88,7 +87,7 @@ padding: EdgeInsets.all(14),
                       onPressed: () {
                         showModalBottomSheet(
                           context: context,
- builder: (context) => Wrap(
+                          builder: (context) => Wrap(
                             children: [
                               Container(
                                 color: Constants.primaryColor,
@@ -192,7 +191,7 @@ padding: EdgeInsets.all(14),
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-widget.recipeList[widget.index]["header"]["time_to_cook"],
+                    widget.recipeList[widget.index]["header"]["time_to_cook"],
                     style: TextStyle(
                       fontFamily: Constants.mainFont,
                       color: Colors.white,

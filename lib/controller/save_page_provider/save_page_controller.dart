@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recipe_app/model/save_page_model/save_page_cookbook_model.dart';
 
 class SavePageProvider with ChangeNotifier {
-  int selectedIndex = 0;
+ int selectedIndex = 0;
   int recipeLength = 0;
  int cookbookIndex = 0;
  final List<CreateCookBookModel> cookbooks = [
@@ -14,7 +14,9 @@ class SavePageProvider with ChangeNotifier {
     notifyListeners();
   }
 
- // method for add recipe to cookbook
+
+// method for add recipe to cookbook
+
   void addRecipeToCookbook(
       CreateCookBookModel createCookBookModel, SavedRecipes savedRecipes) {
     cookbookIndex = cookbooks
