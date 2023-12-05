@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_app/constants/constants.dart';
 import 'package:recipe_app/controller/search_ingredients_provider/search_ingredient_provider.dart';
@@ -10,6 +12,7 @@ class SearchScreen extends StatefulWidget {
   @override
   State<SearchScreen> createState() => _SearchScreenState();
 }
+
 class _SearchScreenState extends State<SearchScreen> {
   // List<SearchRecipe> ofSearchRescipes = [];
   TextEditingController searchrecipetextcontroller = TextEditingController();
@@ -37,7 +40,7 @@ class _SearchScreenState extends State<SearchScreen> {
               borderRadius: BorderRadius.circular(19),
               color: Color(0xFFD9D9D9),
             ),
- child: Center(
+            child: Center(
               child: TextField(
                 onSubmitted: (query) {
                   searchProvider.performSearch(query.trim());
@@ -60,7 +63,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   hintStyle: TextStyle(
                     color: Constants.CardColor,
                     fontSize: 24,
- ),
+                  ),
                 ),
                 style: TextStyle(
                   fontSize: 24,
@@ -78,24 +81,21 @@ class _SearchScreenState extends State<SearchScreen> {
                   Center(
                       child: Column(
                     children: [
-                      Container(
-                        width: 170,
-                        height: 100,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                          image: AssetImage(
-                              'assets/images/icons8-nothing-found-48.png'),
-                          fit: BoxFit.fitHeight,
-                        )),
-                      ),
                       Text(
                         'Recipe not found !',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: Constants.mainFont,
-                          fontSize: 16,
+                          fontSize: 25,
                         ),
-                      )
+                      ),
+                      Container(
+                        width: 370,
+                        height: 300,
+                        child: Lottie.asset(
+                            'assets/animations/loading_not_found_animation.json',
+                            fit: BoxFit.cover),
+                      ),
                     ],
                   )),
                 ],
@@ -128,20 +128,36 @@ class _SearchScreenState extends State<SearchScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              width: double.infinity,
-                              height: 150,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(15),
-                                  topRight: Radius.circular(15),
-                                ),
-                                color: Constants.primaryColor,
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                    recipe['recipe_image'],
+                            ClipRRect(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(15),
+                                topRight: Radius.circular(15),
+                              ),
+                              child: Container(
+                                width: double.infinity,
+                                height: 150,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(15),
+                                    topRight: Radius.circular(15),
                                   ),
+                                  color: Constants.primaryColor,
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      'assets/images/shimmer image.jpg',
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                child: CachedNetworkImage(
+                                  imageUrl: recipe['recipe_image'],
                                   fit: BoxFit.cover,
+                                  progressIndicatorBuilder: (context, url,
+                                          downloadProgress) =>
+                                      LottieBuilder.asset(
+                                          'assets/animations/food_loading_animation.json'),
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
                                 ),
                               ),
                             ),

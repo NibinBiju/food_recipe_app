@@ -1,8 +1,10 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_app/constants/constants.dart';
+import 'package:recipe_app/controller/home_page_provider/homepage_provider.dart';
 import 'package:recipe_app/controller/save_page_provider/save_page_controller.dart';
 import 'package:recipe_app/model/save_page_model/save_page_cookbook_model.dart';
 import 'package:recipe_app/view/saved_recipe_page/widgets/save_recipes_card.dart';
@@ -19,14 +21,17 @@ class SavedRecipePage extends StatefulWidget {
 class _SavedRecipePageState extends State<SavedRecipePage> {
   TextEditingController _cookbookTextfield = TextEditingController();
   CreateCookBookModel? cookBookModel;
-int selectindex = 0;
+  int selectindex = 0;
 
   @override
   Widget build(BuildContext context) {
+    var homeProvider = Provider.of<HomeProvider>(context);
     var saveProvider = Provider.of<SavePageProvider>(context);
-final recipedemo =
-        saveProvider.cookbooks.elementAt(saveProvider.recipeLength);
- Map<String, int> recipeCountPerCookbook = saveProvider.getRecipesCount();
+    // final recipedemo =
+    //     saveProvider.cookbooks.elementAt(saveProvider.recipeLength);
+    // Map<String, int> recipeCountPerCookbook = saveProvider.getRecipesCount();
+    CreateCookBookModel createCookBookModel =
+        saveProvider.cookbooks[saveProvider.selectedIndex];
     return Scaffold(
       backgroundColor: Constants.primaryColor,
       appBar: AppBar(
@@ -86,7 +91,7 @@ final recipedemo =
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
- children:
+                  children:
                       List.generate(saveProvider.cookbooks.length + 1, (index) {
                     return Padding(
                       padding: const EdgeInsets.only(
@@ -211,7 +216,8 @@ final recipedemo =
                               highlightColor: Colors.black12,
                               splashColor: Constants.primaryColor,
                               onTap: () {
-print(saveProvider.cookbooks[index].recipes.length);
+                                print(saveProvider
+                                    .cookbooks[index].recipes.length);
                                 saveProvider.selectedIndex = index;
                                 setState(() {});
                               },
@@ -241,7 +247,7 @@ print(saveProvider.cookbooks[index].recipes.length);
                                     ),
                                     Text(
                                       saveProvider
- .cookbooks[index].cookBookName ??
+                                              .cookbooks[index].cookBookName ??
                                           'N/a',
                                       style: TextStyle(
                                         fontFamily: Constants.mainFont,
@@ -260,23 +266,41 @@ print(saveProvider.cookbooks[index].recipes.length);
                 ),
               ),
               Column(
-children: List.generate(
-                  //error
-                  cookBookModel!.recipes.length,
-                  (receipeeIndex) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SavePageRecipeCard(
-                        cookBookModel: saveProvider.cookbooks[receipeeIndex],
-
-                        //error
-                        index: receipeeIndex,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: createCookBookModel.recipes.isEmpty
+                    ? [
+                        Column(
+                          children: [
+                            Text(
+                              'Add Recipes !',
+                              style: TextStyle(
+                                fontFamily: Constants.mainFont,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w300,
+                                fontSize: 32,
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              child: Lottie.asset(
+                                  'assets/animations/loading_not_found_animation.json'),
+                            ),
+                          ],
+                        )
+                      ]
+                    : List.generate(
+                        createCookBookModel.recipes.length,
+                        (receipeeIndex) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SavePageRecipeCard(
+                              cookBookModel: createCookBookModel,
+                              index: receipeeIndex,
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
               ),
-
             ],
           ),
         ),

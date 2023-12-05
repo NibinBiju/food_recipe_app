@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_app/constants/constants.dart';
 import 'package:recipe_app/controller/save_page_provider/save_page_controller.dart';
@@ -25,7 +27,7 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-var searchIngredientProvider = Provider.of<SearchRecipesProvider>(context);
+    var searchIngredientProvider = Provider.of<SearchRecipesProvider>(context);
     var saveProvider = Provider.of<SavePageProvider>(context);
     return Scaffold(
         backgroundColor: Constants.primaryColor,
@@ -41,8 +43,9 @@ var searchIngredientProvider = Provider.of<SearchRecipesProvider>(context);
           elevation: 0,
           backgroundColor: Constants.primaryColor,
           leading: Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Image.asset(Constants.logo)),
+            padding: const EdgeInsets.only(left: 20),
+            child: Image.asset(Constants.logo),
+          ),
           actions: [
             Row(
               mainAxisSize: MainAxisSize.min,
@@ -158,10 +161,6 @@ var searchIngredientProvider = Provider.of<SearchRecipesProvider>(context);
                     ),
                   ),
                 ),
-
-                ///
-                ///
-                ///
                 //ingredients for search
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
@@ -193,11 +192,24 @@ var searchIngredientProvider = Provider.of<SearchRecipesProvider>(context);
                             height: 100,
                             child: Column(
                               children: [
-                                CircleAvatar(
-                                  backgroundColor: Colors.black,
-                                  radius: 32,
-                                  foregroundImage: NetworkImage(
-                                    ingredients['image'],
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.black,
+                                    radius: 32,
+                                    foregroundImage: AssetImage(
+                                      ingredients['image'],
+                                    ),
+                                    child: CachedNetworkImage(
+                                      imageUrl: ingredients['image'],
+                                      fit: BoxFit.cover,
+                                      progressIndicatorBuilder: (context, url,
+                                              downloadProgress) =>
+                                          LottieBuilder.asset(
+                                              'assets/animations/food_loading_animation.json'),
+                                      errorWidget: (context, url, error) =>
+                                          Icon(Icons.error),
+                                    ),
                                   ),
                                 ),
                                 Text(

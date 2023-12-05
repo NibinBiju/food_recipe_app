@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_app/constants/constants.dart';
 import 'package:recipe_app/controller/save_page_provider/save_page_controller.dart';
@@ -63,27 +65,26 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
           children: [
             Stack(
               children: [
-                Container(
-                  width: 290,
-                  height: 260,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(17),
-                    image: DecorationImage(
- image: AssetImage(
-                        'assets/images/shimmer image.jpg',
-                      ),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(17),
                   child: Container(
                     width: 290,
                     height: 260,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(17),
+                      borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
-                        image: NetworkImage(widget.image),
+                        image: AssetImage('assets/images/shimmer image.jpg'),
                         fit: BoxFit.cover,
                       ),
+                    ),
+                    child: CachedNetworkImage(
+                      imageUrl: widget.image,
+                      fit: BoxFit.cover,
+                      progressIndicatorBuilder: (context, url,
+                              downloadProgress) =>
+                          LottieBuilder.asset(
+                              'assets/animations/food_loading_animation.json'),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
                     ),
                   ),
                 ),
@@ -117,7 +118,7 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
                                           trailing: CircleAvatar(
                                             backgroundColor: Colors.black54,
                                             child: IconButton(
-                                               //add recipe to cookbook
+                                              //add recipe to cookbook
                                               onPressed: () {
                                                 CreateCookBookModel
                                                     createCookBookModel =
@@ -126,6 +127,8 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
                                                 saveProvider
                                                     .addRecipeToCookbook(
                                                   createCookBookModel,
+
+                                                  //add ingredients and instructions
                                                   SavedRecipes(
                                                     index: index,
                                                     image: widget.image,
@@ -134,7 +137,7 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> {
                                                     time: widget.time,
                                                   ),
                                                 );
- Navigator.pop(context);
+                                                Navigator.pop(context);
                                               },
                                               icon: Icon(
                                                 Icons.add,

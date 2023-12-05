@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:recipe_app/constants/constants.dart';
 import 'package:recipe_app/controller/save_page_provider/save_page_controller.dart';
@@ -30,7 +32,7 @@ class _RecipesMayLikeCardState extends State<RecipesMayLikeCard> {
     var saveProvider = Provider.of<SavePageProvider>(context);
     return InkWell(
         onTap: () {
-  Navigator.push(
+          Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) {
@@ -50,28 +52,24 @@ class _RecipesMayLikeCardState extends State<RecipesMayLikeCard> {
           children: [
             Stack(
               children: [
-                Container(
-padding: EdgeInsets.all(14),
-                  width: 180,
-                  height: 160,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
- image: DecorationImage(
-                      image: AssetImage('assets/images/shimmer image.jpg'),
-                    ),
-                  ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
                   child: Container(
-                    padding: EdgeInsets.all(14),
                     width: 180,
                     height: 160,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
-                        image: NetworkImage(
-                          widget.recipeList[widget.index]['recipe_image'],
-                        ),
-                        fit: BoxFit.cover,
+                        image: AssetImage('assets/images/shimmer image.jpg'),
                       ),
+                    ),
+                    child: CachedNetworkImage(
+                      imageUrl: widget.recipeList[widget.index]['recipe_image'],
+                      fit: BoxFit.cover,
+                      progressIndicatorBuilder: (context, url,
+                              downloadProgress) =>
+                          LottieBuilder.asset(
+                              'assets/animations/food_loading_animation.json'),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
                     ),
                   ),
                 ),
